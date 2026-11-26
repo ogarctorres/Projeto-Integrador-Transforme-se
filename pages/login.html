@@ -3,85 +3,123 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login | Conecta Mais</title>
+  <title>Login | Conecta Mais (Conecta+)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/auth.css">
   <script src="../js/dados.js" defer></script>
   <script src="../js/login.js" defer></script>
 </head>
 <body>
 
-  <main class="page">
-    <a class="back-home" href="../index.html">← Voltar para a página inicial</a>
+  <main class="auth-page">
+    <div class="auth-top-bar">
+      <a class="back-home" href="../index.html">← Voltar para a Home Sem Login</a>
+      <a class="brand-inline" href="../index.html">
+        <span class="brand-square">✦</span>
+        <div>
+          <strong>Conecta+</strong>
+          <small>Talentos Jovens &amp; Oportunidades</small>
+        </div>
+      </a>
+    </div>
 
-    <section class="login-card">
-      <div class="brand-mark">✦</div>
+    <!-- LAYOUT EM 2 COLUNAS FIEL À TELA "LOGIN (1440×960)" DO FIGMA PROA -->
+    <section class="login-split">
 
-      <h1>Login</h1>
-      <p class="subtitle">Acesse sua conta no Conecta+ para ver suas oportunidades</p>
+      <!-- COLUNA ESQUERDA: PAINEL PROMOCIONAL AZUL ROYAL -->
+      <div class="login-hero">
+        <span class="pill-emerald">🚀 PLATAFORMA #1 DE RENDA EXTRA PARA JOVENS</span>
 
-      <form id="login-form">
-        <label for="email">E-mail</label>
-        <input
-          type="email"
-          id="email"
-          placeholder="Digite seu e-mail"
-          value="richard.mendes@estudante.br"
-          required
-        >
+        <h1>Transforme suas habilidades e tempo livre em renda real.</h1>
 
-        <label for="password">Senha</label>
-        <div class="password-wrap">
+        <p>
+          Conectamos jovens estudantes a oportunidades flexíveis de Social Media,
+          Edição de Vídeo, Organização no Notion, Suporte via WhatsApp e Formatação Acadêmica.
+        </p>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <strong>+14.200</strong>
+            <span>Jovens ativos</span>
+          </div>
+          <div class="stat-card">
+            <strong>R$ 850/mês</strong>
+            <span>Renda média</span>
+          </div>
+          <div class="stat-card">
+            <strong>96% Match</strong>
+            <span>Por habilidades</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUNA DIREITA: CARD BRANCO DE ACESSO -->
+      <div class="auth-card">
+        <h2>Acesse sua conta 👋</h2>
+        <p class="subtitle">Entre para ver as 24 oportunidades recomendadas para o seu perfil hoje.</p>
+
+        <form id="login-form">
+          <label for="email">E-mail institucional ou pessoal</label>
           <input
-            type="password"
-            id="password"
-            placeholder="Digite sua senha"
-            value="123456"
-            minlength="6"
+            type="email"
+            id="email"
+            placeholder="Digite seu e-mail"
+            value="richard.mendes@estudante.br"
             required
           >
-          <button type="button" id="toggle-password">Mostrar</button>
+
+          <label for="password">Senha de acesso</label>
+          <div class="password-wrap">
+            <input
+              type="password"
+              id="password"
+              placeholder="Digite sua senha"
+              value="123456"
+              minlength="6"
+              required
+            >
+            <button type="button" id="toggle-password">Mostrar</button>
+          </div>
+
+          <div class="form-options">
+            <label class="remember">
+              <input type="checkbox" checked>
+              Manter conectado
+            </label>
+            <a href="#" id="forgot-link">Esqueceu a senha?</a>
+          </div>
+
+          <button type="submit" class="btn-primary">Entrar na Plataforma →</button>
+
+          <a href="cadastro.html" class="btn-secondary">
+            Primeiro Acesso? Criar Conta Grátis →
+          </a>
+
+          <p id="feedback" class="feedback"></p>
+        </form>
+
+        <div class="separator">
+          <span>ou continue com</span>
         </div>
 
-        <div class="form-options">
-          <label class="remember">
-            <input type="checkbox" checked>
-            Manter conectado
-          </label>
+        <div class="social-buttons">
+          <button type="button" class="social-button" id="google-button">
+            <span class="google-g">G</span>
+            Google
+          </button>
 
-          <a href="#" id="forgot-link">Esqueceu a senha?</a>
+          <button type="button" class="social-button" id="linkedin-button">
+            <span class="linkedin-in">in</span>
+            LinkedIn
+          </button>
         </div>
-
-        <button type="submit" class="login-button">Entrar</button>
-
-        <p id="feedback" class="feedback"></p>
-      </form>
-
-      <div class="separator">
-        <span>ou continue com</span>
       </div>
 
-      <div class="social-buttons">
-        <button type="button" class="social-button" id="google-button">
-          <span class="google-g">G</span>
-          Google
-        </button>
-
-        <button type="button" class="social-button" id="linkedin-button">
-          <span class="linkedin-in">in</span>
-          LinkedIn
-        </button>
-      </div>
-
-      <p class="signup">
-        Ainda não tem uma conta?
-        <a href="cadastro.html" id="signup-link">Cadastre-se gratuitamente</a>
-      </p>
     </section>
 
-    <footer>
+    <footer class="auth-footer">
       © 2026 Conecta+ • Conectando pessoas a novas oportunidades.
     </footer>
   </main>

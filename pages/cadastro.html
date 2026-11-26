@@ -3,77 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro | Conecta Mais</title>
+  <title>Cadastro | Conecta Mais (Conecta+)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/auth.css">
   <script src="../js/dados.js" defer></script>
   <script src="../js/cadastro.js" defer></script>
 </head>
 <body>
 
-  <main class="page">
-    <a class="back-home" href="../index.html">← Voltar para a página inicial</a>
+  <main class="auth-page">
+    <div class="auth-top-bar">
+      <a class="back-home" href="../index.html">← Voltar para a Home Sem Login</a>
+      <a class="brand-inline" href="../index.html">
+        <span class="brand-square">✦</span>
+        <div>
+          <strong>Conecta+</strong>
+          <small>Cadastro 100% Gratuito</small>
+        </div>
+      </a>
+    </div>
 
-    <section class="login-card cadastro-card">
-      <div class="brand-mark">✦</div>
+    <!-- CARD DE CADASTRO POR ETAPAS (FIEL AO ESTILO DO FIGMA PROA) -->
+    <section class="auth-card wizard-card">
+      <div class="wizard-header">
+        <div>
+          <span class="step-pill" id="badgeEtapa">ETAPA 1 DE 4</span>
+          <h2 id="tituloEtapa">Dados Pessoais</h2>
+          <p class="subtitle" id="subtituloEtapa">Comece informando seus dados básicos de acesso gratuito.</p>
+        </div>
+      </div>
 
-      <h1>Criar Conta Grátis</h1>
-      <p class="subtitle">Cadastro simples e gratuito para jovens no Conecta+</p>
+      <!-- BARRA DE PROGRESSO AZUL ROYAL -->
+      <div class="progress-track">
+        <div class="progress-fill" id="barraProgresso" style="width: 25%;"></div>
+      </div>
 
       <form id="cadastro-form">
-        <label for="nome">1. Nome completo</label>
-        <input type="text" id="nome" placeholder="Ex: Maria Clara Silva" required>
 
-        <label for="email">E-mail</label>
-        <input type="email" id="email" placeholder="Ex: maria@estudante.br" required>
+        <!-- ETAPA 1: DADOS PESSOAIS -->
+        <div class="etapa-bloco ativa" data-etapa="1">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" placeholder="Ex: Maria Clara Silva" required>
 
-        <label for="password">Crie uma senha (mínimo 6 caracteres)</label>
-        <div class="password-wrap">
-          <input type="password" id="password" placeholder="Digite sua senha" minlength="6" required>
-          <button type="button" id="toggle-password">Mostrar</button>
+          <label for="email">E-mail institucional ou pessoal</label>
+          <input type="email" id="email" placeholder="Ex: maria@estudante.br" required>
+
+          <label for="password">Crie uma senha (mínimo 6 caracteres)</label>
+          <div class="password-wrap">
+            <input type="password" id="password" placeholder="Digite sua senha" minlength="6" required>
+            <button type="button" id="toggle-password">Mostrar</button>
+          </div>
         </div>
 
-        <label for="escolaridade">2. Escolaridade / Perfil acadêmico</label>
-        <input type="text" id="escolaridade" placeholder="Ex: Ensino Médio ou Faculdade em andamento" value="Ensino Superior em andamento" required>
+        <!-- ETAPA 2: PERFIL ACADÊMICO E DISPOSITIVO -->
+        <div class="etapa-bloco" data-etapa="2">
+          <label for="escolaridade">Escolaridade / Curso atual</label>
+          <input type="text" id="escolaridade" value="Ensino Superior em andamento" placeholder="Ex: Ensino Médio ou Faculdade">
 
-        <label for="dispositivo">Dispositivo e acesso à internet (Etapa de Inclusão do Figma)</label>
-        <input type="text" id="dispositivo" placeholder="Ex: Celular com Wi-Fi / Notebook" value="Notebook e Celular com Wi-Fi" required>
+          <label for="dispositivo">Qual dispositivo e internet você usa?</label>
+          <input type="text" id="dispositivo" value="Notebook e Celular com Wi-Fi" placeholder="Ex: Celular com Wi-Fi / Notebook">
 
-        <label for="meta">Meta mensal desejada (R$)</label>
-        <input type="number" id="meta" value="1250" min="100" step="50" required>
-
-        <span class="field-label">3. Suas principais habilidades:</span>
-        <div class="checkbox-group" id="grupo-habilidades">
-          <label><input type="checkbox" value="Edição de vídeo" checked> Edição de vídeo</label>
-          <label><input type="checkbox" value="Redes sociais" checked> Redes sociais</label>
-          <label><input type="checkbox" value="Canva"> Canva</label>
-          <label><input type="checkbox" value="Notion"> Notion</label>
-          <label><input type="checkbox" value="ABNT"> ABNT</label>
-          <label><input type="checkbox" value="Organização"> Organização</label>
-          <label><input type="checkbox" value="Atendimento"> Atendimento</label>
+          <label for="meta">Qual é a sua meta de renda extra mensal? (R$)</label>
+          <input type="number" id="meta" value="1250" min="100" step="50">
         </div>
 
-        <span class="field-label">4. Dias livres no contraturno:</span>
-        <div class="checkbox-group" id="grupo-dias">
-          <label><input type="checkbox" value="Seg" checked> Seg</label>
-          <label><input type="checkbox" value="Ter"> Ter</label>
-          <label><input type="checkbox" value="Qua" checked> Qua</label>
-          <label><input type="checkbox" value="Qui"> Qui</label>
-          <label><input type="checkbox" value="Sex" checked> Sex</label>
-          <label><input type="checkbox" value="Sáb" checked> Sáb</label>
-          <label><input type="checkbox" value="Dom"> Dom</label>
+        <!-- ETAPA 3: HABILIDADES E DISPONIBILIDADE -->
+        <div class="etapa-bloco" data-etapa="3">
+          <span class="field-label">Selecione suas principais habilidades:</span>
+          <div class="checkbox-group" id="grupo-habilidades">
+            <label><input type="checkbox" value="Edição de vídeo" checked> Edição de vídeo</label>
+            <label><input type="checkbox" value="Redes sociais" checked> Redes sociais</label>
+            <label><input type="checkbox" value="Canva"> Canva</label>
+            <label><input type="checkbox" value="Notion"> Notion</label>
+            <label><input type="checkbox" value="ABNT"> ABNT</label>
+            <label><input type="checkbox" value="Organização"> Organização</label>
+            <label><input type="checkbox" value="Atendimento"> Atendimento</label>
+            <label><input type="checkbox" value="Suporte"> Suporte</label>
+          </div>
+
+          <span class="field-label">Dias disponíveis no contraturno (Seg–Dom):</span>
+          <div class="checkbox-group" id="grupo-dias">
+            <label><input type="checkbox" value="Seg" checked> Seg</label>
+            <label><input type="checkbox" value="Ter"> Ter</label>
+            <label><input type="checkbox" value="Qua" checked> Qua</label>
+            <label><input type="checkbox" value="Qui"> Qui</label>
+            <label><input type="checkbox" value="Sex" checked> Sex</label>
+            <label><input type="checkbox" value="Sáb" checked> Sáb</label>
+            <label><input type="checkbox" value="Dom"> Dom</label>
+          </div>
         </div>
 
-        <div class="form-options">
-          <label class="remember">
-            <input type="checkbox" id="aceite-lgpd" required>
-            Li e concordo com os Termos de Uso e Política de Privacidade (LGPD)
+        <!-- ETAPA 4: FINALIZAÇÃO E LGPD -->
+        <div class="etapa-bloco" data-etapa="4">
+          <div class="lgpd-box">
+            <strong>🔒 Seus dados estão protegidos (LGPD)</strong>
+            <p>
+              O Conecta+ é 100% gratuito para jovens estudantes. Suas informações são usadas
+              exclusivamente para calcular o Match com oportunidades compatíveis com a sua rotina.
+            </p>
+          </div>
+
+          <label class="remember lgpd-check">
+            <input type="checkbox" id="aceite-lgpd" checked>
+            Li e concordo com os Termos de Uso e Política de Privacidade (LGPD).
           </label>
         </div>
 
-        <button type="submit" class="login-button">Finalizar Cadastro Gratuito</button>
+        <!-- BOTÕES DE NAVEGAÇÃO ENTRE AS ETAPAS -->
+        <div class="wizard-actions">
+          <button type="button" class="btn-outline" id="btnEtapaAnterior" hidden>← Etapa anterior</button>
+          <button type="button" class="btn-primary" id="btnProximaEtapa">Próxima etapa →</button>
+          <button type="submit" class="btn-emerald" id="btnFinalizarCadastro" hidden>Finalizar Cadastro Gratuito ✓</button>
+        </div>
 
         <p id="feedback" class="feedback"></p>
       </form>
@@ -84,7 +127,7 @@
       </p>
     </section>
 
-    <footer>
+    <footer class="auth-footer">
       © 2026 Conecta+ • Conectando pessoas a novas oportunidades.
     </footer>
   </main>
