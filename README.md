@@ -2,6 +2,7 @@
 
 Plataforma web desenvolvida por jovens no **Instituto PROA** para conectar habilidades cotidianas e tempo livre no contraturno a oportunidades reais de renda extra — de forma **100% gratuita para estudantes**.
 
+🌐 **Site no Ar (Vercel):** [https://conecta-mais-three.vercel.app](https://conecta-mais-three.vercel.app)  
 🔗 **Protótipo Oficial no Figma:** [Prototipo PROA (22 Telas Desktop)](https://www.figma.com/design/Fk9t2TqetfQP7emQocf9vF/Prototipo-PROA)
 
 ---
@@ -11,10 +12,12 @@ Plataforma web desenvolvida por jovens no **Instituto PROA** para conectar habil
 ```text
 projeto-integrador/
 ├── index.html          # Página Inicial (Home Pública Sem Login — Tela 00A do Figma)
+├── assets/
+│   └── logos/          # Logos oficiais em SVG dos 8 parceiros da plataforma
 ├── pages/
-│   ├── login.html      # Tela de Login (Tela Login do Figma)
-│   ├── cadastro.html   # Tela de Cadastro gratuito com habilidades, dias livres e LGPD
-│   └── painel.html     # Área Logada (Oportunidades, Favoritos, Candidaturas, Chat, Alertas e Perfil)
+│   ├── login.html      # Tela de Login em 2 colunas (Tela Login do Figma)
+│   ├── cadastro.html   # Cadastro por etapas gratuito com habilidades, dias livres e LGPD
+│   └── painel.html     # Área Logada (Oportunidades, Simulador Financeiro, Favoritos, Chat, Alertas e Perfil)
 ├── css/
 │   ├── home.css        # Estilos da página inicial
 │   ├── auth.css        # Estilos das páginas de Login e Cadastro
@@ -23,8 +26,9 @@ projeto-integrador/
 │   ├── dados.js        # Dados demonstrativos em localStorage (pronto para migrar ao Firebase)
 │   ├── home.js         # Interações da Home (3 abas, busca, simulador e modal de prévia)
 │   ├── login.js        # Validação do Login e mostrar/ocultar senha
-│   ├── cadastro.js     # Salvamento do novo cadastro
-│   └── painel.js       # Oportunidades, favoritos, candidaturas, chat direto e perfil
+│   ├── cadastro.js     # Fluxo de cadastro por etapas e salvamento
+│   ├── painel.js       # Filtros, Simulador Financeiro, detalhes de vaga, favoritos, chat e perfil
+│   └── acessibilidade.js # VLibras, Modo Alto Contraste e ajuste de fonte (A- / A+)
 ├── .gitignore          # Arquivos ignorados pelo Git
 └── README.md           # Documentação do repositório
 ```
@@ -47,6 +51,7 @@ projeto-integrador/
 - **Front-End:** HTML5, CSS3 (Flexbox e CSS Grid) e JavaScript (Vanilla JS).
 - **Design UX/UI:** Figma (Design System com fonte **Inter**, paleta Azul Royal/Marinho, Verde Esmeralda e Âmbar).
 - **Metodologia:** Framework Ágil **Scrum** (*Sprints, Product Backlog, Planning, Daily, Review e Retrospective*).
+- **Acessibilidade (WCAG 2.1):** Widget oficial **VLibras**, controle de tamanho de fonte (`A-` / `A+`) e **Modo Alto Contraste** em todas as telas.
 - **Próxima Etapa (Banco de Dados):** Migração dos dados demonstrativos (`js/dados.js`) para o **Firebase** (*Firebase Authentication* + *Cloud Firestore*).
 
 ---
