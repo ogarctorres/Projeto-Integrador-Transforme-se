@@ -472,21 +472,30 @@ document.getElementById("btnEnviarChat").addEventListener("click", function () {
   const texto = input.value.trim();
   if (texto === "") return;
 
+  const hora = new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
   const box = document.getElementById("mensagensChat");
   const minhaMsg = document.createElement("div");
   minhaMsg.className = "msg-enviada";
-  minhaMsg.innerHTML = "<strong>Você:</strong> " + texto;
+  minhaMsg.innerHTML = "<strong>Você (" + hora + "):</strong> " + texto;
   box.appendChild(minhaMsg);
 
   input.value = "";
+  box.scrollTop = box.scrollHeight;
 
   // Resposta simples automática para demonstração
   setTimeout(function () {
     const resp = document.createElement("div");
     resp.className = "msg-recebida";
-    resp.innerHTML = "<strong>Ana Clara:</strong> Perfeito! Combinado, vamos te enviar o briefing dos posts por aqui ainda hoje.";
+    resp.innerHTML = "<strong>Ana Clara (" + hora + "):</strong> Perfeito! Combinado, vamos te enviar o briefing dos posts por aqui ainda hoje.";
     box.appendChild(resp);
+    box.scrollTop = box.scrollHeight;
   }, 700);
+});
+
+document.getElementById("inputChat").addEventListener("keydown", function (evento) {
+  if (evento.key === "Enter") {
+    document.getElementById("btnEnviarChat").click();
+  }
 });
 
 // Respostas rápidas clicáveis no Chat Direto
