@@ -661,6 +661,16 @@ textarea:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.micro-card.clicavel {
+  cursor: pointer;
+}
+
+.micro-card.clicavel:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
 }
 
 .micro-amber { background: #fffbeb; border: 1px solid #fde68a; }

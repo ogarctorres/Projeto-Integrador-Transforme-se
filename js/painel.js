@@ -519,5 +519,90 @@ document.getElementById("btnSair").addEventListener("click", function () {
   window.location.href = "../index.html";
 });
 
+// 8. Leitor de Microtutoriais clicáveis no Dashboard (Início)
+const MICROTUTORIAIS_PAINEL = [
+  {
+    titulo: "Como cobrar pelo seu 1º pacote de posts 💡",
+    sub: "Monte pacotes simples e acessíveis para cafeterias, salões e comércios do bairro",
+    passos: [
+      "1. Ofereça um pacote fechado semanal (ex: 3 artes no Canva + 2 Reels curtos editados)",
+      "2. Use templates reutilizáveis para produzir cada post em menos de 20 minutos",
+      "3. Mostre ao lojista que o pacote custa menos de R$ 20 por dia e traz clientes novos"
+    ],
+    precos: [
+      ["Pacote Básico (2 posts/sem)", "R$ 300/mês"],
+      ["Pacote Local (3 posts + 2 Reels)", "R$ 550/mês"],
+      ["Gestão Completa + Stories", "R$ 750/mês"]
+    ],
+    vagaId: 9
+  },
+  {
+    titulo: "5 formas de monetizar organização no Notion 📘",
+    sub: "Transforme sua organização de estudos em serviços rápidos e recorrentes",
+    passos: [
+      "1. Crie um painel universitário completo (provas, notas, leituras e TCC)",
+      "2. Monte um calendário editorial simples para pequenos criadores de conteúdo",
+      "3. Combine o template no Notion com formatação ABNT para aumentar seu valor por entrega"
+    ],
+    precos: [
+      ["Template Estudantil Personalizado", "R$ 60/entrega"],
+      ["Painel para Pequeno Negócio", "R$ 150/projeto"],
+      ["Combo Organização + ABNT", "R$ 220/projeto"]
+    ],
+    vagaId: 4
+  },
+  {
+    titulo: "Portfólio rápido mesmo sem clientes prévios 🚀",
+    sub: "Conquiste sua primeira vaga criando 2 amostras demonstrativas hoje mesmo",
+    passos: [
+      "1. Escolha um comércio real do seu bairro e crie 2 artes ou 2 cortes demonstrativos",
+      "2. Salve os arquivos organizados em uma pasta limpa no Google Drive",
+      "3. Envie o link da pasta junto com sua candidatura em 1 clique no Conecta+"
+    ],
+    precos: [
+      ["Semana Teste / Projeto Piloto", "R$ 120/sem"],
+      ["Pacote Mensal Recorrente", "R$ 550/mês"],
+      ["Combo Reels + Artes Feed", "R$ 700/mês"]
+    ],
+    vagaId: 1
+  }
+];
+
+document.querySelectorAll("[data-micro]").forEach(function (card) {
+  card.addEventListener("click", function () {
+    const tut = MICROTUTORIAIS_PAINEL[Number(card.dataset.micro)];
+    if (!tut) return;
+
+    document.getElementById("microTituloPagina").textContent = tut.titulo;
+    document.getElementById("microSubPagina").textContent = tut.sub;
+
+    const passosEl = document.getElementById("microPassosLista");
+    passosEl.innerHTML = "";
+    tut.passos.forEach(function (p) {
+      const div = document.createElement("div");
+      div.className = "entrega-item-card";
+      div.innerHTML = '<span class="entrega-check">✓</span><span>' + p + '</span>';
+      passosEl.appendChild(div);
+    });
+
+    const precosEl = document.getElementById("microPrecosLista");
+    precosEl.innerHTML = "";
+    tut.precos.forEach(function (par) {
+      const linha = document.createElement("div");
+      linha.className = "resumo-linha";
+      linha.innerHTML = "<span>" + par[0] + "</span><strong style='color:#047857;'>" + par[1] + "</strong>";
+      precosEl.appendChild(linha);
+    });
+
+    document.getElementById("btnMicroVerVaga").onclick = function () {
+      const vagaRel = listarOportunidades().find(function (v) { return v.id === tut.vagaId; });
+      if (vagaRel) abrirPaginaDetalhesVaga(vagaRel);
+    };
+
+    abrirAbaPainel("sec-microtutorial");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+});
+
 carregarDadosUsuario();
 renderizarTudo();

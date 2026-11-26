@@ -143,19 +143,19 @@
           </div>
         </div>
         <div class="micro-grid">
-          <article class="micro-card micro-amber">
+          <article class="micro-card micro-amber clicavel" data-micro="0">
             <span>✦ DICA • 3 MIN</span>
             <strong>Como cobrar pelo seu 1º pacote de posts</strong>
             <small>Pacote básico (2 posts/sem): R$ 300/mês • Local (3 posts + 2 Reels): R$ 550/mês.</small>
           </article>
 
-          <article class="micro-card micro-blue">
+          <article class="micro-card micro-blue clicavel" data-micro="1">
             <span>✦ GUIA • 4 MIN</span>
             <strong>5 formas de monetizar organização no Notion</strong>
             <small>Templates estudantis (R$ 60) • Painel para pequeno negócio (R$ 150/projeto).</small>
           </article>
 
-          <article class="micro-card micro-green">
+          <article class="micro-card micro-green clicavel" data-micro="2">
             <span>✦ AULA • 5 MIN</span>
             <strong>Portfólio rápido mesmo sem clientes prévios</strong>
             <small>Crie 2 exemplos demonstrativos para comércios do bairro e envie na candidatura.</small>
@@ -444,6 +444,38 @@
           <button type="button" class="btn-link-outline" data-go="sec-vagas">Explorar Mais Vagas</button>
           <button type="button" class="btn-outline-neutro" data-go="sec-inicio">🏠 Voltar ao Início</button>
         </div>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         TELA DE LEITURA DO MICROTUTORIAL (CONECTADA AOS CARDS DO INÍCIO)
+    ================================================================== -->
+    <section id="sec-microtutorial" class="painel-sec">
+      <div class="sec-head">
+        <div class="detalhe-head-left">
+          <button type="button" class="btn-voltar-pill" data-go="sec-inicio">← Voltar ao Início</button>
+          <div>
+            <h2 id="microTituloPagina">Microtutorial Prático 💡</h2>
+            <p class="sec-sub" id="microSubPagina">Guia rápido passo a passo para aplicar hoje mesmo</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="detalhe-layout-2col">
+        <div class="perfil-box detalhe-main-card">
+          <div class="detalhe-bloco">
+            <h3>Passo a passo prático</h3>
+            <div class="detalhe-entregas-cards" id="microPassosLista"></div>
+          </div>
+        </div>
+
+        <aside class="perfil-box detalhe-sidebar-card">
+          <h3>Tabela de Preços Sugerida</h3>
+          <div class="detalhe-resumo-lista" id="microPrecosLista"></div>
+          <button type="button" class="btn-azul btn-lg-full" id="btnMicroVerVaga">
+            Ver Vaga Relacionada a este Guia →
+          </button>
+        </aside>
       </div>
     </section>
 
