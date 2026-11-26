@@ -14,113 +14,169 @@
 </head>
 <body>
 
-  <!-- BARRA SUPERIOR LOGADA (FIEL À TELA 02. INÍCIO DO FIGMA) -->
+  <!-- BARRA SUPERIOR LOGADA ALINHADA AO CONTAINER (FIEL À TELA 02. INÍCIO DO FIGMA) -->
   <header class="top-bar">
-    <a class="brand" href="../index.html">
-      <span class="brand-square">✦</span>
-      <div class="brand-texts">
-        <strong>Conecta+</strong>
-        <small>Talentos Jovens &amp; Oportunidades</small>
+    <div class="top-bar-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-square">✦</span>
+        <div class="brand-texts">
+          <strong>Conecta+</strong>
+          <small>Talentos Jovens &amp; Oportunidades</small>
+        </div>
+      </a>
+
+      <nav class="menu-pill">
+        <button class="menu-btn active" data-sec="sec-inicio">🏠 Início</button>
+        <button class="menu-btn" data-sec="sec-vagas">💼 Oportunidades</button>
+        <button class="menu-btn" data-sec="sec-favoritos">❤️ Favoritos (<span id="contFav">0</span>)</button>
+        <button class="menu-btn" data-sec="sec-candidaturas">💬 Chat (<span id="contCand">0</span>)</button>
+        <button class="menu-btn" data-sec="sec-perfil">👤 Perfil</button>
+      </nav>
+
+      <div class="header-right">
+        <button type="button" class="potencial-chip" id="btnAbrirSimuladorTopo" title="Abrir Simulador Financeiro">
+          📈 R$ 850/mês
+        </button>
+
+        <button class="notif-btn" id="btnAbrirAlertas" title="Central de Notificações">
+          🔔 <span class="notif-count" id="contNotif">3</span>
+        </button>
+
+        <div class="user-chip" id="btnAbrirPerfilTopo" title="Abrir Meu Perfil">
+          <span class="avatar-mini" id="avatarIniciais">RM</span>
+          <strong id="badgeNomeUsuario">Richard</strong>
+        </div>
+
+        <button class="btn-sair" id="btnSair">Sair</button>
       </div>
-    </a>
-
-    <nav class="menu-pill">
-      <button class="menu-btn active" data-sec="sec-vagas">💼 Oportunidades</button>
-      <button class="menu-btn" data-sec="sec-favoritos">❤️ Favoritos (<span id="contFav">0</span>)</button>
-      <button class="menu-btn" data-sec="sec-candidaturas">💬 Chat (<span id="contCand">0</span>)</button>
-      <button class="menu-btn" data-sec="sec-perfil">👤 Perfil</button>
-    </nav>
-
-    <div class="header-right">
-      <button type="button" class="potencial-chip" id="btnAbrirSimuladorTopo" title="Abrir Painel Financeiro">📈 Potencial: R$ 850/mês</button>
-
-      <button class="notif-btn" id="btnAbrirAlertas" title="Central de Notificações">
-        🔔 <span class="notif-count" id="contNotif">3</span>
-      </button>
-
-      <div class="user-chip" id="btnAbrirPerfilTopo">
-        <span class="avatar-mini" id="avatarIniciais">RM</span>
-        <strong id="badgeNomeUsuario">Richard M.</strong>
-      </div>
-
-      <button class="btn-sair" id="btnSair">Sair</button>
     </div>
   </header>
 
   <main class="container">
 
-    <!-- HERO EM 2 COLUNAS FIEL À TELA "02. INÍCIO" DO FIGMA -->
-    <section class="hero-grid">
+    <!-- =================================================================
+         ABA 1: INÍCIO / DASHBOARD LIMPO (TELA 02. INÍCIO DO FIGMA)
+         Mostra Hero + Top 3 Sugestões + 3 Microtutoriais (sem parede de 12 cards!)
+    ================================================================== -->
+    <section id="sec-inicio" class="painel-sec active">
 
-      <!-- ESQUERDA: BOAS-VINDAS + 3 AÇÕES RÁPIDAS -->
-      <div class="welcome-card">
-        <div class="welcome-top">
-          <div class="avatar-grande" id="avatarGrande">RM</div>
-          <div>
-            <h1 id="saudacaoUsuario">Olá, Richard! 👋</h1>
-            <p id="resumoRotina">Suas habilidades e horários estão prontos para conectar você a novas oportunidades.</p>
+      <!-- HERO EM 2 COLUNAS -->
+      <div class="hero-grid">
+        <div class="welcome-card">
+          <div class="welcome-top">
+            <div class="avatar-grande" id="avatarGrande">RM</div>
+            <div>
+              <h1 id="saudacaoUsuario">Olá, Richard! 👋</h1>
+              <p id="resumoRotina">Pronto para turbinar sua renda extra hoje? Você tem 12 oportunidades compatíveis.</p>
+            </div>
+          </div>
+
+          <div class="quick-actions">
+            <button type="button" class="qa-card qa-blue" data-go="sec-vagas">
+              <span class="qa-icon">💼</span>
+              <div>
+                <strong>Ver Oportunidades</strong>
+                <small>Explorar todas (12)</small>
+              </div>
+            </button>
+
+            <button type="button" class="qa-card qa-green" data-go="sec-perfil">
+              <span class="qa-icon">✨</span>
+              <div>
+                <strong>Minhas Habilidades</strong>
+                <small>Atualizar tags e dias</small>
+              </div>
+            </button>
+
+            <button type="button" class="qa-card qa-amber" data-go="sec-financeiro">
+              <span class="qa-icon">📈</span>
+              <div>
+                <strong>Simular Ganhos</strong>
+                <small>Planejar meta mensal</small>
+              </div>
+            </button>
           </div>
         </div>
 
-        <div class="quick-actions">
-          <button type="button" class="qa-card qa-blue" data-go="sec-vagas">
-            <span class="qa-icon">💼</span>
+        <!-- CARD AZUL DE META MENSAL (CLICÁVEL -> SIMULADOR) -->
+        <div class="meta-card clicavel" id="cardMetaFinanceiro" title="Clique para abrir o Simulador de Ganhos">
+          <div class="meta-top">
             <div>
-              <strong>Ver Oportunidades</strong>
-              <small>12 vagas compatíveis</small>
+              <span class="meta-label">Potencial mensal estimado</span>
+              <strong class="meta-valor">R$ 850,00 <small>/ mês</small></strong>
             </div>
-          </button>
+            <span class="badge-meta" id="badgePorcentagemMeta">Meta 68%</span>
+          </div>
 
-          <button type="button" class="qa-card qa-green" data-go="sec-perfil">
-            <span class="qa-icon">✨</span>
-            <div>
-              <strong>Minhas Habilidades</strong>
-              <small>Atualizar tags e perfil</small>
+          <div class="meta-middle">
+            <div class="progress-bar">
+              <div class="progress-fill" id="barraMetaFill" style="width: 68%;"></div>
             </div>
-          </button>
+            <p class="meta-hint" id="metaValorTexto">
+              Meta: R$ 1.250/mês • Média de R$ 35 a R$ 55/hora
+            </p>
+          </div>
 
-          <button type="button" class="qa-card qa-amber" data-go="sec-candidaturas">
-            <span class="qa-icon">💬</span>
-            <div>
-              <strong>Chat &amp; Candidaturas</strong>
-              <small>Falar com contratantes</small>
-            </div>
-          </button>
+          <div class="meta-footer-link">
+            <span>Abrir Simulador Financeiro</span>
+            <span>→</span>
+          </div>
         </div>
       </div>
 
-      <!-- DIREITA: CARD AZUL ROYAL DE META MENSAL (TELA 02 / 02.1 DO FIGMA) -->
-      <div class="meta-card clicavel" id="cardMetaFinanceiro" title="Clique para abrir o Simulador de Ganhos">
-        <div class="meta-top">
+      <!-- TOP 3 SUGESTÕES PARA VOCÊ -->
+      <div class="sec-head">
+        <div>
+          <h2>Sugestões para Você</h2>
+          <p class="sec-sub">As 3 oportunidades com maior compatibilidade com seu perfil hoje</p>
+        </div>
+        <button type="button" class="btn-link-outline" data-go="sec-vagas">Ver todas (12) →</button>
+      </div>
+      <div class="cards-grid" id="listaTop3Inicio"></div>
+
+      <!-- NOVIDADES & MICROTUTORIAIS -->
+      <div class="micro-block">
+        <div class="sec-head" style="margin-bottom: 14px;">
           <div>
-            <span class="meta-label">Potencial mensal estimado</span>
-            <strong class="meta-valor">R$ 850,00 <small>/ mês</small></strong>
+            <h2>Novidades &amp; Microtutoriais 💡</h2>
+            <p class="sec-sub">Guias rápidos de 3 a 5 minutos para monetizar suas habilidades do zero</p>
           </div>
-          <span class="badge-meta" id="badgePorcentagemMeta">Meta 68%</span>
         </div>
+        <div class="micro-grid">
+          <article class="micro-card micro-amber">
+            <span>✦ DICA • 3 MIN</span>
+            <strong>Como cobrar pelo seu 1º pacote de posts</strong>
+            <small>Pacote básico (2 posts/sem): R$ 300/mês • Local (3 posts + 2 Reels): R$ 550/mês.</small>
+          </article>
 
-        <div class="progress-bar">
-          <div class="progress-fill" id="barraMetaFill" style="width: 68%;"></div>
+          <article class="micro-card micro-blue">
+            <span>✦ GUIA • 4 MIN</span>
+            <strong>5 formas de monetizar organização no Notion</strong>
+            <small>Templates estudantis (R$ 60) • Painel para pequeno negócio (R$ 150/projeto).</small>
+          </article>
+
+          <article class="micro-card micro-green">
+            <span>✦ AULA • 5 MIN</span>
+            <strong>Portfólio rápido mesmo sem clientes prévios</strong>
+            <small>Crie 2 exemplos demonstrativos para comércios do bairro e envie na candidatura.</small>
+          </article>
         </div>
-
-        <p class="meta-hint" id="metaValorTexto">
-          Meta definida: R$ 1.250/mês • Média de R$ 35 a R$ 55/hora
-        </p>
       </div>
 
     </section>
 
-    <!-- ABA 1: OPORTUNIDADES -->
-    <section id="sec-vagas" class="painel-sec active">
+    <!-- =================================================================
+         ABA 2: CATÁLOGO COMPLETO DE OPORTUNIDADES (TELA 03 DO FIGMA)
+    ================================================================== -->
+    <section id="sec-vagas" class="painel-sec">
       <div class="sec-head">
         <div>
-          <h2>Sugestões para Você</h2>
-          <p class="sec-sub">Oportunidades compatíveis com suas habilidades e disponibilidade no contraturno</p>
+          <h2>Explorar Oportunidades</h2>
+          <p class="sec-sub">Filtre por compatibilidade, formato remoto ou tempo livre no contraturno</p>
         </div>
         <input type="search" id="buscaPainel" placeholder="Buscar por habilidade, empresa ou vaga...">
       </div>
 
-      <!-- CHIPS DE FILTRO RÁPIDO (FIEL À TELA 03. OPORTUNIDADES DO FIGMA) -->
       <div class="filter-chips" id="filtrosPainel">
         <button type="button" class="chip-filtro active" data-filtro="todas">Todas (12)</button>
         <button type="button" class="chip-filtro" data-filtro="match95">⭐ 95%+ Match</button>
@@ -129,86 +185,72 @@
       </div>
 
       <div class="cards-grid" id="listaVagasPainel"></div>
-
-      <!-- NOVIDADES & MICROTUTORIAIS (FIEL À TELA 02. INÍCIO DO FIGMA) -->
-      <div class="micro-block">
-        <h3>Novidades &amp; Microtutoriais Práticos 💡</h3>
-        <div class="micro-grid">
-          <article class="micro-card micro-amber">
-            <span>DICA • 3 MIN</span>
-            <strong>Como cobrar pelo seu 1º pacote de posts</strong>
-            <small>Pacote básico (2 posts/sem): R$ 300/mês • Local (3 posts + 2 Reels): R$ 550/mês</small>
-          </article>
-
-          <article class="micro-card micro-blue">
-            <span>GUIA • 4 MIN</span>
-            <strong>5 formas de monetizar organização no Notion</strong>
-            <small>Templates estudantis (R$ 60) • Painel para pequeno negócio (R$ 150/projeto)</small>
-          </article>
-
-          <article class="micro-card micro-green">
-            <span>AULA • 5 MIN</span>
-            <strong>Portfólio rápido mesmo sem clientes prévios</strong>
-            <small>Crie 2 exemplos demonstrativos para negócios do bairro e envie junto com a candidatura</small>
-          </article>
-        </div>
-      </div>
     </section>
 
-    <!-- ABA 2: FAVORITOS -->
+    <!-- =================================================================
+         ABA 3: FAVORITOS (TELA 04 DO FIGMA)
+    ================================================================== -->
     <section id="sec-favoritos" class="painel-sec">
       <div class="sec-head">
         <div>
           <h2>Meus Favoritos</h2>
-          <p class="sec-sub">Vagas salvas para você acompanhar ou se candidatar quando quiser</p>
+          <p class="sec-sub">Oportunidades salvas para acompanhar ou se candidatar quando quiser</p>
         </div>
+        <button type="button" class="btn-link-outline" data-go="sec-vagas">Explorar mais vagas →</button>
       </div>
       <div class="cards-grid" id="listaFavoritosPainel"></div>
     </section>
 
-    <!-- ABA 3: CANDIDATURAS & CHAT DIRETO -->
+    <!-- =================================================================
+         ABA 4: CANDIDATURAS & CHAT DIRETO (TELA 03.6 DO FIGMA)
+    ================================================================== -->
     <section id="sec-candidaturas" class="painel-sec">
       <div class="sec-head">
         <div>
           <h2>Minhas Candidaturas &amp; Chat Direto</h2>
-          <p class="sec-sub">Acompanhe seus envios e converse em tempo real com contratantes</p>
+          <p class="sec-sub">Acompanhe seus envios e converse diretamente com os contratantes</p>
         </div>
       </div>
       <div class="lista-simples" id="listaCandidaturasPainel"></div>
 
-      <div class="perfil-box" style="margin-top: 22px;">
+      <div class="perfil-box" style="margin-top: 24px;">
         <h3>💬 Mensagens — Ana Clara (Cafeteria &amp; Bistrô Vila Nova)</h3>
         <div id="mensagensChat" class="chat-box">
           <div class="msg-recebida">
             <strong>Ana Clara:</strong> Olá! Vimos seu perfil no Conecta+ e gostamos muito das suas habilidades. Você tem disponibilidade para 3 posts por semana?
           </div>
         </div>
-        <div class="linha-meta" style="margin-top: 12px;">
+        <div class="linha-meta" style="margin-top: 14px;">
           <input type="text" id="inputChat" placeholder="Digite sua resposta para o contratante..." style="flex: 1; width: auto;">
           <button type="button" class="btn-verde" id="btnEnviarChat">Enviar →</button>
         </div>
       </div>
     </section>
 
-    <!-- ABA 4: CENTRAL DE NOTIFICAÇÕES -->
+    <!-- =================================================================
+         ABA 5: NOTIFICAÇÕES (TELA 05 DO FIGMA)
+    ================================================================== -->
     <section id="sec-notificacoes" class="painel-sec">
       <div class="sec-head">
         <div>
           <h2>Central de Notificações &amp; Alertas</h2>
           <p class="sec-sub">Novos matches de vagas e respostas de contratantes</p>
         </div>
+        <button type="button" class="btn-link-outline" data-go="sec-inicio">← Voltar ao Início</button>
       </div>
       <div class="lista-simples" id="listaNotificacoesPainel"></div>
     </section>
 
-    <!-- ABA 5: PAINEL FINANCEIRO & SIMULADOR (TELA 02.1 DO FIGMA) -->
+    <!-- =================================================================
+         ABA 6: PAINEL FINANCEIRO & SIMULADOR (TELA 02.1 DO FIGMA)
+    ================================================================== -->
     <section id="sec-financeiro" class="painel-sec">
       <div class="sec-head">
         <div>
           <h2>Painel Financeiro &amp; Simulador de Ganhos 📈</h2>
           <p class="sec-sub">Combine atividades flexíveis (média de R$ 35 a R$ 55/hora) para alcançar sua meta mensal</p>
         </div>
-        <button type="button" class="btn-azul" data-go="sec-vagas">← Voltar às Oportunidades</button>
+        <button type="button" class="btn-link-outline" data-go="sec-inicio">← Voltar ao Início</button>
       </div>
 
       <div class="sim-grid-painel">
@@ -268,7 +310,9 @@
       </div>
     </section>
 
-    <!-- ABA 6: MEU PERFIL (TELA 05 DO FIGMA) -->
+    <!-- =================================================================
+         ABA 7: MEU PERFIL (TELA 05 DO FIGMA)
+    ================================================================== -->
     <section id="sec-perfil" class="painel-sec">
       <div class="perfil-box">
         <h2>Meu Perfil &amp; Preferências de Trabalho — Conecta+</h2>
@@ -296,7 +340,7 @@
 
   </main>
 
-  <!-- MODAL DE DETALHES DA VAGA + CANDIDATURA EM 1 CLIQUE (TELAS 03.1 A 03.4 DO FIGMA) -->
+  <!-- MODAL DE DETALHES DA VAGA + CANDIDATURA EM 1 CLIQUE -->
   <dialog id="modalCandidatura">
     <button class="close" id="fecharModalCand">×</button>
     <span class="tag-verde" id="candBadgeMatch">✓ 98% Compatível</span>

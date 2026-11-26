@@ -23,8 +23,7 @@ function carregarDadosUsuario() {
   document.getElementById("avatarGrande").textContent = iniciais;
   document.getElementById("saudacaoUsuario").textContent = "Olá, " + primeiroNome + "! 👋";
   document.getElementById("resumoRotina").textContent =
-    "Habilidades: " + usuarioAtual.habilidades.join(", ") +
-    " • Dias livres: " + usuarioAtual.diasLivres.join(", ");
+    "Pronto para turbinar sua renda extra hoje? Você tem " + listarOportunidades().length + " oportunidades compatíveis.";
 
   const meta = Number(usuarioAtual.metaMensal) || 1250;
   const porcentagem = Math.min(100, Math.round((850 / meta) * 100));
@@ -160,6 +159,11 @@ function criarCardVaga(vaga) {
   const card = document.createElement("article");
   card.className = "vaga-card";
 
+  let tagsHtml = "";
+  vaga.habilidades.forEach(function (hab) {
+    tagsHtml += "<span>" + hab + "</span>";
+  });
+
   card.innerHTML =
     '<div class="vaga-topo">' +
       '<span class="tag-verde">✓ ' + vaga.compatibilidade + ' • ' + vaga.tempo + '</span>' +
@@ -170,8 +174,14 @@ function criarCardVaga(vaga) {
     '<h3>' + vaga.titulo + '</h3>' +
     '<div class="vaga-empresa">' + vaga.empresa + ' • ' + vaga.formato + '</div>' +
     '<p class="vaga-desc">' + vaga.descricao + '</p>' +
-    '<div class="vaga-valor">' + vaga.valor + '</div>' +
-    '<button class="btn-azul btn-candidatar" type="button">Ver Detalhes &amp; Candidatar →</button>';
+    '<div class="vaga-tags">' + tagsHtml + '</div>' +
+    '<div class="vaga-rodape">' +
+      '<div class="vaga-preco-box">' +
+        '<small>Retorno estimado</small>' +
+        '<div class="vaga-valor">' + vaga.valor + '</div>' +
+      '</div>' +
+      '<button class="btn-azul btn-candidatar" type="button">Ver Detalhes →</button>' +
+    '</div>';
 
   card.querySelector(".btn-fav").addEventListener("click", function () {
     alternarFavorito(usuarioAtual.id, vaga.id);
@@ -292,7 +302,26 @@ function renderizarNotificacoes() {
   });
 }
 
+// Renderiza apenas as Top 3 sugestões na aba Início (Tela 02 do Figma)
+function renderizarTop3Inicio() {
+  const container = document.getElementById("listaTop3Inicio");
+  if (!container) return;
+
+  const vagas = listarOportunidades();
+  // Destaca as 3 principais vagas do Figma: Social Media (9), Formatação ABNT (2) e Suporte WhatsApp (5)
+  const idsDestaque = [9, 2, 5];
+  const selecionadas = idsDestaque
+    .map(function (id) { return vagas.find(function (v) { return v.id === id; }); })
+    .filter(Boolean);
+
+  container.innerHTML = "";
+  selecionadas.forEach(function (vaga) {
+    container.appendChild(criarCardVaga(vaga));
+  });
+}
+
 function renderizarTudo() {
+  renderizarTop3Inicio();
   renderizarVagas();
   renderizarFavoritos();
   renderizarCandidaturas();
