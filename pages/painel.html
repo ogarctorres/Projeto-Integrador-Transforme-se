@@ -31,7 +31,7 @@
     </nav>
 
     <div class="header-right">
-      <span class="potencial-chip">📈 Potencial: R$ 850/mês</span>
+      <button type="button" class="potencial-chip" id="btnAbrirSimuladorTopo" title="Abrir Painel Financeiro">📈 Potencial: R$ 850/mês</button>
 
       <button class="notif-btn" id="btnAbrirAlertas" title="Central de Notificações">
         🔔 <span class="notif-count" id="contNotif">3</span>
@@ -89,7 +89,7 @@
       </div>
 
       <!-- DIREITA: CARD AZUL ROYAL DE META MENSAL (TELA 02 / 02.1 DO FIGMA) -->
-      <div class="meta-card">
+      <div class="meta-card clicavel" id="cardMetaFinanceiro" title="Clique para abrir o Simulador de Ganhos">
         <div class="meta-top">
           <div>
             <span class="meta-label">Potencial mensal estimado</span>
@@ -176,7 +176,74 @@
       <div class="lista-simples" id="listaNotificacoesPainel"></div>
     </section>
 
-    <!-- ABA 5: MEU PERFIL -->
+    <!-- ABA 5: PAINEL FINANCEIRO & SIMULADOR (TELA 02.1 DO FIGMA) -->
+    <section id="sec-financeiro" class="painel-sec">
+      <div class="sec-head">
+        <div>
+          <h2>Painel Financeiro &amp; Simulador de Ganhos 📈</h2>
+          <p class="sec-sub">Combine atividades flexíveis (média de R$ 35 a R$ 55/hora) para alcançar sua meta mensal</p>
+        </div>
+        <button type="button" class="btn-azul" data-go="sec-vagas">← Voltar às Oportunidades</button>
+      </div>
+
+      <div class="sim-grid-painel">
+        <div class="perfil-box">
+          <h3>Marque as atividades que deseja combinar no mês:</h3>
+          <div class="sim-lista" id="listaSimuladorPainel">
+            <label class="sim-item">
+              <input type="checkbox" value="550" data-horas="6" checked>
+              <div>
+                <strong>1 Cliente de Social Media Local (Posts + Reels)</strong>
+                <small>6h / semana • Pagamento quinzenal via PIX</small>
+              </div>
+              <span class="sim-preco">+ R$ 550</span>
+            </label>
+
+            <label class="sim-item">
+              <input type="checkbox" value="500" data-horas="6" checked>
+              <div>
+                <strong>Atendimento via WhatsApp (Noite / Sábado)</strong>
+                <small>6h / semana • 100% Remoto</small>
+              </div>
+              <span class="sim-preco">+ R$ 500</span>
+            </label>
+
+            <label class="sim-item">
+              <input type="checkbox" value="200" data-horas="2" checked>
+              <div>
+                <strong>2 Formatações de Trabalhos ABNT por mês</strong>
+                <small>2h / semana • Horário flexível</small>
+              </div>
+              <span class="sim-preco">+ R$ 200</span>
+            </label>
+
+            <label class="sim-item">
+              <input type="checkbox" value="180" data-horas="2">
+              <div>
+                <strong>2 Pacotes de Cortes TikTok / Reels no CapCut</strong>
+                <small>2h / semana • Até 2h/dia</small>
+              </div>
+              <span class="sim-preco">+ R$ 180</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="meta-card">
+          <div>
+            <span class="meta-label">PROJEÇÃO TOTAL SIMULADA</span>
+            <strong class="meta-valor" id="simTotalReais">R$ 1.250,00 <small>/ mês</small></strong>
+            <p class="meta-hint" id="simTotalHoras" style="margin-top: 8px;">Carga semanal estimada: 14h / semana</p>
+          </div>
+
+          <button type="button" class="btn-verde btn-full" id="btnAplicarMetaSimulada">
+            Definir esse valor como minha Meta ✓
+          </button>
+          <p id="msgSimulador" style="font-size: 12px; color: #fde68a; font-weight: 700; margin: 10px 0 0;"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 6: MEU PERFIL -->
     <section id="sec-perfil" class="painel-sec">
       <div class="perfil-box">
         <h2>Meu Perfil &amp; Preferências — Conecta+</h2>

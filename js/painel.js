@@ -62,6 +62,44 @@ document.getElementById("btnAbrirAlertas").addEventListener("click", function ()
 document.getElementById("btnAbrirPerfilTopo").addEventListener("click", function () {
   abrirAbaPainel("sec-perfil");
 });
+document.getElementById("btnAbrirSimuladorTopo").addEventListener("click", function () {
+  abrirAbaPainel("sec-financeiro");
+});
+document.getElementById("cardMetaFinanceiro").addEventListener("click", function () {
+  abrirAbaPainel("sec-financeiro");
+});
+
+// Simulador Financeiro Interativo (Tela 02.1 do Figma)
+function calcularSimuladorPainel() {
+  let somaValor = 0;
+  let somaHoras = 0;
+
+  document.querySelectorAll("#listaSimuladorPainel input:checked").forEach(function (item) {
+    somaValor += Number(item.value);
+    somaHoras += Number(item.dataset.horas);
+  });
+
+  document.getElementById("simTotalReais").innerHTML =
+    "R$ " + somaValor.toLocaleString("pt-BR") + ",00 <small>/ mês</small>";
+  document.getElementById("simTotalHoras").textContent =
+    "Carga semanal estimada: " + somaHoras + "h / semana";
+
+  return somaValor;
+}
+
+document.querySelectorAll("#listaSimuladorPainel input").forEach(function (cb) {
+  cb.addEventListener("change", calcularSimuladorPainel);
+});
+
+document.getElementById("btnAplicarMetaSimulada").addEventListener("click", function () {
+  const total = calcularSimuladorPainel();
+  if (total > 0) {
+    usuarioAtual.metaMensal = total;
+    atualizarUsuarioLogado(usuarioAtual);
+    carregarDadosUsuario();
+    document.getElementById("msgSimulador").textContent = "Meta atualizada para R$ " + total.toLocaleString("pt-BR") + "/mês! ✓";
+  }
+});
 
 // 2. Cria um card de vaga
 function criarCardVaga(vaga) {

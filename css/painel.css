@@ -295,6 +295,67 @@ button {
   box-shadow: 0 12px 26px rgba(37, 99, 235, 0.24);
 }
 
+.meta-card.clicavel {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.meta-card.clicavel:hover {
+  transform: translateY(-2px);
+}
+
+.sim-grid-painel {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.sim-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.sim-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 14px;
+  cursor: pointer;
+}
+
+.sim-item input {
+  accent-color: var(--emerald);
+  width: 18px;
+  height: 18px;
+}
+
+.sim-item > div {
+  flex: 1;
+}
+
+.sim-item strong {
+  display: block;
+  font-size: 14px;
+}
+
+.sim-item small {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.sim-preco {
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--emerald-dark);
+  white-space: nowrap;
+}
+
 .meta-top {
   display: flex;
   justify-content: space-between;
