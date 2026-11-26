@@ -390,6 +390,29 @@ button {
   background: #ffffff;
 }
 
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.chip-filtro {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: var(--muted);
+  padding: 8px 14px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.chip-filtro.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
 /* GRADE DE CARDS DE VAGAS */
 .cards-grid {
   display: grid;

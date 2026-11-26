@@ -10,6 +10,7 @@ if (!usuarioAtual) {
 }
 
 let vagaSelecionadaParaCandidatura = null;
+let filtroAtivoPainel = "todas";
 
 // 1. Preenche cabeçalho, iniciais, saudação, barra da meta e dados do perfil
 function carregarDadosUsuario() {
@@ -104,14 +105,41 @@ function renderizarVagas() {
   const vagas = listarOportunidades();
 
   container.innerHTML = "";
+  let totalMostrado = 0;
 
   vagas.forEach(function (vaga) {
     const texto = (vaga.titulo + " " + vaga.empresa + " " + vaga.habilidades.join(" ")).toLowerCase();
-    if (busca === "" || texto.includes(busca)) {
+    const bateBusca = busca === "" || texto.includes(busca);
+
+    let bateFiltro = true;
+    if (filtroAtivoPainel === "match95") {
+      bateFiltro = parseInt(vaga.compatibilidade, 10) >= 95;
+    } else if (filtroAtivoPainel === "remoto") {
+      bateFiltro = vaga.formato === "Remoto";
+    } else if (filtroAtivoPainel === "curto") {
+      bateFiltro = vaga.tipo === "curtos";
+    }
+
+    if (bateBusca && bateFiltro) {
+      totalMostrado++;
       container.appendChild(criarCardVaga(vaga));
     }
   });
+
+  if (totalMostrado === 0) {
+    container.innerHTML = '<div class="vazio-box">Nenhuma vaga encontrada com esse filtro.</div>';
+  }
 }
+
+// Clique nos chips de filtro rápido
+document.querySelectorAll(".chip-filtro").forEach(function (chip) {
+  chip.addEventListener("click", function () {
+    document.querySelectorAll(".chip-filtro").forEach(function (c) { c.classList.remove("active"); });
+    chip.classList.add("active");
+    filtroAtivoPainel = chip.dataset.filtro;
+    renderizarVagas();
+  });
+});
 
 function renderizarFavoritos() {
   const container = document.getElementById("listaFavoritosPainel");
