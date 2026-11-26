@@ -38,6 +38,16 @@ function carregarDadosUsuario() {
   document.getElementById("perfilDispositivo").textContent = usuarioAtual.dispositivo || "Celular / Notebook";
   document.getElementById("novaMetaInput").value = meta;
 
+  // Calcula o nível de preenchimento do perfil (Tela 05 do Figma)
+  let pontos = 55;
+  if (usuarioAtual.habilidades.length >= 2) pontos += 15;
+  if (usuarioAtual.habilidades.length >= 4) pontos += 10;
+  if (usuarioAtual.diasLivres.length >= 2) pontos += 10;
+  if (usuarioAtual.diasLivres.length >= 4) pontos += 10;
+  const pctPerfil = Math.min(100, pontos);
+  document.getElementById("perfilNivelBadge").textContent = "Perfil " + pctPerfil + "% completo";
+  document.getElementById("perfilBarraFill").style.width = pctPerfil + "%";
+
   renderizarEditoresPerfil();
 }
 
