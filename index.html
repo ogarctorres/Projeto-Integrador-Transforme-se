@@ -28,7 +28,7 @@
 
     <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu">☰</button>
 
-    <nav class="nav" id="nav">
+    <nav class="nav" id="nav" aria-label="Navegação principal da vitrine">
       <a href="#inicio">Início</a>
       <a href="#oportunidades">Oportunidades</a>
       <a href="#habilidades">Habilidades &amp; Horários</a>
@@ -57,10 +57,10 @@
         </p>
 
         <div class="search-box">
-          <div class="tabs">
-            <button class="tab" data-type="longos">Projetos Longos</button>
-            <button class="tab" data-type="medios">Projetos Médios</button>
-            <button class="tab active" data-type="curtos">Tarefas Curtas</button>
+          <div class="tabs" role="tablist" aria-label="Categorias de duração dos projetos">
+            <button class="tab" role="tab" data-type="longos">Projetos Longos</button>
+            <button class="tab" role="tab" data-type="medios">Projetos Médios</button>
+            <button class="tab active" role="tab" data-type="curtos">Tarefas Curtas</button>
           </div>
 
           <div class="search-row">
