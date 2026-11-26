@@ -22,6 +22,10 @@
       "border-radius: 99px; padding: 5px 10px; font-size: 12px; font-weight: 700; cursor: pointer;" +
     "}" +
     ".a11y-btn:hover { background: #2563eb; border-color: #60a5fa; }" +
+    "@media (max-width: 600px) {" +
+      ".a11y-bar { left: 10px; bottom: 10px; padding: 5px 8px; gap: 4px; }" +
+      ".a11y-btn { padding: 4px 8px; font-size: 11px; }" +
+    "}" +
     "body.alto-contraste { background: #000000 !important; color: #ffffff !important; }" +
     "body.alto-contraste header, body.alto-contraste .header, body.alto-contraste .top-bar," +
     "body.alto-contraste .job, body.alto-contraste .vaga-card, body.alto-contraste .auth-card," +
