@@ -165,13 +165,15 @@ document.getElementById("filterButton").addEventListener("click", function () {
   document.getElementById("habilidades").scrollIntoView({ behavior: "smooth" });
 });
 
-// 7. Atualizar texto do Match na prévia
+// 7. Atualizar texto do Match na prévia (com singular e plural corretos)
 function atualizarResumoMatch() {
   const qtdHabilidades = document.querySelectorAll("#previewSkills input:checked").length;
   const qtdDias = document.querySelectorAll("#previewDays input:checked").length;
+  const textoHab = qtdHabilidades === 1 ? "habilidade" : "habilidades";
+  const textoDia = qtdDias === 1 ? "dia selecionado" : "dias selecionados";
 
   document.getElementById("matchResumoTexto").textContent =
-    "✓ " + qtdHabilidades + " habilidades e " + qtdDias + " dias selecionados — perfeito para vagas no contraturno!";
+    "✓ " + qtdHabilidades + " " + textoHab + " e " + qtdDias + " " + textoDia + " — perfeito para vagas no contraturno!";
 }
 
 document.querySelectorAll("#previewSkills input, #previewDays input").forEach(function (cb) {
@@ -226,8 +228,14 @@ document.querySelectorAll(".tip-card").forEach(function (card) {
   });
 });
 
-// 10. Fechar modal e menu mobile
+// 10. Fechar modal (no X ou clicando fora) e menu mobile
 botaoFecharModal.addEventListener("click", function () { modal.close(); });
+
+modal.addEventListener("click", function (evento) {
+  if (evento.target === modal) {
+    modal.close();
+  }
+});
 
 document.getElementById("mobileMenu").addEventListener("click", function () {
   document.getElementById("nav").classList.toggle("open");
