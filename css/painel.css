@@ -38,6 +38,14 @@ button {
   cursor: pointer;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
+}
+
 /* =========================================================================
    CABEÇALHO LOGADO — ALINHADO COM A MESMA LARGURA (1240px) DO CONTEÚDO
    ========================================================================= */
