@@ -1,4 +1,4 @@
-# ✦ Conecta Mais (`Conecta+`) — Projeto Integrador PROA
+#  Conecta Mais (`Conecta+`) — Projeto Integrador PROA
 
 Plataforma web desenvolvida por jovens no **Instituto PROA** para conectar habilidades cotidianas e tempo livre no contraturno a oportunidades reais de renda extra — de forma **100% gratuita para estudantes**.
 
