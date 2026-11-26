@@ -59,6 +59,12 @@ const OPORTUNIDADES_PADRAO = [
     nivel: "Fácil",
     compatibilidade: "95%",
     valor: "R$ 80 – R$ 150/semana",
+    pagamento: "Pagamento semanal via PIX após entrega",
+    entregas: [
+      "Criar 3 artes promocionais no Canva usando o kit de cores da cafeteria",
+      "Adaptar as artes para o formato Feed (4:5) e Stories (9:16)",
+      "Enviar os links editáveis e arquivos PNG prontos para postar"
+    ],
     descricao: "Crie artes promocionais para redes sociais seguindo os templates da cafeteria do bairro.",
     habilidades: ["Canva", "Redes sociais"],
     corFundo: "art-three"
@@ -73,6 +79,12 @@ const OPORTUNIDADES_PADRAO = [
     nivel: "Fácil",
     compatibilidade: "93%",
     valor: "R$ 80 – R$ 150/painel",
+    pagamento: "Pagamento por painel entregue via PIX",
+    entregas: [
+      "Estruturar calendário de provas, entregas e leituras no Notion",
+      "Configurar lista de tarefas com filtros por matéria e prioridade",
+      "Compartilhar o template duplicável com um mini guia de uso"
+    ],
     descricao: "Monte um espaço organizado no Notion para estudantes acompanharem provas, tarefas e prazos.",
     habilidades: ["Notion", "Organização"],
     corFundo: "art-four"
