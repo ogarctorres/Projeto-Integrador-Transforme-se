@@ -121,6 +121,12 @@ const OPORTUNIDADES_PADRAO = [
     nivel: "Intermediário",
     compatibilidade: "92%",
     valor: "R$ 250 – R$ 380/semana",
+    pagamento: "Pagamento semanal via PIX por lote de vídeos",
+    entregas: [
+      "Revisar legendas geradas automaticamente corrigindo acentuação e termos técnicos",
+      "Sincronizar o tempo de entrada e saída de cada fala no editor",
+      "Exportar os arquivos .SRT ou vídeos legendados em 1080p"
+    ],
     descricao: "Revise e sincronize legendas em português para vídeos curtos publicados no YouTube e Instagram.",
     habilidades: ["Edição de vídeo", "Organização"],
     corFundo: "art-one"
@@ -135,6 +141,12 @@ const OPORTUNIDADES_PADRAO = [
     nivel: "Fácil",
     compatibilidade: "91%",
     valor: "R$ 200 – R$ 320/lote",
+    pagamento: "Pagamento por lote cadastrado via PIX",
+    entregas: [
+      "Organizar fotos enviadas pela papelaria em pastas por categoria",
+      "Preencher título, preço, descrição simples e tags no painel da loja",
+      "Conferir estoque inicial e revisar se todos os produtos estão visíveis"
+    ],
     descricao: "Suba fotos, títulos e descrições de produtos escolares no sistema online da papelaria.",
     habilidades: ["Organização", "Digitação"],
     corFundo: "art-four"
@@ -149,6 +161,12 @@ const OPORTUNIDADES_PADRAO = [
     nivel: "Fácil",
     compatibilidade: "90%",
     valor: "R$ 280 – R$ 400/semana",
+    pagamento: "Pagamento semanal via PIX • Flexível",
+    entregas: [
+      "Criar 4 artes semanais no Canva destacando os doces em promoção",
+      "Montar 6 sequências de Stories com enquetes para engajar clientes do bairro",
+      "Entregar tudo organizado no Google Drive até quinta-feira"
+    ],
     descricao: "Produza 4 posts e 6 stories semanais no Canva divulgando o cardápio da doceria do bairro.",
     habilidades: ["Redes sociais", "Canva"],
     corFundo: "art-two"
