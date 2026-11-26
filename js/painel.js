@@ -489,6 +489,14 @@ document.getElementById("btnEnviarChat").addEventListener("click", function () {
   }, 700);
 });
 
+// Respostas rápidas clicáveis no Chat Direto
+document.querySelectorAll(".quick-reply-btn").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    document.getElementById("inputChat").value = btn.textContent;
+    document.getElementById("btnEnviarChat").click();
+  });
+});
+
 // 6. Troca de abas do menu
 const botoesMenu = document.querySelectorAll(".menu-btn");
 botoesMenu.forEach(function (btn) {

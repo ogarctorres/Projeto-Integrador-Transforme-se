@@ -784,6 +784,27 @@ textarea:focus-visible {
   align-self: flex-end;
 }
 
+.chat-quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.quick-reply-btn {
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  border: 1px solid var(--primary-border);
+  border-radius: 99px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.quick-reply-btn:hover {
+  background: #dbeafe;
+}
+
 .editar-meta {
   margin-top: 20px;
   padding-top: 16px;
