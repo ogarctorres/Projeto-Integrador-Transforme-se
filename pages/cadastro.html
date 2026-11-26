@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro | Conecta Mais</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/auth.css">
+  <script src="../js/dados.js" defer></script>
+  <script src="../js/cadastro.js" defer></script>
+</head>
+<body>
+
+  <main class="page">
+    <a class="back-home" href="../index.html">← Voltar para a página inicial</a>
+
+    <section class="login-card cadastro-card">
+      <div class="brand-mark">✦</div>
+
+      <h1>Criar Conta Grátis</h1>
+      <p class="subtitle">Cadastro simples e gratuito para jovens no Conecta+</p>
+
+      <form id="cadastro-form">
+        <label for="nome">1. Nome completo</label>
+        <input type="text" id="nome" placeholder="Ex: Maria Clara Silva" required>
+
+        <label for="email">E-mail</label>
+        <input type="email" id="email" placeholder="Ex: maria@estudante.br" required>
+
+        <label for="password">Crie uma senha (mínimo 6 caracteres)</label>
+        <div class="password-wrap">
+          <input type="password" id="password" placeholder="Digite sua senha" minlength="6" required>
+          <button type="button" id="toggle-password">Mostrar</button>
+        </div>
+
+        <label for="escolaridade">2. Escolaridade / Perfil acadêmico</label>
+        <input type="text" id="escolaridade" placeholder="Ex: Ensino Médio ou Faculdade em andamento" value="Ensino Superior em andamento" required>
+
+        <label for="dispositivo">Dispositivo e acesso à internet (Etapa de Inclusão do Figma)</label>
+        <input type="text" id="dispositivo" placeholder="Ex: Celular com Wi-Fi / Notebook" value="Notebook e Celular com Wi-Fi" required>
+
+        <label for="meta">Meta mensal desejada (R$)</label>
+        <input type="number" id="meta" value="1250" min="100" step="50" required>
+
+        <span class="field-label">3. Suas principais habilidades:</span>
+        <div class="checkbox-group" id="grupo-habilidades">
+          <label><input type="checkbox" value="Edição de vídeo" checked> Edição de vídeo</label>
+          <label><input type="checkbox" value="Redes sociais" checked> Redes sociais</label>
+          <label><input type="checkbox" value="Canva"> Canva</label>
+          <label><input type="checkbox" value="Notion"> Notion</label>
+          <label><input type="checkbox" value="ABNT"> ABNT</label>
+          <label><input type="checkbox" value="Organização"> Organização</label>
+          <label><input type="checkbox" value="Atendimento"> Atendimento</label>
+        </div>
+
+        <span class="field-label">4. Dias livres no contraturno:</span>
+        <div class="checkbox-group" id="grupo-dias">
+          <label><input type="checkbox" value="Seg" checked> Seg</label>
+          <label><input type="checkbox" value="Ter"> Ter</label>
+          <label><input type="checkbox" value="Qua" checked> Qua</label>
+          <label><input type="checkbox" value="Qui"> Qui</label>
+          <label><input type="checkbox" value="Sex" checked> Sex</label>
+          <label><input type="checkbox" value="Sáb" checked> Sáb</label>
+          <label><input type="checkbox" value="Dom"> Dom</label>
+        </div>
+
+        <div class="form-options">
+          <label class="remember">
+            <input type="checkbox" id="aceite-lgpd" required>
+            Li e concordo com os Termos de Uso e Política de Privacidade (LGPD)
+          </label>
+        </div>
+
+        <button type="submit" class="login-button">Finalizar Cadastro Gratuito</button>
+
+        <p id="feedback" class="feedback"></p>
+      </form>
+
+      <p class="signup">
+        Já tem uma conta?
+        <a href="login.html">Fazer Login</a>
+      </p>
+    </section>
+
+    <footer>
+      © 2026 Conecta+ • Conectando pessoas a novas oportunidades.
+    </footer>
+  </main>
+
+</body>
+</html>

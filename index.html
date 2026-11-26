@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conecta Mais | Conquiste sua independência</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/home.css">
+  <script src="js/dados.js" defer></script>
+  <script src="js/home.js" defer></script>
+</head>
+<body>
+
+  <!-- CABEÇALHO PÚBLICO (TELA 00A DO FIGMA) -->
+  <header class="header">
+    <a class="brand" href="#inicio">
+      <span class="brand-icon">✦</span>
+      <span class="brand-name">CONECTA<br><b>MAIS</b></span>
+    </a>
+
+    <label class="top-search">
+      <span>⌕</span>
+      <input id="topSearch" type="search" placeholder="Pesquise uma oportunidade...">
+    </label>
+
+    <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu">☰</button>
+
+    <nav class="nav" id="nav">
+      <a href="#inicio">Início</a>
+      <a href="#oportunidades">Oportunidades</a>
+      <a href="#habilidades">Habilidades &amp; Horários</a>
+      <a href="#simulador">Simulador</a>
+      <a href="#dicas">Dicas</a>
+      <a href="#parceiros">Parceiros</a>
+    </nav>
+
+    <div class="header-buttons" id="headerButtons">
+      <a class="btn-link login" href="pages/login.html">Entrar</a>
+      <a class="btn-link register" href="pages/cadastro.html">Cadastre-se</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- BANNER HERO -->
+    <section class="hero" id="inicio">
+      <div class="hero-inner">
+        <span class="hero-label">CONECTA+ • PRÉVIA COMPLETA DA PLATAFORMA (CADASTRO GRATUITO)</span>
+
+        <h1>Conquiste sua independência</h1>
+
+        <p>
+          Transforme suas habilidades cotidianas e seu tempo livre no contraturno em oportunidades reais.<br>
+          Explore projetos, simule seus ganhos e descubra seu Match antes mesmo de criar sua conta.
+        </p>
+
+        <div class="search-box">
+          <div class="tabs">
+            <button class="tab" data-type="longos">Projetos Longos</button>
+            <button class="tab" data-type="medios">Projetos Médios</button>
+            <button class="tab active" data-type="curtos">Tarefas Curtas</button>
+          </div>
+
+          <div class="search-row">
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Digite o nome da habilidade ou vaga (ex: Canva, Notion, ABNT, Reels...)"
+            >
+            <button id="searchButton">Buscar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VITRINE DE OPORTUNIDADES -->
+    <section class="content-section opportunities" id="oportunidades">
+      <div class="section-head">
+        <div>
+          <h2 id="listTitle">Tarefas Curtas (Até 2h/dia)</h2>
+          <p id="listSubtitle">Atividades rápidas para encaixar na sua rotina e conquistar uma renda extra.</p>
+        </div>
+        <button class="filter" id="filterButton">⚑ Filtrar pelo meu Tempo Livre</button>
+      </div>
+
+      <div class="jobs" id="jobs"></div>
+
+      <p class="no-results" id="noResults" hidden>
+        Nenhuma oportunidade encontrada para essa busca. Tente outra palavra-chave.
+      </p>
+    </section>
+
+    <!-- PRÉVIA DO MATCH: HABILIDADES + HORÁRIOS -->
+    <section class="content-section match-section" id="habilidades">
+      <div class="match-head">
+        <div>
+          <span class="mini-title">✦ PRÉVIA DO MATCH INTELIGENTE</span>
+          <h2>Habilidades do Dia a Dia + Grade de Horários Livres</h2>
+        </div>
+        <a class="blue-button" href="pages/cadastro.html">
+          Cadastrar Minhas Habilidades Grátis +
+        </a>
+      </div>
+
+      <div class="match-grid">
+        <div class="match-card">
+          <h3>1. Suas Habilidades (Marque o que você domina)</h3>
+
+          <div class="skill-options" id="previewSkills">
+            <label><input type="checkbox" checked> Edição de vídeo</label>
+            <label><input type="checkbox" checked> Redes sociais</label>
+            <label><input type="checkbox"> Notion</label>
+            <label><input type="checkbox"> ABNT</label>
+            <label><input type="checkbox"> Atendimento</label>
+            <label><input type="checkbox"> Canva</label>
+          </div>
+
+          <small>Sem exigir currículo formal: cruzamos suas habilidades com oportunidades reais.</small>
+        </div>
+
+        <div class="match-card">
+          <h3>2. Sua Agenda Semanal (Separe os dias livres)</h3>
+
+          <div class="day-options" id="previewDays">
+            <label><input type="checkbox" checked> Seg</label>
+            <label><input type="checkbox"> Ter</label>
+            <label><input type="checkbox" checked> Qua</label>
+            <label><input type="checkbox"> Qui</label>
+            <label><input type="checkbox" checked> Sex</label>
+            <label><input type="checkbox" checked> Sáb</label>
+            <label><input type="checkbox"> Dom</label>
+          </div>
+
+          <small class="green-text" id="matchResumoTexto">
+            ✓ 2 habilidades e 4 dias selecionados — perfeito para vagas no contraturno!
+          </small>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIMULADOR DE METAS (6h, 12h e 18h — FIEL AO FIGMA) -->
+    <section class="content-section simulator" id="simulador">
+      <div class="simulator-left">
+        <span class="mini-title yellow">✦ SIMULADOR FINANCEIRO DE METAS</span>
+
+        <h2>Quanto vale o seu tempo livre por mês?</h2>
+
+        <p>
+          Simule quanto você pode ganhar dedicando algumas horas por semana (valor médio de R$ 35 a R$ 55/hora).
+        </p>
+
+        <div class="hours">
+          <button data-hours="6">
+            6h / semana
+            <small>Ritmo leve (1h por dia)</small>
+          </button>
+
+          <button class="selected" data-hours="12">
+            12h / semana
+            <small>Noite + Sábados</small>
+          </button>
+
+          <button data-hours="18">
+            18h / semana
+            <small>Meio período flexível</small>
+          </button>
+        </div>
+      </div>
+
+      <div class="estimate">
+        <span>RETORNO MENSAL ESTIMADO</span>
+        <strong id="estimate">R$ 850 <small>/ mês</small></strong>
+        <a class="estimate-cta" href="pages/cadastro.html">
+          Criar Conta e Definir Minha Meta →
+        </a>
+      </div>
+    </section>
+
+    <!-- DICAS E MICROTUTORIAIS -->
+    <section class="content-section tips" id="dicas">
+      <article class="tip-card" data-tip="0">
+        <span>✦ DICA RÁPIDA • 3 MIN</span>
+        <h3>Como cobrar pelo 1º pacote de posts</h3>
+        <p>Veja como calcular um preço justo para oferecer artes e Reels a comércios do bairro.</p>
+      </article>
+
+      <article class="tip-card" data-tip="1">
+        <span>✦ GUIA PRÁTICO • 4 MIN</span>
+        <h3>5 formas de monetizar o Notion</h3>
+        <p>Transforme sua organização de estudos em painéis prontos para vender para universitários.</p>
+      </article>
+
+      <article class="tip-card" data-tip="2">
+        <span>✦ AULA RÁPIDA • 5 MIN</span>
+        <h3>Portfólio rápido sem clientes prévios</h3>
+        <p>Aprenda a criar 2 exemplos demonstrativos para conquistar seu primeiro contratante.</p>
+      </article>
+    </section>
+
+    <!-- CHAMADA PARA ENTRAR -->
+    <section class="community">
+      <div>
+        <h2>Gostou da prévia da plataforma Conecta Mais?</h2>
+        <p>Cadastro 100% gratuito para jovens estudantes. Entre agora e teste o painel completo!</p>
+      </div>
+
+      <div class="community-actions">
+        <a class="community-primary" href="pages/login.html">
+          Entrar na Plataforma →
+        </a>
+        <a class="community-secondary" href="pages/cadastro.html">
+          Criar Conta Grátis
+        </a>
+      </div>
+    </section>
+
+    <!-- PARCEIROS (FIEL AO FIGMA) -->
+    <section class="content-section partners" id="parceiros">
+      <h2>Nossos Parceiros</h2>
+      <p>Grandes empresas e iniciativas que inspiram a inclusão produtiva de jovens talentos</p>
+
+      <div class="logos">
+        <b class="bb">Banco do Brasil</b>
+        <b class="cx">CAIXA</b>
+        <b class="cf">Carrefour</b>
+        <b class="it">Itaú</b>
+        <b class="cc">Coca-Cola</b>
+        <b class="as">ASSAÍ</b>
+        <b class="br">bradesco</b>
+        <b class="ml">mercado livre</b>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <b>✦ CONECTA+ (CONECTA MAIS)</b>
+    <p>Conectando pessoas a novas oportunidades.</p>
+    <small>© 2026 Conecta+ • Projeto Integrador Instituto PROA</small>
+  </footer>
+
+  <!-- MODAL DE PRÉVIA DA VAGA (TELA 001 DO FIGMA) -->
+  <dialog id="modal">
+    <button class="close" id="closeModal" aria-label="Fechar janela">×</button>
+    <div id="modalBody"></div>
+  </dialog>
+
+</body>
+</html>

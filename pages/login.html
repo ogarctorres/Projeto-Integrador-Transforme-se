@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Conecta Mais</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/auth.css">
+  <script src="../js/dados.js" defer></script>
+  <script src="../js/login.js" defer></script>
+</head>
+<body>
+
+  <main class="page">
+    <a class="back-home" href="../index.html">← Voltar para a página inicial</a>
+
+    <section class="login-card">
+      <div class="brand-mark">✦</div>
+
+      <h1>Login</h1>
+      <p class="subtitle">Acesse sua conta no Conecta+ para ver suas oportunidades</p>
+
+      <form id="login-form">
+        <label for="email">E-mail</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Digite seu e-mail"
+          value="richard.mendes@estudante.br"
+          required
+        >
+
+        <label for="password">Senha</label>
+        <div class="password-wrap">
+          <input
+            type="password"
+            id="password"
+            placeholder="Digite sua senha"
+            value="123456"
+            minlength="6"
+            required
+          >
+          <button type="button" id="toggle-password">Mostrar</button>
+        </div>
+
+        <div class="form-options">
+          <label class="remember">
+            <input type="checkbox" checked>
+            Manter conectado
+          </label>
+
+          <a href="#" id="forgot-link">Esqueceu a senha?</a>
+        </div>
+
+        <button type="submit" class="login-button">Entrar</button>
+
+        <p id="feedback" class="feedback"></p>
+      </form>
+
+      <div class="separator">
+        <span>ou continue com</span>
+      </div>
+
+      <div class="social-buttons">
+        <button type="button" class="social-button" id="google-button">
+          <span class="google-g">G</span>
+          Google
+        </button>
+
+        <button type="button" class="social-button" id="linkedin-button">
+          <span class="linkedin-in">in</span>
+          LinkedIn
+        </button>
+      </div>
+
+      <p class="signup">
+        Ainda não tem uma conta?
+        <a href="cadastro.html" id="signup-link">Cadastre-se gratuitamente</a>
+      </p>
+    </section>
+
+    <footer>
+      © 2026 Conecta+ • Conectando pessoas a novas oportunidades.
+    </footer>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,288 @@
+/* =========================================================================
+   ESTILOS DAS PÁGINAS DE LOGIN E CADASTRO — CONECTA MAIS
+   Baseado no código original da tela de Login feita pelo grupo.
+   ========================================================================= */
+
+:root {
+  --page-bg: #f5f7fa;
+  --card-bg: #eef4fc;
+  --field-bg: #ffffff;
+  --blue: #2864e8;
+  --blue-dark: #174fc8;
+  --blue-border: #9bb8f4;
+  --green: #079b6b;
+  --text: #171717;
+  --muted: #6b7280;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  background: var(--page-bg);
+  color: var(--text);
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 18px;
+}
+
+.back-home {
+  margin-bottom: 16px;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--blue-dark);
+  text-decoration: none;
+}
+
+.back-home:hover {
+  text-decoration: underline;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 34px 36px;
+  background: var(--card-bg);
+  border: 1px solid #c3d2e8;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(24, 45, 80, 0.1);
+  text-align: center;
+}
+
+.cadastro-card {
+  max-width: 520px;
+}
+
+.brand-mark {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  border-radius: 12px;
+  color: #ffffff;
+  background: var(--blue);
+  font-size: 24px;
+  font-weight: bold;
+}
+
+h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.subtitle {
+  margin: 8px 0 24px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+form {
+  text-align: left;
+}
+
+form > label,
+.field-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+.password-wrap input {
+  width: 100%;
+  height: 43px;
+  padding: 0 13px;
+  border: 1px solid var(--blue-border);
+  border-radius: 6px;
+  outline: none;
+  background: var(--field-bg);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(40, 100, 232, 0.14);
+}
+
+.password-wrap {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.password-wrap input {
+  margin-bottom: 0;
+  padding-right: 76px;
+}
+
+#toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: var(--blue-dark);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 18px;
+  font-size: 12px;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.remember input {
+  accent-color: var(--blue);
+}
+
+a {
+  color: var(--blue-dark);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.checkbox-group label {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 16px;
+  padding: 6px 11px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #1e293b;
+  cursor: pointer;
+}
+
+.checkbox-group input {
+  accent-color: var(--green);
+  margin-right: 4px;
+}
+
+.login-button {
+  width: 100%;
+  min-height: 44px;
+  border: none;
+  border-radius: 7px;
+  color: #ffffff;
+  background: var(--blue);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.login-button:hover {
+  background: var(--blue-dark);
+}
+
+.feedback {
+  min-height: 18px;
+  margin: 10px 0 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 15px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #cbd5e1;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.social-button {
+  flex: 1;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #b8c4d5;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #303846;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.social-button:hover {
+  background: #f8fbff;
+}
+
+.google-g { color: #4285f4; font-size: 18px; font-weight: bold; }
+.linkedin-in { color: #0a66c2; font-size: 16px; font-weight: bold; }
+
+.signup {
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.signup a {
+  font-weight: bold;
+}
+
+footer {
+  margin-top: 24px;
+  color: #8a929e;
+  text-align: center;
+  font-size: 12px;
+}
+
+@media (max-width: 440px) {
+  .login-card {
+    padding: 26px 20px;
+  }
+}
