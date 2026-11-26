@@ -189,7 +189,7 @@ function criarCardVaga(vaga) {
   });
 
   card.querySelector(".btn-candidatar").addEventListener("click", function () {
-    abrirModalCandidatura(vaga);
+    abrirPaginaDetalhesVaga(vaga);
   });
 
   return card;
@@ -328,41 +328,123 @@ function renderizarTudo() {
   renderizarNotificacoes();
 }
 
-// 4. Modal de candidatura em 1 clique
-const modalCand = document.getElementById("modalCandidatura");
+// 4. PÁGINA COMPLETA DE DETALHES DA VAGA (03.1–03.3), CANDIDATURA (03.4) E SUCESSO (03.5)
+let telaOrigemDetalhes = "sec-vagas";
 
-function abrirModalCandidatura(vaga) {
-  vagaSelecionadaParaCandidatura = vaga;
-  document.getElementById("candBadgeMatch").textContent = "✓ " + vaga.compatibilidade + " Compatível • " + vaga.formato;
-  document.getElementById("candTituloVaga").textContent = vaga.titulo;
-  document.getElementById("candEmpresaVaga").textContent = vaga.empresa + " • " + vaga.valor;
-  document.getElementById("candPagamentoInfo").textContent =
-    "💰 " + (vaga.pagamento || "Pagamento combinado via PIX • " + vaga.tempo);
-
-  const listaEntregas = document.getElementById("candListaEntregas");
-  const entregas = vaga.entregas || [
-    vaga.descricao,
-    "Dedicação estimada: " + vaga.tempo + " (" + vaga.formato + ")",
-    "Comunicação direta pelo Chat do Conecta+"
-  ];
-  listaEntregas.innerHTML = "";
-  entregas.forEach(function (item) {
-    const li = document.createElement("li");
-    li.textContent = item;
-    listaEntregas.appendChild(li);
+function atualizarBotoesFavoritoDetalhe() {
+  if (!vagaSelecionadaParaCandidatura) return;
+  const favoritos = listarFavoritosDoUsuario(usuarioAtual.id);
+  const salva = favoritos.some(function (f) {
+    return f.oportunidadeId === vagaSelecionadaParaCandidatura.id;
   });
 
-  document.getElementById("textoMensagemCand").value =
-    "Olá! Tenho interesse nesta oportunidade e disponibilidade nos dias: " + usuarioAtual.diasLivres.join(", ") + ".";
-  document.getElementById("msgCandidatura").textContent = "";
-  modalCand.showModal();
+  const texto = salva ? "♥ Salva nos Favoritos" : "♡ Salvar nos Favoritos";
+  document.getElementById("btnFavDetalheTopo").textContent = texto;
+  document.getElementById("btnFavDetalheLateral").textContent = texto;
 }
 
-document.getElementById("fecharModalCand").addEventListener("click", function () {
-  modalCand.close();
+function abrirPaginaDetalhesVaga(vaga) {
+  // Lembra de qual aba o usuário veio (Início, Oportunidades ou Favoritos)
+  const ativa = document.querySelector(".painel-sec.active");
+  if (ativa && ["sec-inicio", "sec-vagas", "sec-favoritos"].includes(ativa.id)) {
+    telaOrigemDetalhes = ativa.id;
+  }
+
+  vagaSelecionadaParaCandidatura = vaga;
+
+  document.getElementById("detTituloVaga").textContent = vaga.titulo;
+  document.getElementById("detEmpresaVaga").textContent = vaga.empresa + " • ⭐ 4.9 (Contratante verificado)";
+  document.getElementById("detDescricaoLonga").textContent =
+    vaga.descricao + " Esta oportunidade foi estruturada especialmente para jovens estudantes conciliarem com a rotina escolar ou universitária.";
+
+  // Badges da vaga
+  document.getElementById("detBadgesRow").innerHTML =
+    '<span class="tag-verde">✓ ' + vaga.compatibilidade + ' Compatível com seu perfil</span>' +
+    '<span class="badge-info-azul">🏠 ' + vaga.formato + '</span>' +
+    '<span class="badge-info-azul">⏱ ' + vaga.tempo + '</span>' +
+    '<span class="badge-info-ambar">★ Esforço: ' + vaga.nivel + '</span>';
+
+  // Checklist de entregas
+  const entregas = vaga.entregas || [
+    vaga.descricao,
+    "Dedicação flexível: " + vaga.tempo + " (" + vaga.formato + ")",
+    "Alinhamento direto pelo Chat do Conecta+"
+  ];
+  const boxEntregas = document.getElementById("detListaEntregas");
+  boxEntregas.innerHTML = "";
+  entregas.forEach(function (item) {
+    const div = document.createElement("div");
+    div.className = "entrega-item-card";
+    div.innerHTML = '<span class="entrega-check">✓</span><span>' + item + '</span>';
+    boxEntregas.appendChild(div);
+  });
+
+  // Tags de habilidades
+  const boxTags = document.getElementById("detTagsHabilidades");
+  boxTags.innerHTML = "";
+  vaga.habilidades.forEach(function (hab) {
+    const span = document.createElement("span");
+    span.textContent = hab;
+    boxTags.appendChild(span);
+  });
+
+  // Card lateral de remuneração e resumo
+  document.getElementById("detValorVaga").textContent = vaga.valor;
+  document.getElementById("detPagamentoVaga").textContent =
+    "💰 " + (vaga.pagamento || "Pagamento combinado via PIX");
+  document.getElementById("detFormatoInfo").textContent = vaga.formato;
+  document.getElementById("detTempoInfo").textContent = vaga.tempo;
+  document.getElementById("detNivelInfo").textContent = vaga.nivel;
+
+  atualizarBotoesFavoritoDetalhe();
+  abrirAbaPainel("sec-detalhe-vaga");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.getElementById("btnVoltarDasDetalhes").addEventListener("click", function () {
+  abrirAbaPainel(telaOrigemDetalhes);
 });
 
+function alternarFavNaTelaDetalhe() {
+  if (!vagaSelecionadaParaCandidatura) return;
+  alternarFavorito(usuarioAtual.id, vagaSelecionadaParaCandidatura.id);
+  renderizarTudo();
+  atualizarBotoesFavoritoDetalhe();
+}
+
+document.getElementById("btnFavDetalheTopo").addEventListener("click", alternarFavNaTelaDetalhe);
+document.getElementById("btnFavDetalheLateral").addEventListener("click", alternarFavNaTelaDetalhe);
+
+document.getElementById("btnIrChatDetalhe").addEventListener("click", function () {
+  abrirAbaPainel("sec-candidaturas");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// Abre a página do Formulário de Candidatura Rápida (Tela 03.4 do Figma)
+document.getElementById("btnIrParaFormularioCand").addEventListener("click", function () {
+  if (!vagaSelecionadaParaCandidatura) return;
+  const v = vagaSelecionadaParaCandidatura;
+
+  document.getElementById("formCandResumoVaga").innerHTML =
+    "<strong>Vaga selecionada:</strong> " + v.titulo + "<br>" +
+    "<small>" + v.empresa + " • " + v.valor + " • " + v.tempo + "</small>";
+
+  document.getElementById("formCandDadosPerfil").textContent =
+    usuarioAtual.nome + " (" + usuarioAtual.email + ") • Habilidades: " +
+    usuarioAtual.habilidades.join(", ") + " • Dias: " + usuarioAtual.diasLivres.join(", ");
+
+  document.getElementById("textoMensagemCand").value =
+    "Olá! Tenho interesse na oportunidade de " + v.titulo +
+    " e tenho disponibilidade nos dias: " + usuarioAtual.diasLivres.join(", ") + ".";
+  document.getElementById("msgCandidatura").textContent = "";
+
+  abrirAbaPainel("sec-candidatura-form");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// Envia a candidatura e abre a página de Sucesso (Tela 03.5 do Figma)
 document.getElementById("btnConfirmarCand").addEventListener("click", function () {
+  if (!vagaSelecionadaParaCandidatura) return;
   const mensagem = document.getElementById("textoMensagemCand").value.trim();
   const resultado = salvarCandidatura(usuarioAtual.id, vagaSelecionadaParaCandidatura.id, mensagem);
 
@@ -373,11 +455,15 @@ document.getElementById("btnConfirmarCand").addEventListener("click", function (
     return;
   }
 
-  msgEl.style.color = "#079b6b";
-  msgEl.textContent = "Candidatura enviada com sucesso! ✓";
   renderizarTudo();
+  document.getElementById("sucessoTextoVaga").textContent =
+    "Sua candidatura para '" + vagaSelecionadaParaCandidatura.titulo + "' na " +
+    vagaSelecionadaParaCandidatura.empresa + " foi enviada com seu perfil do Conecta+!";
+  document.getElementById("sucessoProtocolo").textContent =
+    "Protocolo #CM-2026-0" + resultado.candidatura.id + " • Status: Enviada em " + resultado.candidatura.data;
 
-  setTimeout(function () { modalCand.close(); }, 800);
+  abrirAbaPainel("sec-candidatura-sucesso");
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 // 5. Chat Direto simples com contratante (Tela 03.6 do Figma)

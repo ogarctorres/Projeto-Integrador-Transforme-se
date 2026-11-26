@@ -89,6 +89,12 @@ const OPORTUNIDADES_PADRAO = [
     nivel: "Fácil",
     compatibilidade: "94%",
     valor: "R$ 500 – R$ 850/mês",
+    pagamento: "Fixo mensal via PIX + bônus por avaliação",
+    entregas: [
+      "Responder dúvidas frequentes de clientes usando catálogo e mensagens rápidas prontas",
+      "Consultar código de rastreio e prazos de entrega no painel simplificado da loja",
+      "Encaminhar casos especiais de troca ou devolução para a supervisão"
+    ],
     descricao: "Responda dúvidas de clientes sobre entregas e tamanhos pelo WhatsApp usando mensagens prontas.",
     habilidades: ["Atendimento", "Suporte"],
     corFundo: "art-three"

@@ -311,6 +311,143 @@
     </section>
 
     <!-- =================================================================
+         TELA DE DETALHES COMPLETOS DA VAGA (TELAS 03.1 A 03.3 DO FIGMA)
+    ================================================================== -->
+    <section id="sec-detalhe-vaga" class="painel-sec">
+      <div class="sec-head">
+        <div class="detalhe-head-left">
+          <button type="button" class="btn-voltar-pill" id="btnVoltarDasDetalhes">← Voltar às Oportunidades</button>
+          <div>
+            <h2 id="detTituloVaga">Detalhes da Oportunidade</h2>
+            <p class="sec-sub" id="detEmpresaVaga">Empresa parceira • ⭐ 4.9</p>
+          </div>
+        </div>
+        <button type="button" class="btn-link-outline" id="btnFavDetalheTopo">♡ Salvar nos Favoritos</button>
+      </div>
+
+      <div class="detalhe-layout-2col">
+        <!-- COLUNA PRINCIPAL ESQUERDA -->
+        <div class="perfil-box detalhe-main-card">
+          <div class="detalhe-badges-row" id="detBadgesRow"></div>
+
+          <div class="detalhe-bloco">
+            <h3>Sobre a Oportunidade</h3>
+            <p id="detDescricaoLonga"></p>
+          </div>
+
+          <div class="detalhe-bloco">
+            <h3>O que você vai entregar (Escopo)</h3>
+            <div class="detalhe-entregas-cards" id="detListaEntregas"></div>
+          </div>
+
+          <div class="detalhe-bloco">
+            <h3>Habilidades compatíveis com esta vaga</h3>
+            <div class="vaga-tags" id="detTagsHabilidades"></div>
+          </div>
+
+          <div class="detalhe-bloco detalhe-diferenciais">
+            <strong>🎓 Amigável para estudantes:</strong> Não exige experiência formal prévia. Horários flexíveis no contraturno e suporte inicial do contratante.
+          </div>
+        </div>
+
+        <!-- COLUNA LATERAL DIREITA (CARD DE AÇÃO E REMUNERAÇÃO) -->
+        <aside class="perfil-box detalhe-sidebar-card">
+          <div class="detalhe-ganho-box">
+            <small>Remuneração Estimada</small>
+            <strong id="detValorVaga">R$ 500 – R$ 850/mês</strong>
+            <span id="detPagamentoVaga">💰 Pagamento via PIX</span>
+          </div>
+
+          <div class="detalhe-resumo-lista">
+            <div class="resumo-linha"><span>Formato</span><strong id="detFormatoInfo">Remoto</strong></div>
+            <div class="resumo-linha"><span>Dedicação</span><strong id="detTempoInfo">6h / semana</strong></div>
+            <div class="resumo-linha"><span>Esforço</span><strong id="detNivelInfo">Fácil</strong></div>
+            <div class="resumo-linha"><span>Status</span><strong style="color: #047857;">● Vaga Aberta</strong></div>
+          </div>
+
+          <button type="button" class="btn-azul btn-lg-full" id="btnIrParaFormularioCand">
+            Candidatar-se a esta Vaga →
+          </button>
+
+          <button type="button" class="btn-link-outline btn-lg-full" id="btnIrChatDetalhe">
+            💬 Tirar Dúvidas no Chat
+          </button>
+
+          <button type="button" class="btn-outline-neutro btn-lg-full" id="btnFavDetalheLateral">
+            ♡ Salvar nos Favoritos
+          </button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         TELA DE FORMULÁRIO DE CANDIDATURA RÁPIDA (TELA 03.4 DO FIGMA)
+    ================================================================== -->
+    <section id="sec-candidatura-form" class="painel-sec">
+      <div class="sec-head">
+        <div class="detalhe-head-left">
+          <button type="button" class="btn-voltar-pill" data-go="sec-detalhe-vaga">← Voltar aos Detalhes</button>
+          <div>
+            <h2>Formulário de Candidatura Rápida ✨</h2>
+            <p class="sec-sub">Seu perfil do Conecta+ será anexado automaticamente em 1 clique</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="detalhe-layout-2col">
+        <div class="perfil-box">
+          <div class="cand-vaga-resumo" id="formCandResumoVaga"></div>
+
+          <div class="cand-perfil-anexado">
+            <strong>✓ Dados do seu perfil anexados automaticamente:</strong>
+            <p id="formCandDadosPerfil"></p>
+          </div>
+
+          <label class="label-modal" for="textoMensagemCand">Mensagem de apresentação para o contratante:</label>
+          <textarea id="textoMensagemCand" rows="4" placeholder="Conte brevemente sobre sua disponibilidade e interesse..."></textarea>
+
+          <label class="label-modal" for="linkPortfolioCand">Link de portfólio ou amostra (opcional):</label>
+          <input type="text" id="linkPortfolioCand" class="input-full-cand" placeholder="Ex: drive.google.com/meu-portfolio ou behance.net/seu-nome">
+
+          <div class="form-cand-acoes">
+            <button type="button" class="btn-outline-neutro" data-go="sec-detalhe-vaga">Cancelar</button>
+            <button type="button" class="btn-verde" id="btnConfirmarCand" style="flex: 1;">
+              Enviar Candidatura Agora →
+            </button>
+          </div>
+          <p id="msgCandidatura" class="msg-sucesso"></p>
+        </div>
+
+        <aside class="perfil-box">
+          <h3>💡 Dica para se destacar</h3>
+          <p class="sec-sub" style="line-height: 1.6; margin-top: 8px;">
+            Contratantes valorizam jovens pontuais e claros sobre os horários disponíveis. Confirme os dias em que você pode responder e entregue sempre uma pequena amostra se tiver!
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         TELA DE CANDIDATURA ENVIADA COM SUCESSO (TELA 03.5 DO FIGMA)
+    ================================================================== -->
+    <section id="sec-candidatura-sucesso" class="painel-sec">
+      <div class="sucesso-card-central">
+        <div class="sucesso-icone-verde">✓</div>
+        <h2>Candidatura Enviada com Sucesso! 🎉</h2>
+        <p id="sucessoTextoVaga">
+          Sua candidatura e seu perfil do Conecta+ já foram entregues ao contratante.
+        </p>
+        <div class="sucesso-protocolo" id="sucessoProtocolo">Protocolo #CM-2026-001 • Status: Enviada</div>
+
+        <div class="sucesso-acoes">
+          <button type="button" class="btn-azul" data-go="sec-candidaturas">💬 Ir para o Chat Direto</button>
+          <button type="button" class="btn-link-outline" data-go="sec-vagas">Explorar Mais Vagas</button>
+          <button type="button" class="btn-outline-neutro" data-go="sec-inicio">🏠 Voltar ao Início</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================
          ABA 7: MEU PERFIL (TELA 05 DO FIGMA)
     ================================================================== -->
     <section id="sec-perfil" class="painel-sec">
@@ -339,26 +476,6 @@
     </section>
 
   </main>
-
-  <!-- MODAL DE DETALHES DA VAGA + CANDIDATURA EM 1 CLIQUE -->
-  <dialog id="modalCandidatura">
-    <button class="close" id="fecharModalCand">×</button>
-    <span class="tag-verde" id="candBadgeMatch">✓ 98% Compatível</span>
-    <h2 id="candTituloVaga" style="margin-top: 10px;">Detalhes da Vaga</h2>
-    <p id="candEmpresaVaga" class="cand-empresa-info"></p>
-
-    <div class="cand-detalhes-box">
-      <div class="cand-pagamento" id="candPagamentoInfo">💰 Pagamento via PIX</div>
-      <strong>O que você vai fazer (entregas):</strong>
-      <ul id="candListaEntregas" class="cand-entregas-lista"></ul>
-    </div>
-
-    <label class="label-modal" for="textoMensagemCand">Mensagem rápida para o contratante:</label>
-    <textarea id="textoMensagemCand" rows="3" placeholder="Conte brevemente sobre sua experiência e disponibilidade..."></textarea>
-
-    <button type="button" class="btn-verde btn-full" id="btnConfirmarCand">Confirmar Candidatura em 1 Clique →</button>
-    <p id="msgCandidatura" class="msg-sucesso"></p>
-  </dialog>
 
 </body>
 </html>
