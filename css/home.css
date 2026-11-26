@@ -699,38 +699,54 @@ button {
 /* PARCEIROS */
 .partners {
   text-align: center;
+  padding-top: 12px;
+  padding-bottom: 64px;
 }
 
 .partners h2 {
-  font-size: 22px;
-  margin: 0 0 6px;
+  font-size: 24px;
+  margin: 0 0 8px;
 }
 
 .partners > p {
-  font-size: 13px;
+  font-size: 14px;
   color: #566176;
-  margin: 0 0 20px;
+  margin: 0 0 28px;
 }
 
 .logos {
-  max-width: 720px;
+  max-width: 960px;
   margin: 0 auto;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   align-items: center;
-  gap: 18px 28px;
-  flex-wrap: wrap;
 }
 
-.logos b { font-size: 18px; }
-.bb { color: #174b91; }
-.cx { color: #0874c9; }
-.cf { color: #1b4d9a; }
-.it { background: #f36b17; color: #ffffff; padding: 5px 8px; border-radius: 5px; }
-.cc { color: #d51c32; font-family: Georgia, serif; font-style: italic; }
-.as { color: #df2638; }
-.br { color: #c51d37; }
-.ml { color: #225b9b; }
+.partner-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  height: 82px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.partner-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.07);
+}
+
+.partner-item img {
+  max-height: 42px;
+  max-width: 145px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
 
 /* RODAPÉ */
 footer {
@@ -841,5 +857,9 @@ dialog p {
   .tips,
   .hours {
     grid-template-columns: 1fr;
+  }
+
+  .logos {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
