@@ -312,6 +312,13 @@ button {
   display: flex;
   flex-direction: column;
   background: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.job:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(36, 95, 232, 0.14);
+  border-color: #93c5fd;
 }
 
 .job-art {

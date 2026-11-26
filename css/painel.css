@@ -576,6 +576,51 @@ button {
   margin-top: 12px;
 }
 
+/* MICROTUTORIAIS NO DASHBOARD (TELA 02 DO FIGMA) */
+.micro-block {
+  margin-top: 30px;
+}
+
+.micro-block h3 {
+  font-size: 18px;
+  margin: 0 0 14px;
+}
+
+.micro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.micro-card {
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.micro-amber { background: #fffbeb; border: 1px solid #fde68a; }
+.micro-blue  { background: #eff6ff; border: 1px solid #bfdbfe; }
+.micro-green { background: #ecfdf5; border: 1px solid #a7f3d0; }
+
+.micro-card span {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.micro-card strong {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.micro-card small {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
 /* LISTA, PERFIL E CHAT */
 .lista-simples {
   display: flex;
@@ -723,12 +768,14 @@ textarea {
 }
 
 @media (max-width: 1000px) {
-  .hero-grid { grid-template-columns: 1fr; }
+  .hero-grid,
+  .sim-grid-painel { grid-template-columns: 1fr; }
   .cards-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 680px) {
   .top-bar { padding: 12px 16px; }
   .quick-actions,
+  .micro-grid,
   .cards-grid { grid-template-columns: 1fr; }
 }
