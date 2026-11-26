@@ -30,14 +30,26 @@ const textosAbas = {
   }
 };
 
-// 1. Se já existir usuário logado, troca os botões do topo por "Meu Painel"
+// 1. Se já existir usuário logado, mostra "Meu Painel" + botão "Sair" no topo
 function atualizarBotoesCabecalho() {
   const usuario = pegarUsuarioLogado();
   const areaBotoes = document.getElementById("headerButtons");
 
   if (usuario) {
     areaBotoes.innerHTML =
-      '<a class="btn-link login" href="pages/painel.html">Meu Painel (' + usuario.nome.split(" ")[0] + ')</a>';
+      '<a class="btn-link login" href="pages/painel.html">Meu Painel (' + usuario.nome.split(" ")[0] + ')</a>' +
+      '<button type="button" class="btn-link logout-mini" id="btnSairHome">Sair</button>';
+
+    document.getElementById("btnSairHome").addEventListener("click", function () {
+      sairDaConta();
+      areaBotoes.innerHTML =
+        '<a class="btn-link login" href="pages/login.html">Entrar</a>' +
+        '<a class="btn-link register" href="pages/cadastro.html">Cadastre-se</a>';
+    });
+  } else {
+    areaBotoes.innerHTML =
+      '<a class="btn-link login" href="pages/login.html">Entrar</a>' +
+      '<a class="btn-link register" href="pages/cadastro.html">Cadastre-se</a>';
   }
 }
 

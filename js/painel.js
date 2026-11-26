@@ -11,18 +11,26 @@ if (!usuarioAtual) {
 
 let vagaSelecionadaParaCandidatura = null;
 
-// 1. Preenche cabeçalho, saudação e dados do perfil
+// 1. Preenche cabeçalho, iniciais, saudação, barra da meta e dados do perfil
 function carregarDadosUsuario() {
-  const primeiroNome = usuarioAtual.nome.split(" ")[0];
+  const partes = usuarioAtual.nome.trim().split(" ");
+  const primeiroNome = partes[0];
+  const iniciais = partes.slice(0, 2).map(function (p) { return p[0].toUpperCase(); }).join("");
 
-  document.getElementById("badgeNomeUsuario").textContent = "Olá, " + primeiroNome;
+  document.getElementById("badgeNomeUsuario").textContent = primeiroNome;
+  document.getElementById("avatarIniciais").textContent = iniciais;
+  document.getElementById("avatarGrande").textContent = iniciais;
   document.getElementById("saudacaoUsuario").textContent = "Olá, " + primeiroNome + "! 👋";
   document.getElementById("resumoRotina").textContent =
     "Habilidades: " + usuarioAtual.habilidades.join(", ") +
     " • Dias livres: " + usuarioAtual.diasLivres.join(", ");
 
+  const meta = Number(usuarioAtual.metaMensal) || 1250;
+  const porcentagem = Math.min(100, Math.round((850 / meta) * 100));
+  document.getElementById("badgePorcentagemMeta").textContent = "Meta " + porcentagem + "%";
+  document.getElementById("barraMetaFill").style.width = porcentagem + "%";
   document.getElementById("metaValorTexto").textContent =
-    "R$ 850 / R$ " + Number(usuarioAtual.metaMensal).toLocaleString("pt-BR");
+    "Meta definida: R$ " + meta.toLocaleString("pt-BR") + "/mês • Média de R$ 35 a R$ 55/hora";
 
   document.getElementById("perfilNome").textContent = usuarioAtual.nome;
   document.getElementById("perfilEmail").textContent = usuarioAtual.email;
@@ -30,8 +38,29 @@ function carregarDadosUsuario() {
   document.getElementById("perfilDispositivo").textContent = usuarioAtual.dispositivo || "Celular / Notebook";
   document.getElementById("perfilHabilidades").textContent = usuarioAtual.habilidades.join(", ");
   document.getElementById("perfilDias").textContent = usuarioAtual.diasLivres.join(", ");
-  document.getElementById("novaMetaInput").value = usuarioAtual.metaMensal;
+  document.getElementById("novaMetaInput").value = meta;
 }
+
+// Função auxiliar para trocar de aba
+function abrirAbaPainel(idSecao) {
+  document.querySelectorAll(".menu-btn").forEach(function (b) {
+    b.classList.toggle("active", b.dataset.sec === idSecao);
+  });
+  document.querySelectorAll(".painel-sec").forEach(function (s) {
+    s.classList.toggle("active", s.id === idSecao);
+  });
+}
+
+// Botões de ação rápida, sino de alertas e chip do usuário no topo
+document.querySelectorAll("[data-go]").forEach(function (btn) {
+  btn.addEventListener("click", function () { abrirAbaPainel(btn.dataset.go); });
+});
+document.getElementById("btnAbrirAlertas").addEventListener("click", function () {
+  abrirAbaPainel("sec-notificacoes");
+});
+document.getElementById("btnAbrirPerfilTopo").addEventListener("click", function () {
+  abrirAbaPainel("sec-perfil");
+});
 
 // 2. Cria um card de vaga
 function criarCardVaga(vaga) {

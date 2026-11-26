@@ -152,6 +152,12 @@ button {
   border: 1px solid #f0a52a;
 }
 
+.logout-mini {
+  background: #fff1f2;
+  color: #be123c;
+  border: 1px solid #fecdd3;
+}
+
 .mobile-menu {
   display: none;
 }

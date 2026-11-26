@@ -3,56 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Painel | Conecta Mais</title>
+  <title>Painel | Conecta Mais (Conecta+)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/painel.css">
   <script src="../js/dados.js" defer></script>
   <script src="../js/painel.js" defer></script>
 </head>
 <body>
 
-  <!-- BARRA SUPERIOR LOGADA (TELAS 02 A 05 DO FIGMA) -->
+  <!-- BARRA SUPERIOR LOGADA (FIEL À TELA 02. INÍCIO DO FIGMA) -->
   <header class="top-bar">
     <a class="brand" href="../index.html">
-      <span class="brand-icon">✦</span>
-      <span class="brand-name">CONECTA<br><b>MAIS</b></span>
+      <span class="brand-square">✦</span>
+      <div class="brand-texts">
+        <strong>Conecta+</strong>
+        <small>Talentos Jovens &amp; Oportunidades</small>
+      </div>
     </a>
 
-    <nav class="menu-tabs">
+    <nav class="menu-pill">
       <button class="menu-btn active" data-sec="sec-vagas">💼 Oportunidades</button>
       <button class="menu-btn" data-sec="sec-favoritos">❤️ Favoritos (<span id="contFav">0</span>)</button>
-      <button class="menu-btn" data-sec="sec-candidaturas">💬 Candidaturas &amp; Chat (<span id="contCand">0</span>)</button>
-      <button class="menu-btn" data-sec="sec-notificacoes">🔔 Alertas (<span id="contNotif">3</span>)</button>
-      <button class="menu-btn" data-sec="sec-perfil">👤 Meu Perfil</button>
+      <button class="menu-btn" data-sec="sec-candidaturas">💬 Chat (<span id="contCand">0</span>)</button>
+      <button class="menu-btn" data-sec="sec-perfil">👤 Perfil</button>
     </nav>
 
-    <div class="user-area">
-      <span class="user-badge" id="badgeNomeUsuario">Olá, Richard</span>
+    <div class="header-right">
+      <span class="potencial-chip">📈 Potencial: R$ 850/mês</span>
+
+      <button class="notif-btn" id="btnAbrirAlertas" title="Central de Notificações">
+        🔔 <span class="notif-count" id="contNotif">3</span>
+      </button>
+
+      <div class="user-chip" id="btnAbrirPerfilTopo">
+        <span class="avatar-mini" id="avatarIniciais">RM</span>
+        <strong id="badgeNomeUsuario">Richard M.</strong>
+      </div>
+
       <button class="btn-sair" id="btnSair">Sair</button>
     </div>
   </header>
 
   <main class="container">
 
-    <!-- CARTÃO DE BOAS-VINDAS + META MENSAL (TELA 02 E 02.1 DO FIGMA) -->
-    <section class="hero-card">
-      <div>
-        <h1 id="saudacaoUsuario">Olá! 👋</h1>
-        <p id="resumoRotina">Suas habilidades e horários estão prontos para conectar você a novas oportunidades.</p>
+    <!-- HERO EM 2 COLUNAS FIEL À TELA "02. INÍCIO" DO FIGMA -->
+    <section class="hero-grid">
+
+      <!-- ESQUERDA: BOAS-VINDAS + 3 AÇÕES RÁPIDAS -->
+      <div class="welcome-card">
+        <div class="welcome-top">
+          <div class="avatar-grande" id="avatarGrande">RM</div>
+          <div>
+            <h1 id="saudacaoUsuario">Olá, Richard! 👋</h1>
+            <p id="resumoRotina">Suas habilidades e horários estão prontos para conectar você a novas oportunidades.</p>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <button type="button" class="qa-card qa-blue" data-go="sec-vagas">
+            <span class="qa-icon">💼</span>
+            <div>
+              <strong>Ver Oportunidades</strong>
+              <small>12 vagas compatíveis</small>
+            </div>
+          </button>
+
+          <button type="button" class="qa-card qa-green" data-go="sec-perfil">
+            <span class="qa-icon">✨</span>
+            <div>
+              <strong>Minhas Habilidades</strong>
+              <small>Atualizar tags e perfil</small>
+            </div>
+          </button>
+
+          <button type="button" class="qa-card qa-amber" data-go="sec-candidaturas">
+            <span class="qa-icon">💬</span>
+            <div>
+              <strong>Chat &amp; Candidaturas</strong>
+              <small>Falar com contratantes</small>
+            </div>
+          </button>
+        </div>
       </div>
-      <div class="meta-box">
-        <span>POTENCIAL / META MENSAL (68%)</span>
-        <strong id="metaValorTexto">R$ 850 / R$ 1.250</strong>
-        <small>Média estimada: R$ 35 a R$ 55 / hora</small>
+
+      <!-- DIREITA: CARD AZUL ROYAL DE META MENSAL (TELA 02 / 02.1 DO FIGMA) -->
+      <div class="meta-card">
+        <div class="meta-top">
+          <div>
+            <span class="meta-label">Potencial mensal estimado</span>
+            <strong class="meta-valor">R$ 850,00 <small>/ mês</small></strong>
+          </div>
+          <span class="badge-meta" id="badgePorcentagemMeta">Meta 68%</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="barraMetaFill" style="width: 68%;"></div>
+        </div>
+
+        <p class="meta-hint" id="metaValorTexto">
+          Meta definida: R$ 1.250/mês • Média de R$ 35 a R$ 55/hora
+        </p>
       </div>
+
     </section>
 
     <!-- ABA 1: OPORTUNIDADES -->
     <section id="sec-vagas" class="painel-sec active">
       <div class="sec-head">
-        <h2>Oportunidades Recomendadas para Você</h2>
+        <div>
+          <h2>Sugestões para Você</h2>
+          <p class="sec-sub">Oportunidades compatíveis com suas habilidades e disponibilidade no contraturno</p>
+        </div>
         <input type="search" id="buscaPainel" placeholder="Buscar por habilidade, empresa ou vaga...">
       </div>
       <div class="cards-grid" id="listaVagasPainel"></div>
@@ -61,20 +124,26 @@
     <!-- ABA 2: FAVORITOS -->
     <section id="sec-favoritos" class="painel-sec">
       <div class="sec-head">
-        <h2>Meus Favoritos</h2>
+        <div>
+          <h2>Meus Favoritos</h2>
+          <p class="sec-sub">Vagas salvas para você acompanhar ou se candidatar quando quiser</p>
+        </div>
       </div>
       <div class="cards-grid" id="listaFavoritosPainel"></div>
     </section>
 
-    <!-- ABA 3: CANDIDATURAS & CHAT DIRETO (TELA 03.6 DO FIGMA) -->
+    <!-- ABA 3: CANDIDATURAS & CHAT DIRETO -->
     <section id="sec-candidaturas" class="painel-sec">
       <div class="sec-head">
-        <h2>Minhas Candidaturas Enviadas</h2>
+        <div>
+          <h2>Minhas Candidaturas &amp; Chat Direto</h2>
+          <p class="sec-sub">Acompanhe seus envios e converse em tempo real com contratantes</p>
+        </div>
       </div>
       <div class="lista-simples" id="listaCandidaturasPainel"></div>
 
       <div class="perfil-box" style="margin-top: 22px;">
-        <h2>💬 Chat Direto com Contratante — Ana Clara (Cafeteria Vila Nova)</h2>
+        <h3>💬 Mensagens — Ana Clara (Cafeteria &amp; Bistrô Vila Nova)</h3>
         <div id="mensagensChat" class="chat-box">
           <div class="msg-recebida">
             <strong>Ana Clara:</strong> Olá! Vimos seu perfil no Conecta+ e gostamos muito das suas habilidades. Você tem disponibilidade para 3 posts por semana?
@@ -87,15 +156,18 @@
       </div>
     </section>
 
-    <!-- ABA 4: CENTRAL DE NOTIFICAÇÕES (TELA 05 DO FIGMA) -->
+    <!-- ABA 4: CENTRAL DE NOTIFICAÇÕES -->
     <section id="sec-notificacoes" class="painel-sec">
       <div class="sec-head">
-        <h2>Central de Notificações &amp; Matches</h2>
+        <div>
+          <h2>Central de Notificações &amp; Alertas</h2>
+          <p class="sec-sub">Novos matches de vagas e respostas de contratantes</p>
+        </div>
       </div>
       <div class="lista-simples" id="listaNotificacoesPainel"></div>
     </section>
 
-    <!-- ABA 5: MEU PERFIL (TELA 05 DO FIGMA) -->
+    <!-- ABA 5: MEU PERFIL -->
     <section id="sec-perfil" class="painel-sec">
       <div class="perfil-box">
         <h2>Meu Perfil &amp; Preferências — Conecta+</h2>
@@ -119,7 +191,7 @@
 
   </main>
 
-  <!-- MODAL PARA ENVIAR CANDIDATURA EM 1 CLIQUE (TELA 03.4 DO FIGMA) -->
+  <!-- MODAL DE CANDIDATURA EM 1 CLIQUE -->
   <dialog id="modalCandidatura">
     <button class="close" id="fecharModalCand">×</button>
     <h2 id="candTituloVaga">Candidatar-se</h2>
