@@ -37,10 +37,10 @@ button {
   cursor: pointer;
 }
 
-/* CABEÇALHO (FULL WIDTH COM BORDA LIMPA E RESPIRO FIGMA) */
+/* CABEÇALHO (BORDA FULL WIDTH COM CONTEÚDO ALINHADO À COLUNA PRINCIPAL) */
 .header {
   min-height: 76px;
-  padding: 12px 56px;
+  padding: 12px max(24px, calc((100% - 1208px) / 2));
   max-width: 100%;
   margin: 0 auto;
   display: flex;
