@@ -37,9 +37,58 @@ function carregarDadosUsuario() {
   document.getElementById("perfilEmail").textContent = usuarioAtual.email;
   document.getElementById("perfilEscolaridade").textContent = usuarioAtual.escolaridade || "Estudante";
   document.getElementById("perfilDispositivo").textContent = usuarioAtual.dispositivo || "Celular / Notebook";
-  document.getElementById("perfilHabilidades").textContent = usuarioAtual.habilidades.join(", ");
-  document.getElementById("perfilDias").textContent = usuarioAtual.diasLivres.join(", ");
   document.getElementById("novaMetaInput").value = meta;
+
+  renderizarEditoresPerfil();
+}
+
+// Renderiza os botões clicáveis de habilidades e dias em "Meu Perfil" (Tela 05 do Figma)
+const TODAS_HABILIDADES_OPCOES = ["Edição de vídeo", "Redes sociais", "Canva", "Notion", "ABNT", "Organização", "Atendimento", "Suporte"];
+const TODOS_DIAS_OPCOES = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+
+function renderizarEditoresPerfil() {
+  const boxHabs = document.getElementById("perfilEditarHabilidades");
+  const boxDias = document.getElementById("perfilEditarDias");
+
+  boxHabs.innerHTML = "";
+  TODAS_HABILIDADES_OPCOES.forEach(function (hab) {
+    const marcada = usuarioAtual.habilidades.includes(hab);
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "tag-toggle" + (marcada ? " ativa" : "");
+    btn.textContent = (marcada ? "✓ " : "+ ") + hab;
+
+    btn.addEventListener("click", function () {
+      const idx = usuarioAtual.habilidades.indexOf(hab);
+      if (idx >= 0) {
+        usuarioAtual.habilidades.splice(idx, 1);
+      } else {
+        usuarioAtual.habilidades.push(hab);
+      }
+      renderizarEditoresPerfil();
+    });
+    boxHabs.appendChild(btn);
+  });
+
+  boxDias.innerHTML = "";
+  TODOS_DIAS_OPCOES.forEach(function (dia) {
+    const marcado = usuarioAtual.diasLivres.includes(dia);
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "tag-toggle" + (marcado ? " dia-ativo" : "");
+    btn.textContent = (marcado ? "✓ " : "") + dia;
+
+    btn.addEventListener("click", function () {
+      const idx = usuarioAtual.diasLivres.indexOf(dia);
+      if (idx >= 0) {
+        usuarioAtual.diasLivres.splice(idx, 1);
+      } else {
+        usuarioAtual.diasLivres.push(dia);
+      }
+      renderizarEditoresPerfil();
+    });
+    boxDias.appendChild(btn);
+  });
 }
 
 // Função auxiliar para trocar de aba
@@ -329,7 +378,7 @@ document.getElementById("btnSalvarMeta").addEventListener("click", function () {
     usuarioAtual.metaMensal = novaMeta;
     atualizarUsuarioLogado(usuarioAtual);
     carregarDadosUsuario();
-    document.getElementById("msgPerfil").textContent = "Meta mensal atualizada com sucesso! ✓";
+    document.getElementById("msgPerfil").textContent = "Perfil, habilidades, dias e meta salvos com sucesso! ✓";
   }
 });
 

@@ -243,22 +243,26 @@
       </div>
     </section>
 
-    <!-- ABA 6: MEU PERFIL -->
+    <!-- ABA 6: MEU PERFIL (TELA 05 DO FIGMA) -->
     <section id="sec-perfil" class="painel-sec">
       <div class="perfil-box">
-        <h2>Meu Perfil &amp; Preferências — Conecta+</h2>
+        <h2>Meu Perfil &amp; Preferências de Trabalho — Conecta+</h2>
         <p><strong>Nome:</strong> <span id="perfilNome"></span></p>
         <p><strong>E-mail:</strong> <span id="perfilEmail"></span></p>
         <p><strong>Escolaridade:</strong> <span id="perfilEscolaridade"></span></p>
         <p><strong>Dispositivo / Internet:</strong> <span id="perfilDispositivo"></span></p>
-        <p><strong>Habilidades:</strong> <span id="perfilHabilidades"></span></p>
-        <p><strong>Dias livres:</strong> <span id="perfilDias"></span></p>
 
         <div class="editar-meta">
-          <label for="novaMetaInput">Atualizar meta mensal (R$):</label>
+          <label><strong>Minhas Habilidades (clique para marcar/desmarcar):</strong></label>
+          <div class="perfil-tags-grid" id="perfilEditarHabilidades"></div>
+
+          <label style="display:block; margin-top: 16px;"><strong>Meus Dias Disponíveis (Seg–Dom):</strong></label>
+          <div class="perfil-tags-grid" id="perfilEditarDias"></div>
+
+          <label for="novaMetaInput" style="display:block; margin-top: 16px;"><strong>Meta mensal (R$):</strong></label>
           <div class="linha-meta">
             <input type="number" id="novaMetaInput" min="100" step="50">
-            <button type="button" class="btn-azul" id="btnSalvarMeta">Salvar Meta</button>
+            <button type="button" class="btn-azul" id="btnSalvarMeta">Salvar e Atualizar Perfil ✓</button>
           </div>
           <p id="msgPerfil" class="msg-sucesso"></p>
         </div>
