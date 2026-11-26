@@ -257,7 +257,17 @@ function renderizarFavoritos() {
   container.innerHTML = "";
 
   if (favoritos.length === 0) {
-    container.innerHTML = '<div class="vazio-box">Você ainda não salvou favoritos. Clique no coração (♡) em qualquer vaga!</div>';
+    container.innerHTML =
+      '<div class="empty-state-card">' +
+        '<div class="empty-state-icon">🤍</div>' +
+        '<h3>Nenhuma oportunidade salva ainda</h3>' +
+        '<p>Clique no ícone de coração (♡) nas vagas que combinam com você para acessá-las rapidamente aqui.</p>' +
+        '<button type="button" class="btn-azul" id="btnEmptyExplorar">Explorar Oportunidades →</button>' +
+      '</div>';
+
+    document.getElementById("btnEmptyExplorar").addEventListener("click", function () {
+      abrirAbaPainel("sec-vagas");
+    });
     return;
   }
 
