@@ -289,18 +289,28 @@ function renderizarCandidaturas() {
 
 function renderizarNotificacoes() {
   const container = document.getElementById("listaNotificacoesPainel");
-  document.getElementById("contNotif").textContent = NOTIFICACOES_PADRAO.length;
+  const todasLidas = localStorage.getItem("conecta_notif_lidas") === "sim";
+  const badge = document.getElementById("contNotif");
+
+  badge.textContent = todasLidas ? "0" : String(NOTIFICACOES_PADRAO.length);
+  badge.style.display = todasLidas ? "none" : "inline";
   container.innerHTML = "";
 
   NOTIFICACOES_PADRAO.forEach(function (n) {
     const div = document.createElement("div");
     div.className = "item-candidatura";
+    div.style.opacity = todasLidas ? "0.75" : "1";
     div.innerHTML =
       "<div><strong>" + n.titulo + "</strong><br><small>" + n.texto + "</small></div>" +
-      '<span class="tag-verde">' + n.tempo + '</span>';
+      '<span class="tag-verde">' + (todasLidas ? "✓ Lida" : n.tempo) + '</span>';
     container.appendChild(div);
   });
 }
+
+document.getElementById("btnMarcarLidas").addEventListener("click", function () {
+  localStorage.setItem("conecta_notif_lidas", "sim");
+  renderizarNotificacoes();
+});
 
 // Renderiza apenas as Top 3 sugestões na aba Início (Tela 02 do Figma)
 function renderizarTop3Inicio() {
