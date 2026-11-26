@@ -51,8 +51,24 @@ projeto-integrador/
 - **Front-End:** HTML5, CSS3 (Flexbox e CSS Grid) e JavaScript (Vanilla JS).
 - **Design UX/UI:** Figma (Design System com fonte **Inter**, paleta Azul Royal/Marinho, Verde Esmeralda e Âmbar).
 - **Metodologia:** Framework Ágil **Scrum** (*Sprints, Product Backlog, Planning, Daily, Review e Retrospective*).
-- **Acessibilidade (WCAG 2.1):** Widget oficial **VLibras**, controle de tamanho de fonte (`A-` / `A+`) e **Modo Alto Contraste** em todas as telas.
+- **Acessibilidade (WCAG 2.1):** Widget oficial **VLibras**, controle de tamanho de fonte (`A-` / `A+`), foco visível por teclado e **Modo Alto Contraste** em todas as telas.
 - **Próxima Etapa (Banco de Dados):** Migração dos dados demonstrativos (`js/dados.js`) para o **Firebase** (*Firebase Authentication* + *Cloud Firestore*).
+
+---
+
+## 🌍 Alinhamento às ODS's da ONU
+
+- **ODS 8 — Trabalho Decente e Crescimento Econômico:** Primeira porta de geração de renda flexível e transparente para jovens estudantes.
+- **ODS 1 — Erradicação da Pobreza:** Renda complementar real no contraturno dos estudos.
+- **ODS 4 — Educação de Qualidade:** Respeita horários escolares/universitários e capacita via microtutoriais práticos.
+- **ODS 10 — Redução das Desigualdades:** Oportunidades por mérito prático, considerando inclusive o dispositivo e acesso à internet do estudante.
+
+---
+
+## 🎨 Manual de Marca & Monetização
+
+- **Identidade Visual:** Tipografia **Inter**, símbolo `✦` (*talento e novas possibilidades*), **Azul Royal (`#2563EB`) / Marinho (`#1E3A8A`)** (confiança e tecnologia), **Verde Esmeralda (`#10B981`)** (ganhos e Match) e **Âmbar/Laranja (`#FBBF24` / `#F59E0B`)** (energia jovem).
+- **Monetização Sustentável:** **100% gratuito para o jovem estudante**; receita B2B via destaque de vagas, planos para empresas/comércios, patrocínio ESG de grandes marcas parceiras e taxa administrativa sobre o contratante em projetos fechados via PIX.
 
 ---
 
