@@ -296,16 +296,23 @@
 
   </main>
 
-  <!-- MODAL DE CANDIDATURA EM 1 CLIQUE -->
+  <!-- MODAL DE DETALHES DA VAGA + CANDIDATURA EM 1 CLIQUE (TELAS 03.1 A 03.4 DO FIGMA) -->
   <dialog id="modalCandidatura">
     <button class="close" id="fecharModalCand">×</button>
-    <h2 id="candTituloVaga">Candidatar-se</h2>
-    <p id="candEmpresaVaga"></p>
+    <span class="tag-verde" id="candBadgeMatch">✓ 98% Compatível</span>
+    <h2 id="candTituloVaga" style="margin-top: 10px;">Detalhes da Vaga</h2>
+    <p id="candEmpresaVaga" class="cand-empresa-info"></p>
+
+    <div class="cand-detalhes-box">
+      <div class="cand-pagamento" id="candPagamentoInfo">💰 Pagamento via PIX</div>
+      <strong>O que você vai fazer (entregas):</strong>
+      <ul id="candListaEntregas" class="cand-entregas-lista"></ul>
+    </div>
 
     <label class="label-modal" for="textoMensagemCand">Mensagem rápida para o contratante:</label>
-    <textarea id="textoMensagemCand" rows="4" placeholder="Conte brevemente sobre sua experiência e disponibilidade..."></textarea>
+    <textarea id="textoMensagemCand" rows="3" placeholder="Conte brevemente sobre sua experiência e disponibilidade..."></textarea>
 
-    <button type="button" class="btn-verde btn-full" id="btnConfirmarCand">Confirmar Candidatura →</button>
+    <button type="button" class="btn-verde btn-full" id="btnConfirmarCand">Confirmar Candidatura em 1 Clique →</button>
     <p id="msgCandidatura" class="msg-sucesso"></p>
   </dialog>
 

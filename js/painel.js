@@ -171,7 +171,7 @@ function criarCardVaga(vaga) {
     '<div class="vaga-empresa">' + vaga.empresa + ' • ' + vaga.formato + '</div>' +
     '<p class="vaga-desc">' + vaga.descricao + '</p>' +
     '<div class="vaga-valor">' + vaga.valor + '</div>' +
-    '<button class="btn-azul btn-candidatar" type="button">Candidatar-se em 1 clique →</button>';
+    '<button class="btn-azul btn-candidatar" type="button">Ver Detalhes &amp; Candidatar →</button>';
 
   card.querySelector(".btn-fav").addEventListener("click", function () {
     alternarFavorito(usuarioAtual.id, vaga.id);
@@ -304,8 +304,25 @@ const modalCand = document.getElementById("modalCandidatura");
 
 function abrirModalCandidatura(vaga) {
   vagaSelecionadaParaCandidatura = vaga;
+  document.getElementById("candBadgeMatch").textContent = "✓ " + vaga.compatibilidade + " Compatível • " + vaga.formato;
   document.getElementById("candTituloVaga").textContent = vaga.titulo;
   document.getElementById("candEmpresaVaga").textContent = vaga.empresa + " • " + vaga.valor;
+  document.getElementById("candPagamentoInfo").textContent =
+    "💰 " + (vaga.pagamento || "Pagamento combinado via PIX • " + vaga.tempo);
+
+  const listaEntregas = document.getElementById("candListaEntregas");
+  const entregas = vaga.entregas || [
+    vaga.descricao,
+    "Dedicação estimada: " + vaga.tempo + " (" + vaga.formato + ")",
+    "Comunicação direta pelo Chat do Conecta+"
+  ];
+  listaEntregas.innerHTML = "";
+  entregas.forEach(function (item) {
+    const li = document.createElement("li");
+    li.textContent = item;
+    listaEntregas.appendChild(li);
+  });
+
   document.getElementById("textoMensagemCand").value =
     "Olá! Tenho interesse nesta oportunidade e disponibilidade nos dias: " + usuarioAtual.diasLivres.join(", ") + ".";
   document.getElementById("msgCandidatura").textContent = "";

@@ -19,6 +19,12 @@ const OPORTUNIDADES_PADRAO = [
     nivel: "Fácil",
     compatibilidade: "98%",
     valor: "R$ 60 – R$ 90/pacote",
+    pagamento: "Pagamento por pacote entregue via PIX",
+    entregas: [
+      "Selecionar 5 trechos de destaque de cada vídeo",
+      "Adicionar legendas dinâmicas no CapCut (9:16)",
+      "Exportar em HD e enviar na pasta compartilhada"
+    ],
     descricao: "Selecione momentos importantes de vídeos longos e crie cortes curtos com legendas no CapCut.",
     habilidades: ["Edição de vídeo", "CapCut"],
     corFundo: "art-one"
@@ -33,6 +39,12 @@ const OPORTUNIDADES_PADRAO = [
     nivel: "Intermediário",
     compatibilidade: "96%",
     valor: "R$ 70 – R$ 130/trabalho",
+    pagamento: "Pagamento por trabalho entregue via PIX",
+    entregas: [
+      "Aplicar margens, fonte e estilos oficiais ABNT",
+      "Gerar sumário automático e revisar referências",
+      "Entregar o arquivo revisado em Word e PDF em até 48h"
+    ],
     descricao: "Formate trabalhos universitários no Word, organize sumários automáticos e padronize referências.",
     habilidades: ["Organização", "ABNT"],
     corFundo: "art-two"
@@ -135,6 +147,12 @@ const OPORTUNIDADES_PADRAO = [
     nivel: "Intermediário",
     compatibilidade: "98%",
     valor: "R$ 450 – R$ 700/mês",
+    pagamento: "Pagamento quinzenal via PIX • Contrato flexível",
+    entregas: [
+      "Montar 3 posts semanais no Canva com a identidade da cafeteria",
+      "Editar 2 Reels curtos (15s a 30s) com legendas e músicas em alta",
+      "Agendar publicações e responder comentários básicos"
+    ],
     descricao: "Organize o calendário mensal do Instagram com 3 artes no Canva e 2 Reels curtos por semana.",
     habilidades: ["Redes sociais", "Edição de vídeo"],
     corFundo: "art-one"

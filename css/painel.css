@@ -760,6 +760,40 @@ dialog::backdrop {
   margin: 14px 0 6px;
 }
 
+.cand-empresa-info {
+  font-size: 13px;
+  color: var(--primary);
+  font-weight: 700;
+  margin: 4px 0 12px;
+}
+
+.cand-detalhes-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.cand-pagamento {
+  background: var(--emerald-soft);
+  color: var(--emerald-dark);
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-weight: 700;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.cand-entregas-lista {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
 textarea {
   width: 100%;
   padding: 10px;
