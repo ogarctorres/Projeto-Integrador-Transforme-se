@@ -203,6 +203,12 @@ const OPORTUNIDADES_PADRAO = [
     nivel: "Fácil",
     compatibilidade: "96%",
     valor: "R$ 550 – R$ 850/mês",
+    pagamento: "Pagamento quinzenal via PIX • 100% Remoto",
+    entregas: [
+      "Enviar lembretes e confirmar horários de consultas pelo WhatsApp Web",
+      "Responder dúvidas básicas sobre endereço, convênios e preparo de exames",
+      "Registrar remarcações simples na agenda compartilhada da clínica"
+    ],
     descricao: "Confirme agendamentos e tire dúvidas iniciais de pacientes pelo WhatsApp das 18h30 às 21h.",
     habilidades: ["Atendimento", "Suporte"],
     corFundo: "art-three"
@@ -217,6 +223,12 @@ const OPORTUNIDADES_PADRAO = [
     nivel: "Fácil",
     compatibilidade: "94%",
     valor: "R$ 500 – R$ 780/mês",
+    pagamento: "Pagamento mensal via PIX • Horários livres",
+    entregas: [
+      "Classificar notas fiscais e comprovantes digitais em pastas por mês/cliente",
+      "Padronizar nomes de arquivos PDF seguindo o manual do escritório",
+      "Atualizar checklist de documentos recebidos em planilha do Google Sheets"
+    ],
     descricao: "Organize pastas digitais, renomeie documentos enviados por clientes e atualize planilhas simples.",
     habilidades: ["Organização", "Planilhas"],
     corFundo: "art-four"
@@ -231,6 +243,12 @@ const OPORTUNIDADES_PADRAO = [
     nivel: "Fácil",
     compatibilidade: "93%",
     valor: "R$ 500 – R$ 750/mês",
+    pagamento: "Pagamento quinzenal via PIX • Remoto",
+    entregas: [
+      "Dar boas-vindas a novos estudantes nos canais da comunidade",
+      "Organizar perguntas frequentes e direcionar dúvidas aos mentores",
+      "Publicar lembretes semanais de lives, desafios e materiais gratuitos"
+    ],
     descricao: "Acolha novos alunos, organize canais de dúvidas e compartilhe avisos semanais na comunidade.",
     habilidades: ["Atendimento", "Redes sociais"],
     corFundo: "art-two"
