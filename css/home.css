@@ -37,6 +37,13 @@ button {
   cursor: pointer;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
+}
+
 /* CABEÇALHO (BORDA FULL WIDTH COM CONTEÚDO ALINHADO À COLUNA PRINCIPAL) */
 .header {
   min-height: 76px;
