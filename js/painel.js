@@ -75,7 +75,13 @@ function renderizarEditoresPerfil() {
   const boxDias = document.getElementById("perfilEditarDias");
 
   boxHabs.innerHTML = "";
-  TODAS_HABILIDADES_OPCOES.forEach(function (hab) {
+  // Une as habilidades padrão com quaisquer habilidades personalizadas já salvas pelo usuário
+  const listaHabsExibir = TODAS_HABILIDADES_OPCOES.slice();
+  usuarioAtual.habilidades.forEach(function (h) {
+    if (!listaHabsExibir.includes(h)) listaHabsExibir.push(h);
+  });
+
+  listaHabsExibir.forEach(function (hab) {
     const marcada = usuarioAtual.habilidades.includes(hab);
     const btn = document.createElement("button");
     btn.type = "button";
@@ -703,6 +709,22 @@ document.getElementById("buscaPainel").addEventListener("input", renderizarVagas
 const selectOrdem = document.getElementById("ordenarPainel");
 if (selectOrdem) {
   selectOrdem.addEventListener("change", renderizarVagas);
+}
+
+// Adicionar habilidade personalizada em Meu Perfil (Tela 05 do Figma)
+const btnAddHab = document.getElementById("btnAddHabilidade");
+if (btnAddHab) {
+  btnAddHab.addEventListener("click", function () {
+    const inputHab = document.getElementById("inputNovaHabilidade");
+    const nova = inputHab.value.trim();
+    if (nova.length < 2) return;
+    if (!usuarioAtual.habilidades.includes(nova)) {
+      usuarioAtual.habilidades.push(nova);
+    }
+    inputHab.value = "";
+    renderizarEditoresPerfil();
+    mostrarToast("Habilidade '" + nova + "' adicionada! Clique em Salvar Perfil.");
+  });
 }
 
 document.getElementById("btnSalvarMeta").addEventListener("click", async function () {
