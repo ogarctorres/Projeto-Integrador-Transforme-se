@@ -340,6 +340,11 @@ input:focus {
   transition: all 0.2s ease;
 }
 
+button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
 .btn-primary {
   border: none;
   background: var(--primary);
@@ -608,5 +613,10 @@ input:focus {
   .social-buttons,
   .wizard-actions {
     flex-direction: column;
+  }
+
+  .campos-duplos {
+    grid-template-columns: 1fr;
+    gap: 0;
   }
 }
