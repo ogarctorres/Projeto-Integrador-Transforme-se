@@ -245,11 +245,15 @@ function renderizarVagas() {
 
     let bateFiltro = true;
     if (filtroAtivoPainel === "match95") {
-      bateFiltro = parseInt(vaga.compatibilidade, 10) >= 95;
+      bateFiltro = calcularMatchReal(vaga) >= 95;
     } else if (filtroAtivoPainel === "remoto") {
       bateFiltro = vaga.formato === "Remoto";
     } else if (filtroAtivoPainel === "curto") {
       bateFiltro = vaga.tipo === "curtos";
+    } else if (filtroAtivoPainel === "facil") {
+      bateFiltro = vaga.nivel === "Fácil";
+    } else if (filtroAtivoPainel === "mensal") {
+      bateFiltro = vaga.tipo === "longos";
     }
 
     if (bateBusca && bateFiltro) {
