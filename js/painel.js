@@ -159,12 +159,28 @@ document.getElementById("btnAplicarMetaSimulada").addEventListener("click", asyn
   }
 });
 
-// 2. Cria um card de vaga
+// 2. Algoritmo real de cálculo de Match (%) baseado nas habilidades do usuário
+function calcularMatchReal(vaga) {
+  const habsUser = (usuarioAtual.habilidades || []).map(function (h) { return h.toLowerCase(); });
+  if (habsUser.length === 0) return parseInt(vaga.compatibilidade, 10) || 85;
+
+  let acertos = 0;
+  vaga.habilidades.forEach(function (h) {
+    if (habsUser.includes(h.toLowerCase())) acertos++;
+  });
+
+  if (acertos === vaga.habilidades.length) return 98;
+  if (acertos > 0) return 92;
+  return 84;
+}
+
+// Cria um card de vaga
 function criarCardVaga(vaga) {
   const favoritos = listarFavoritosDoUsuario(usuarioAtual.id);
   const estaFavoritada = favoritos.some(function (f) {
     return f.oportunidadeId === vaga.id;
   });
+  const matchReal = calcularMatchReal(vaga);
 
   const card = document.createElement("article");
   card.className = "vaga-card";
@@ -176,7 +192,7 @@ function criarCardVaga(vaga) {
 
   card.innerHTML =
     '<div class="vaga-topo">' +
-      '<span class="tag-verde">✓ ' + vaga.compatibilidade + ' • ' + vaga.tempo + '</span>' +
+      '<span class="tag-verde">✓ ' + matchReal + '% • ' + vaga.tempo + '</span>' +
       '<button class="btn-fav ' + (estaFavoritada ? "salvo" : "") + '" title="Favoritar">' +
         (estaFavoritada ? "♥" : "♡") +
       '</button>' +
