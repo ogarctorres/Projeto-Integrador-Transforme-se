@@ -85,6 +85,8 @@ async function servicoLoginGoogle() {
   if (firebaseEstaConfigurado() && firebaseAuth && firebaseDb) {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
+
       const resultado = await firebaseAuth.signInWithPopup(provider);
       const user = resultado.user;
       const docRef = firebaseDb.collection("usuarios").doc(user.uid);
@@ -98,8 +100,14 @@ async function servicoLoginGoogle() {
           id: user.uid,
           nome: user.displayName || "Estudante Conecta+",
           email: user.email,
+          foto: user.photoURL || "",
           escolaridade: "Estudante",
           dispositivo: "Celular / Notebook",
+          idiomas: "Português",
+          informatica: "Intermediário",
+          turnos: ["Noite", "Finais de semana"],
+          formaPagamento: "PIX",
+          portfolio: "",
           habilidades: ["Redes sociais", "Organização"],
           diasLivres: ["Seg", "Qua", "Sex", "Sáb"],
           metaMensal: 1250,
@@ -111,13 +119,24 @@ async function servicoLoginGoogle() {
       localStorage.setItem("conecta_usuario_logado_v2", JSON.stringify(perfil));
       return { sucesso: true, usuario: perfil, modo: "firebase" };
     } catch (erro) {
-      return { sucesso: false, mensagem: "Não foi possível concluir o login com Google." };
+      console.error("Erro no Login com Google:", erro.code, erro.message);
+      let msg = "Não foi possível concluir o login com Google.";
+      if (erro.code === "auth/popup-closed-by-user") {
+        msg = "Janela do Google fechada antes de concluir o login.";
+      } else if (erro.code === "auth/popup-blocked") {
+        msg = "Seu navegador bloqueou o pop-up do Google. Libere pop-ups e tente de novo.";
+      } else if (erro.code === "auth/unauthorized-domain") {
+        msg = "Domínio não autorizado no Firebase Auth. Adicione este domínio em Authentication > Configurações > Domínios autorizados.";
+      } else if (erro.code === "auth/operation-not-allowed") {
+        msg = "Ative o provedor Google em Firebase Console > Authentication > Método de login.";
+      }
+      return { sucesso: false, mensagem: msg };
     }
   }
 
   return {
     sucesso: false,
-    mensagem: "Cole suas chaves reais em js/firebase-config.js para ativar o Login com Google!"
+    mensagem: "Configure suas chaves do Firebase no .env / Vercel para ativar o Login com Google!"
   };
 }
 
@@ -133,7 +152,7 @@ async function servicoRecuperarSenha(email) {
 
   return {
     sucesso: false,
-    mensagem: "Cole suas chaves reais em js/firebase-config.js para enviar e-mails reais pelo Firebase Auth."
+    mensagem: "Configure suas chaves do Firebase no .env / Vercel para enviar e-mails reais pelo Firebase Auth."
   };
 }
 

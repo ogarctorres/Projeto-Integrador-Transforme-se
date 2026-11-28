@@ -63,9 +63,11 @@ document.getElementById("forgot-link").addEventListener("click", async function 
 });
 
 // 4. Login com Google via Firebase Auth
-document.getElementById("google-button").addEventListener("click", async function () {
+const btnGoogle = document.getElementById("google-button");
+btnGoogle.addEventListener("click", async function () {
+  btnGoogle.disabled = true;
   feedback.style.color = "#2563eb";
-  feedback.textContent = "Conectando com sua conta Google...";
+  feedback.textContent = "Abrindo janela segura do Google...";
   const resp = await servicoLoginGoogle();
 
   if (resp.sucesso) {
@@ -73,6 +75,8 @@ document.getElementById("google-button").addEventListener("click", async functio
     feedback.textContent = "Autenticado com Google! Abrindo seu painel...";
     setTimeout(function () { window.location.href = "painel.html"; }, 550);
   } else {
+    btnGoogle.disabled = false;
+    feedback.style.color = "#b42318";
     feedback.textContent = resp.mensagem;
   }
 });
