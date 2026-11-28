@@ -47,6 +47,21 @@ function mostrarEtapa(numero) {
   btnAnterior.hidden = etapaAtual === 1;
   btnProximo.hidden = etapaAtual === totalEtapas;
   btnFinalizar.hidden = etapaAtual !== totalEtapas;
+
+  if (etapaAtual === 4) {
+    const habs = [];
+    document.querySelectorAll("#grupo-habilidades input:checked").forEach(function (i) { habs.push(i.value); });
+    const dias = [];
+    document.querySelectorAll("#grupo-dias input:checked").forEach(function (i) { dias.push(i.value); });
+    const resumoBox = document.getElementById("resumoCadastroBox");
+    if (resumoBox) {
+      resumoBox.innerHTML =
+        "<strong>📋 Resumo do seu perfil:</strong><br>" +
+        "Nome: " + (campoNome.value.trim() || "Não informado") + " • Meta: R$ " + (campoMeta.value || "1250") + "/mês<br>" +
+        "Habilidades: " + habs.join(", ") + "<br>" +
+        "Dias livres: " + dias.join(", ");
+    }
+  }
 }
 
 // 2. Avançar etapa com validação simples
@@ -132,6 +147,7 @@ formCadastro.addEventListener("submit", async function (event) {
     informatica: document.getElementById("informatica").value,
     turnos: turnosSelecionados.length > 0 ? turnosSelecionados : ["Noite"],
     formaPagamento: document.getElementById("formaPagamento").value,
+    portfolio: document.getElementById("portfolioCadastro").value.trim(),
     habilidades: habilidadesSelecionadas,
     diasLivres: diasSelecionados,
     metaMensal: Number(campoMeta.value) || 1250

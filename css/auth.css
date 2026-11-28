@@ -492,6 +492,17 @@ input:focus {
   accent-color: var(--emerald);
 }
 
+.resumo-final-box {
+  background: var(--primary-soft);
+  border: 1px solid var(--primary-border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: #1e3a8a;
+  line-height: 1.55;
+}
+
 .lgpd-box {
   background: #ecfdf5;
   border: 1px solid #a7f3d0;
