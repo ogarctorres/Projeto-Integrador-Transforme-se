@@ -48,6 +48,9 @@ function carregarDadosUsuario() {
   document.getElementById("perfilEscolaridade").textContent = usuarioAtual.escolaridade || "Estudante";
   document.getElementById("perfilDispositivo").textContent = usuarioAtual.dispositivo || "Celular / Notebook";
   document.getElementById("novaMetaInput").value = meta;
+  const inputPort = document.getElementById("perfilPortfolioInput");
+  if (inputPort) inputPort.value = usuarioAtual.portfolio || "";
+  if (!Array.isArray(usuarioAtual.turnos)) usuarioAtual.turnos = ["Noite", "Finais de semana"];
 
   // Calcula o nível de preenchimento do perfil (Tela 05 do Figma)
   let pontos = 55;
@@ -65,6 +68,7 @@ function carregarDadosUsuario() {
 // Renderiza os botões clicáveis de habilidades e dias em "Meu Perfil" (Tela 05 do Figma)
 const TODAS_HABILIDADES_OPCOES = ["Edição de vídeo", "Redes sociais", "Canva", "Notion", "ABNT", "Organização", "Atendimento", "Suporte"];
 const TODOS_DIAS_OPCOES = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+const TODOS_TURNOS_OPCOES = ["Manhã", "Tarde", "Noite", "Finais de semana"];
 
 function renderizarEditoresPerfil() {
   const boxHabs = document.getElementById("perfilEditarHabilidades");
@@ -109,6 +113,25 @@ function renderizarEditoresPerfil() {
     });
     boxDias.appendChild(btn);
   });
+
+  const boxTurnos = document.getElementById("perfilEditarTurnos");
+  if (boxTurnos) {
+    boxTurnos.innerHTML = "";
+    TODOS_TURNOS_OPCOES.forEach(function (turno) {
+      const ativo = usuarioAtual.turnos.includes(turno);
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "tag-toggle" + (ativo ? " ativa" : "");
+      btn.textContent = (ativo ? "✓ " : "+ ") + turno;
+      btn.addEventListener("click", function () {
+        const idx = usuarioAtual.turnos.indexOf(turno);
+        if (idx >= 0) usuarioAtual.turnos.splice(idx, 1);
+        else usuarioAtual.turnos.push(turno);
+        renderizarEditoresPerfil();
+      });
+      boxTurnos.appendChild(btn);
+    });
+  }
 }
 
 // Função auxiliar para trocar de aba
@@ -684,11 +707,16 @@ if (selectOrdem) {
 
 document.getElementById("btnSalvarMeta").addEventListener("click", async function () {
   const novaMeta = Number(document.getElementById("novaMetaInput").value);
+  const inputPort = document.getElementById("perfilPortfolioInput");
+  if (inputPort) usuarioAtual.portfolio = inputPort.value.trim();
+
   if (novaMeta >= 100) {
     usuarioAtual.metaMensal = novaMeta;
     await servicoAtualizarPerfil(usuarioAtual);
     carregarDadosUsuario();
-    document.getElementById("msgPerfil").textContent = "Perfil, habilidades, dias e meta salvos com sucesso! ✓";
+    renderizarTudo();
+    document.getElementById("msgPerfil").textContent = "Perfil, habilidades, dias, turnos e meta salvos! ✓";
+    mostrarToast("✓ Perfil salvo e Match recalculado!");
   }
 });
 
