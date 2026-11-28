@@ -97,8 +97,8 @@ togglePassword.addEventListener("click", function () {
   togglePassword.textContent = senhaOculta ? "Ocultar" : "Mostrar";
 });
 
-// 5. Finalizar cadastro e salvar no dados.js
-formCadastro.addEventListener("submit", function (event) {
+// 5. Finalizar cadastro e salvar no Firebase Auth + Firestore (ou fallback local)
+formCadastro.addEventListener("submit", async function (event) {
   event.preventDefault();
   feedback.style.color = "#b42318";
 
@@ -128,21 +128,24 @@ formCadastro.addEventListener("submit", function (event) {
     metaMensal: Number(campoMeta.value) || 1250
   };
 
-  const resposta = cadastrarNovoUsuario(novoUsuario);
+  btnFinalizar.disabled = true;
+  btnFinalizar.textContent = "Criando conta...";
+
+  const resposta = await servicoCadastrarUsuario(novoUsuario);
 
   if (!resposta.sucesso) {
+    btnFinalizar.disabled = false;
+    btnFinalizar.textContent = "Finalizar Cadastro Gratuito ✓";
     feedback.textContent = resposta.mensagem;
     return;
   }
-
-  validarLoginUsuario(novoUsuario.email, novoUsuario.senha);
 
   feedback.style.color = "#059669";
   feedback.textContent = "Cadastro concluído com sucesso! Abrindo seu painel...";
 
   setTimeout(function () {
     window.location.href = "painel.html";
-  }, 700);
+  }, 650);
 });
 
 mostrarEtapa(1);
