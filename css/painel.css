@@ -1266,6 +1266,37 @@ textarea {
   flex-wrap: wrap;
 }
 
+/* RODAPÉ DISCRETO COM STATUS DE CONEXÃO DO BANCO */
+.painel-footer {
+  max-width: 1240px;
+  margin: 0 auto 32px;
+  padding: 18px 28px 40px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.status-banco-pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.status-banco-pill.online {
+  background: var(--emerald-soft);
+  border-color: #a7f3d0;
+  color: var(--emerald-dark);
+}
+
 /* RESPONSIVIDADE */
 @media (max-width: 1080px) {
   .top-bar-inner { padding: 12px 20px; }

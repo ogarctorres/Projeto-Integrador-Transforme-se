@@ -654,3 +654,11 @@ document.querySelectorAll("[data-micro]").forEach(function (card) {
 
 carregarDadosUsuario();
 renderizarTudo();
+
+// Exibe se está rodando no Firebase real ou no Modo Demonstração Local
+const statusEl = document.getElementById("statusConexaoBanco");
+if (statusEl && typeof obterStatusConexaoBanco === "function") {
+  const infoBanco = obterStatusConexaoBanco();
+  statusEl.textContent = infoBanco.texto;
+  if (infoBanco.online) statusEl.classList.add("online");
+}
