@@ -415,12 +415,18 @@ textarea:focus-visible {
 /* =========================================================================
    SEÇÕES E CABEÇALHOS
    ========================================================================= */
+@keyframes fadeSecao {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .painel-sec {
   display: none;
 }
 
 .painel-sec.active {
   display: block;
+  animation: fadeSecao 0.22s ease;
 }
 
 .sec-head {

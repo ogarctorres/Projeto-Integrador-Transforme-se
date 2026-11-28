@@ -556,6 +556,7 @@ document.getElementById("btnIrParaFormularioCand").addEventListener("click", fun
   document.getElementById("textoMensagemCand").value =
     "Olá! Tenho interesse na oportunidade de " + v.titulo +
     " e tenho disponibilidade nos dias: " + usuarioAtual.diasLivres.join(", ") + ".";
+  document.getElementById("linkPortfolioCand").value = usuarioAtual.portfolio || "";
   document.getElementById("msgCandidatura").textContent = "";
 
   abrirAbaPainel("sec-candidatura-form");
