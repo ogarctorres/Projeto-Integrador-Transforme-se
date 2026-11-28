@@ -630,6 +630,51 @@ input:focus-visible {
   display: block;
 }
 
+/* COMO FUNCIONA EM 3 PASSOS */
+.steps-section {
+  padding-top: 12px;
+  padding-bottom: 44px;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.step-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.step-num {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.step-card h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.step-card p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
 /* DICAS E MICROTUTORIAIS */
 .tips {
   display: grid;
@@ -994,6 +1039,7 @@ dialog p {
 
   .jobs,
   .match-grid,
+  .steps-grid,
   .tips,
   .hours {
     grid-template-columns: 1fr;
