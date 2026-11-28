@@ -40,8 +40,8 @@ function atualizarBotoesCabecalho() {
       '<a class="btn-link login" href="pages/painel.html">Meu Painel (' + usuario.nome.split(" ")[0] + ')</a>' +
       '<button type="button" class="btn-link logout-mini" id="btnSairHome">Sair</button>';
 
-    document.getElementById("btnSairHome").addEventListener("click", function () {
-      sairDaConta();
+    document.getElementById("btnSairHome").addEventListener("click", async function () {
+      await servicoSairDaConta();
       areaBotoes.innerHTML =
         '<a class="btn-link login" href="pages/login.html">Entrar</a>' +
         '<a class="btn-link register" href="pages/cadastro.html">Cadastre-se</a>';
