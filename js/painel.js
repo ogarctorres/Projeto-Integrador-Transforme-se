@@ -342,7 +342,16 @@ function renderizarCandidaturas() {
         "<strong>" + vaga.titulo + "</strong> — " + vaga.empresa + "<br>" +
         "<small>Enviada em " + cand.data + " • Mensagem: \"" + cand.mensagem + "\"</small>" +
       "</div>" +
-      '<span class="tag-verde">✓ ' + cand.status + '</span>';
+      '<div style="display:flex; align-items:center; gap:8px;">' +
+        '<span class="tag-verde">✓ ' + cand.status + '</span>' +
+        '<button type="button" class="btn-sair btn-cancelar-cand">Retirar</button>' +
+      "</div>";
+
+    item.querySelector(".btn-cancelar-cand").addEventListener("click", async function () {
+      await servicoCancelarCandidatura(usuarioAtual.id, cand.id);
+      renderizarTudo();
+      mostrarToast("Candidatura retirada da lista.");
+    });
 
     container.appendChild(item);
   });
