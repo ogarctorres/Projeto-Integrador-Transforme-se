@@ -36,12 +36,23 @@ function carregarDadosUsuario() {
   document.getElementById("resumoRotina").textContent =
     "Pronto para turbinar sua renda extra hoje? Você tem " + listarOportunidades().length + " oportunidades compatíveis.";
 
+  const potencialCalculado = 450 + (usuarioAtual.habilidades.length * 75) + (usuarioAtual.diasLivres.length * 25);
   const meta = Number(usuarioAtual.metaMensal) || 1250;
-  const porcentagem = Math.min(100, Math.round((850 / meta) * 100));
+  const porcentagem = Math.min(100, Math.round((potencialCalculado / meta) * 100));
+
+  const potDash = document.getElementById("potencialDashboardValor");
+  if (potDash) {
+    potDash.innerHTML = "R$ " + potencialCalculado.toLocaleString("pt-BR") + ",00 <small>/ mês</small>";
+  }
+  const btnPotTopo = document.getElementById("btnAbrirSimuladorTopo");
+  if (btnPotTopo) {
+    btnPotTopo.textContent = "📈 R$ " + potencialCalculado.toLocaleString("pt-BR") + "/mês";
+  }
+
   document.getElementById("badgePorcentagemMeta").textContent = "Meta " + porcentagem + "%";
   document.getElementById("barraMetaFill").style.width = porcentagem + "%";
   document.getElementById("metaValorTexto").textContent =
-    "Meta definida: R$ " + meta.toLocaleString("pt-BR") + "/mês • Média de R$ 35 a R$ 55/hora";
+    "Meta: R$ " + meta.toLocaleString("pt-BR") + "/mês • Média de R$ 35 a R$ 55/hora";
 
   document.getElementById("perfilNome").textContent = usuarioAtual.nome;
   document.getElementById("perfilEmail").textContent = usuarioAtual.email;
