@@ -31,7 +31,9 @@
     "body.alto-contraste .job, body.alto-contraste .vaga-card, body.alto-contraste .auth-card," +
     "body.alto-contraste .welcome-card, body.alto-contraste .perfil-box, body.alto-contraste .match-card," +
     "body.alto-contraste .match-grid, body.alto-contraste .search-box, body.alto-contraste .partner-item," +
-    "body.alto-contraste .item-candidatura, body.alto-contraste .micro-card, body.alto-contraste .tips article {" +
+    "body.alto-contraste .item-candidatura, body.alto-contraste .micro-card, body.alto-contraste .tips article," +
+    "body.alto-contraste .step-card, body.alto-contraste .faq-item, body.alto-contraste .resumo-final-box," +
+    "body.alto-contraste .sucesso-card-central, body.alto-contraste .empty-state-card {" +
       "background: #111111 !important; color: #ffffff !important; border: 2px solid #ffd04b !important;" +
     "}" +
     "body.alto-contraste a, body.alto-contraste h1, body.alto-contraste h2, body.alto-contraste h3," +
