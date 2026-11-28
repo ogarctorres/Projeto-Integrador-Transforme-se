@@ -402,7 +402,7 @@ function listarCandidaturasDoUsuario(usuarioId) {
   });
 }
 
-function salvarCandidatura(usuarioId, oportunidadeId, mensagem) {
+function salvarCandidatura(usuarioId, oportunidadeId, mensagem, portfolio) {
   const todas = JSON.parse(localStorage.getItem("conecta_candidaturas_v2")) || [];
   const jaExiste = todas.find(function (c) {
     return c.usuarioId === usuarioId && c.oportunidadeId === oportunidadeId;
@@ -413,10 +413,11 @@ function salvarCandidatura(usuarioId, oportunidadeId, mensagem) {
   }
 
   const nova = {
-    id: todas.length + 1,
+    id: Date.now(),
     usuarioId: usuarioId,
     oportunidadeId: oportunidadeId,
     mensagem: mensagem,
+    portfolio: portfolio || "",
     data: new Date().toLocaleDateString("pt-BR"),
     status: "Enviada"
   };
@@ -424,4 +425,12 @@ function salvarCandidatura(usuarioId, oportunidadeId, mensagem) {
   todas.push(nova);
   localStorage.setItem("conecta_candidaturas_v2", JSON.stringify(todas));
   return { sucesso: true, candidatura: nova };
+}
+
+function removerCandidaturaLocal(usuarioId, candidaturaId) {
+  const todas = JSON.parse(localStorage.getItem("conecta_candidaturas_v2")) || [];
+  const filtradas = todas.filter(function (c) {
+    return !(c.usuarioId === usuarioId && c.id === candidaturaId);
+  });
+  localStorage.setItem("conecta_candidaturas_v2", JSON.stringify(filtradas));
 }

@@ -147,3 +147,91 @@ async function servicoSairDaConta() {
   }
   sairDaConta();
 }
+
+// =========================================================================
+// OPERAÇÕES NO CLOUD FIRESTORE (PERFIL, FAVORITOS, CANDIDATURAS E CHAT)
+// =========================================================================
+
+async function servicoAtualizarPerfil(usuarioAtualizado) {
+  atualizarUsuarioLogado(usuarioAtualizado);
+
+  if (firebaseEstaConfigurado() && firebaseDb && usuarioAtualizado.id) {
+    try {
+      await firebaseDb.collection("usuarios").doc(String(usuarioAtualizado.id)).set(usuarioAtualizado, { merge: true });
+    } catch (erro) {
+      console.warn("Aviso Firestore (perfil):", erro.message);
+    }
+  }
+}
+
+async function servicoAlternarFavorito(usuarioId, oportunidadeId) {
+  const salvoAgora = alternarFavorito(usuarioId, oportunidadeId);
+
+  if (firebaseEstaConfigurado() && firebaseDb) {
+    const docId = String(usuarioId) + "_" + String(oportunidadeId);
+    try {
+      if (salvoAgora) {
+        await firebaseDb.collection("favoritos").doc(docId).set({
+          usuarioId: String(usuarioId),
+          oportunidadeId: Number(oportunidadeId),
+          salvoEm: new Date().toISOString()
+        });
+      } else {
+        await firebaseDb.collection("favoritos").doc(docId).delete();
+      }
+    } catch (erro) {
+      console.warn("Aviso Firestore (favoritos):", erro.message);
+    }
+  }
+
+  return salvoAgora;
+}
+
+async function servicoEnviarCandidatura(usuarioId, oportunidadeId, mensagem, portfolio) {
+  const resultado = salvarCandidatura(usuarioId, oportunidadeId, mensagem, portfolio);
+
+  if (resultado.sucesso && firebaseEstaConfigurado() && firebaseDb) {
+    try {
+      await firebaseDb.collection("candidaturas").add({
+        usuarioId: String(usuarioId),
+        oportunidadeId: Number(oportunidadeId),
+        mensagem: mensagem,
+        portfolio: portfolio || "",
+        status: "Enviada",
+        criadoEm: new Date().toISOString()
+      });
+    } catch (erro) {
+      console.warn("Aviso Firestore (candidaturas):", erro.message);
+    }
+  }
+
+  return resultado;
+}
+
+async function servicoCancelarCandidatura(usuarioId, candidaturaId) {
+  removerCandidaturaLocal(usuarioId, candidaturaId);
+}
+
+async function servicoSalvarMensagemChat(usuarioId, contatoId, autor, texto, hora) {
+  if (firebaseEstaConfigurado() && firebaseDb) {
+    try {
+      await firebaseDb.collection("mensagens_chat").add({
+        usuarioId: String(usuarioId),
+        contatoId: contatoId,
+        autor: autor,
+        texto: texto,
+        hora: hora,
+        criadoEm: new Date().toISOString()
+      });
+    } catch (erro) {
+      console.warn("Aviso Firestore (chat):", erro.message);
+    }
+  }
+}
+
+function obterStatusConexaoBanco() {
+  if (firebaseEstaConfigurado()) {
+    return { online: true, texto: "☁️ Conectado ao Firebase (Auth + Firestore)" };
+  }
+  return { online: false, texto: "💾 Modo Demonstração Local (pronto para chaves do Firebase)" };
+}
