@@ -1,35 +1,38 @@
 // =========================================================================
 // CONFIGURAÇÃO DO FIREBASE — CONECTA MAIS (CONECTA+)
 // =========================================================================
-// Passo a passo para ativar o Firebase real (veja também FIREBASE_GUIA.md):
-// 1. Acesse https://console.firebase.google.com
-// 2. Crie um projeto chamado "conecta-mais"
-// 3. Adicione um aplicativo Web (</>) e copie o objeto "firebaseConfig"
-// 4. Substitua os valores abaixo pelas suas chaves reais
+// As chaves do Firebase NÃO ficam escritas aqui (para não irem ao GitHub!).
+// Elas são carregadas automaticamente do arquivo "js/firebase-env.js",
+// que é gerado a partir do ".env" (local) ou das Environment Variables (Vercel)
+// pelo script "scripts/gerar-env.js".
 //
-// Enquanto os valores abaixo estiverem como exemplo ("COLE_SUA_..."),
-// o site funciona automaticamente no Modo Demonstração Local (localStorage)
-// sem quebrar nenhuma página!
+// Passo a passo completo no arquivo FIREBASE_GUIA.md!
+// Enquanto as chaves não estiverem preenchidas, o site funciona normalmente
+// no Modo Demonstração Local (localStorage) sem quebrar nenhuma página.
 // =========================================================================
 
+const ENV_FIREBASE = window.__FIREBASE_ENV__ || {};
+
 const FIREBASE_CONFIG = {
-  apiKey: "COLE_SUA_API_KEY_AQUI",
-  authDomain: "SEU_PROJETO.firebaseapp.com",
-  projectId: "SEU_PROJETO",
-  storageBucket: "SEU_PROJETO.appspot.com",
-  messagingSenderId: "000000000000",
-  appId: "1:000000000000:web:0000000000000000"
+  apiKey: ENV_FIREBASE.apiKey || "",
+  authDomain: ENV_FIREBASE.authDomain || "",
+  projectId: ENV_FIREBASE.projectId || "",
+  storageBucket: ENV_FIREBASE.storageBucket || "",
+  messagingSenderId: ENV_FIREBASE.messagingSenderId || "",
+  appId: ENV_FIREBASE.appId || ""
 };
 
 // Verifica se o Firebase SDK foi carregado e se as chaves reais já foram preenchidas
 function firebaseEstaConfigurado() {
   const sdkCarregado = typeof window.firebase !== "undefined";
-  const chavePreenchida =
-    FIREBASE_CONFIG.apiKey &&
-    FIREBASE_CONFIG.apiKey !== "COLE_SUA_API_KEY_AQUI" &&
+  const apiValida =
+    Boolean(FIREBASE_CONFIG.apiKey) &&
+    !FIREBASE_CONFIG.apiKey.startsWith("COLE_SUA_");
+  const projetoValido =
+    Boolean(FIREBASE_CONFIG.projectId) &&
     FIREBASE_CONFIG.projectId !== "SEU_PROJETO";
 
-  return sdkCarregado && chavePreenchida;
+  return sdkCarregado && apiValida && projetoValido;
 }
 
 // Inicializa o Firebase somente se as chaves reais estiverem configuradas

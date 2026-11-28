@@ -1,3 +1,8 @@
+# Variáveis de ambiente e chaves privadas do Firebase (NUNCA subir pro GitHub!)
+.env
+.env.local
+js/firebase-env.js
+
 # Arquivos de sistema operacional
 .DS_Store
 Thumbs.db
