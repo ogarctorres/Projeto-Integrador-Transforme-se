@@ -1,0 +1,45 @@
+rules_version = '2';
+
+// =========================================================================
+// REGRAS DE SEGURANÇA DO CLOUD FIRESTORE — CONECTA MAIS (LGPD)
+// =========================================================================
+// Garante que cada estudante só consiga ler e alterar os próprios dados
+// de perfil, favoritos, candidaturas e mensagens de chat.
+// =========================================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Perfil do usuário: apenas o próprio dono autenticado lê e edita
+    match /usuarios/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Oportunidades: leitura pública para a vitrine; escrita apenas via admin
+    match /oportunidades/{vagaId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Favoritos: apenas o próprio usuário autenticado
+    match /favoritos/{docId} {
+      allow read, write: if request.auth != null
+        && (resource == null || resource.data.usuarioId == request.auth.uid)
+        && (request.resource == null || request.resource.data.usuarioId == request.auth.uid);
+    }
+
+    // Candidaturas: apenas o usuário dono da candidatura
+    match /candidaturas/{candId} {
+      allow read, create, delete: if request.auth != null
+        && (resource == null || resource.data.usuarioId == request.auth.uid)
+        && (request.resource == null || request.resource.data.usuarioId == request.auth.uid);
+    }
+
+    // Mensagens do Chat Direto: apenas o usuário participante
+    match /mensagens_chat/{msgId} {
+      allow read, create: if request.auth != null
+        && (resource == null || resource.data.usuarioId == request.auth.uid)
+        && (request.resource == null || request.resource.data.usuarioId == request.auth.uid);
+    }
+  }
+}
