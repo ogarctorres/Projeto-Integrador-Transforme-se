@@ -576,11 +576,25 @@ const CONTATOS_CHAT = {
 };
 
 let contatoChatAtual = "ana";
-let historicoChatMemoria = {
-  ana: CONTATOS_CHAT.ana.iniciais.slice(),
-  lucas: CONTATOS_CHAT.lucas.iniciais.slice(),
-  mariana: CONTATOS_CHAT.mariana.iniciais.slice()
-};
+const chaveChatLocal = "conecta_chat_v2_" + usuarioAtual.id;
+
+function carregarHistoricoChatLocal() {
+  const salvo = localStorage.getItem(chaveChatLocal);
+  if (salvo) {
+    try { return JSON.parse(salvo); } catch (e) {}
+  }
+  return {
+    ana: CONTATOS_CHAT.ana.iniciais.slice(),
+    lucas: CONTATOS_CHAT.lucas.iniciais.slice(),
+    mariana: CONTATOS_CHAT.mariana.iniciais.slice()
+  };
+}
+
+let historicoChatMemoria = carregarHistoricoChatLocal();
+
+function salvarHistoricoChatLocal() {
+  localStorage.setItem(chaveChatLocal, JSON.stringify(historicoChatMemoria));
+}
 
 function renderizarMensagensChat() {
   const box = document.getElementById("mensagensChat");
@@ -615,6 +629,7 @@ document.getElementById("btnEnviarChat").addEventListener("click", async functio
   const contato = CONTATOS_CHAT[contatoChatAtual];
 
   historicoChatMemoria[contatoChatAtual].push({ tipo: "enviada", autor: "Você", hora: hora, texto: texto });
+  salvarHistoricoChatLocal();
   renderizarMensagensChat();
   input.value = "";
 
@@ -627,6 +642,7 @@ document.getElementById("btnEnviarChat").addEventListener("click", async functio
       hora: hora,
       texto: contato.respostaAuto
     });
+    salvarHistoricoChatLocal();
     renderizarMensagensChat();
   }, 650);
 });
