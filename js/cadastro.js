@@ -105,11 +105,29 @@ btnAnterior.addEventListener("click", function () {
   }
 });
 
-// 4. Mostrar e ocultar senha
+// 4. Mostrar/ocultar senha e indicador de força em tempo real
 togglePassword.addEventListener("click", function () {
   const senhaOculta = campoSenha.type === "password";
   campoSenha.type = senhaOculta ? "text" : "password";
   togglePassword.textContent = senhaOculta ? "Ocultar" : "Mostrar";
+});
+
+const textoForca = document.getElementById("forcaSenhaTexto");
+campoSenha.addEventListener("input", function () {
+  const v = campoSenha.value;
+  if (v.length === 0) {
+    textoForca.style.color = "#475569";
+    textoForca.textContent = "Use pelo menos 6 caracteres (misture letras e números).";
+  } else if (v.length < 6) {
+    textoForca.style.color = "#dc2626";
+    textoForca.textContent = "Força da senha: Fraca (mínimo 6 caracteres)";
+  } else if (/[0-9]/.test(v) && /[a-zA-Z]/.test(v) && v.length >= 8) {
+    textoForca.style.color = "#059669";
+    textoForca.textContent = "Força da senha: Forte ✓";
+  } else {
+    textoForca.style.color = "#d97706";
+    textoForca.textContent = "Força da senha: Média (adicione números para ficar forte)";
+  }
 });
 
 // 5. Finalizar cadastro e salvar no Firebase Auth + Firestore (ou fallback local)

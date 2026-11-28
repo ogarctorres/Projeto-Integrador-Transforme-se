@@ -281,6 +281,13 @@ input:focus {
   font-weight: 700;
 }
 
+.forca-senha {
+  margin: -8px 0 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
 .form-options {
   display: flex;
   justify-content: space-between;
