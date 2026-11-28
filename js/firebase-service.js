@@ -33,14 +33,19 @@ async function servicoCadastrarUsuario(novoUsuario) {
         criadoEm: new Date().toISOString()
       };
 
-      await firebaseDb.collection("usuarios").doc(uid).set(perfilLimpo);
+      try {
+        await firebaseDb.collection("usuarios").doc(uid).set(perfilLimpo);
+      } catch (erroDb) {
+        console.warn("Conta criada no Auth, mas Firestore retornou aviso:", erroDb.code || erroDb.message);
+      }
       localStorage.setItem("conecta_usuario_logado_v2", JSON.stringify(perfilLimpo));
       return { sucesso: true, usuario: perfilLimpo, modo: "firebase" };
     } catch (erro) {
-      let msg = "Não foi possível criar sua conta no Firebase.";
+      let msg = "Não foi possível criar sua conta no Firebase (" + (erro.code || erro.message) + ").";
       if (erro.code === "auth/email-already-in-use") msg = "Este e-mail já está cadastrado.";
       if (erro.code === "auth/weak-password") msg = "A senha deve ter pelo menos 6 caracteres.";
       if (erro.code === "auth/invalid-email") msg = "Digite um e-mail válido.";
+      if (erro.code === "auth/operation-not-allowed") msg = "Ative E-mail/senha em Firebase Console > Authentication > Método de login.";
       return { sucesso: false, mensagem: msg };
     }
   }
@@ -58,18 +63,21 @@ async function servicoLoginEmailSenha(email, senha) {
     try {
       const credencial = await firebaseAuth.signInWithEmailAndPassword(email, senha);
       const uid = credencial.user.uid;
-      const doc = await firebaseDb.collection("usuarios").doc(uid).get();
+      let usuario = {
+        id: uid,
+        nome: credencial.user.displayName || email.split("@")[0],
+        email: email,
+        habilidades: ["Edição de vídeo", "Redes sociais"],
+        diasLivres: ["Seg", "Qua", "Sex", "Sáb"],
+        metaMensal: 1250
+      };
 
-      const usuario = doc.exists
-        ? doc.data()
-        : {
-            id: uid,
-            nome: credencial.user.displayName || email.split("@")[0],
-            email: email,
-            habilidades: ["Edição de vídeo", "Redes sociais"],
-            diasLivres: ["Seg", "Qua", "Sex", "Sáb"],
-            metaMensal: 1250
-          };
+      try {
+        const doc = await firebaseDb.collection("usuarios").doc(uid).get();
+        if (doc.exists) usuario = doc.data();
+      } catch (erroDb) {
+        console.warn("Login OK no Auth, mas Firestore retornou aviso:", erroDb.code || erroDb.message);
+      }
 
       localStorage.setItem("conecta_usuario_logado_v2", JSON.stringify(usuario));
       return { sucesso: true, usuario: usuario, modo: "firebase" };
@@ -89,46 +97,53 @@ async function servicoLoginGoogle() {
 
       const resultado = await firebaseAuth.signInWithPopup(provider);
       const user = resultado.user;
-      const docRef = firebaseDb.collection("usuarios").doc(user.uid);
-      const doc = await docRef.get();
 
-      let perfil = null;
-      if (doc.exists) {
-        perfil = doc.data();
-      } else {
-        perfil = {
-          id: user.uid,
-          nome: user.displayName || "Estudante Conecta+",
-          email: user.email,
-          foto: user.photoURL || "",
-          escolaridade: "Estudante",
-          dispositivo: "Celular / Notebook",
-          idiomas: "Português",
-          informatica: "Intermediário",
-          turnos: ["Noite", "Finais de semana"],
-          formaPagamento: "PIX",
-          portfolio: "",
-          habilidades: ["Redes sociais", "Organização"],
-          diasLivres: ["Seg", "Qua", "Sex", "Sáb"],
-          metaMensal: 1250,
-          criadoEm: new Date().toISOString()
-        };
-        await docRef.set(perfil);
+      let perfil = {
+        id: user.uid,
+        nome: user.displayName || "Estudante Conecta+",
+        email: user.email,
+        foto: user.photoURL || "",
+        escolaridade: "Estudante",
+        dispositivo: "Celular / Notebook",
+        idiomas: "Português",
+        informatica: "Intermediário",
+        turnos: ["Noite", "Finais de semana"],
+        formaPagamento: "PIX",
+        portfolio: "",
+        habilidades: ["Redes sociais", "Organização"],
+        diasLivres: ["Seg", "Qua", "Sex", "Sáb"],
+        metaMensal: 1250,
+        criadoEm: new Date().toISOString()
+      };
+
+      // Busca/salva perfil no Firestore sem travar o login se as regras ainda estiverem pendentes
+      try {
+        const docRef = firebaseDb.collection("usuarios").doc(user.uid);
+        const doc = await docRef.get();
+        if (doc.exists) {
+          perfil = doc.data();
+        } else {
+          await docRef.set(perfil);
+        }
+      } catch (erroDb) {
+        console.warn("Google Auth OK, mas Firestore retornou aviso:", erroDb.code || erroDb.message);
       }
 
       localStorage.setItem("conecta_usuario_logado_v2", JSON.stringify(perfil));
       return { sucesso: true, usuario: perfil, modo: "firebase" };
     } catch (erro) {
       console.error("Erro no Login com Google:", erro.code, erro.message);
-      let msg = "Não foi possível concluir o login com Google.";
+      let msg = "Não foi possível concluir o login com Google (" + (erro.code || erro.message) + ").";
       if (erro.code === "auth/popup-closed-by-user") {
         msg = "Janela do Google fechada antes de concluir o login.";
       } else if (erro.code === "auth/popup-blocked") {
         msg = "Seu navegador bloqueou o pop-up do Google. Libere pop-ups e tente de novo.";
       } else if (erro.code === "auth/unauthorized-domain") {
-        msg = "Domínio não autorizado no Firebase Auth. Adicione este domínio em Authentication > Configurações > Domínios autorizados.";
+        msg = "Domínio não autorizado no Firebase Auth. Adicione conecta-mais-three.vercel.app em Authentication > Configurações > Domínios autorizados.";
       } else if (erro.code === "auth/operation-not-allowed") {
         msg = "Ative o provedor Google em Firebase Console > Authentication > Método de login.";
+      } else if (erro.code === "auth/cancelled-popup-request") {
+        msg = "Uma janela de login do Google já estava aberta. Tente novamente.";
       }
       return { sucesso: false, mensagem: msg };
     }
