@@ -152,9 +152,19 @@ botoesAbas.forEach(function (botao) {
   });
 });
 
-// 5. Busca central e busca do topo
+// 5. Busca central, busca do topo e limpar busca
 botaoBuscar.addEventListener("click", mostrarOportunidades);
 inputBuscaCentral.addEventListener("input", mostrarOportunidades);
+
+const btnLimpar = document.getElementById("btnLimparBuscaHome");
+if (btnLimpar) {
+  btnLimpar.addEventListener("click", function () {
+    inputBuscaCentral.value = "";
+    inputBuscaTopo.value = "";
+    mostrarOportunidades();
+    inputBuscaCentral.focus();
+  });
+}
 
 inputBuscaTopo.addEventListener("keydown", function (evento) {
   if (evento.key === "Enter") {
