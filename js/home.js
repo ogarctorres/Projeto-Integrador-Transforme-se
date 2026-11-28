@@ -53,10 +53,19 @@ function atualizarBotoesCabecalho() {
   }
 }
 
+function pegarHabilidadesMarcadasHome() {
+  const lista = [];
+  document.querySelectorAll("#previewSkills input:checked").forEach(function (cb) {
+    lista.push(cb.parentElement.textContent.trim().toLowerCase());
+  });
+  return lista;
+}
+
 // 2. Mostra os cards de oportunidades da aba selecionada
 function mostrarOportunidades() {
   const todasAsVagas = listarOportunidades();
   const textoBusca = inputBuscaCentral.value.trim().toLowerCase();
+  const habsMarcadas = pegarHabilidadesMarcadasHome();
 
   containerVagas.innerHTML = "";
   let quantidadeMostrada = 0;
@@ -76,7 +85,10 @@ function mostrarOportunidades() {
       quantidadeMostrada++;
 
       const card = document.createElement("article");
-      card.className = "job";
+      const combinaComVisitante = vaga.habilidades.some(function (h) {
+        return habsMarcadas.includes(h.toLowerCase());
+      });
+      card.className = "job" + (combinaComVisitante ? " destaque-match" : "");
 
       let tagsHtml = "";
       vaga.habilidades.forEach(function (hab) {
@@ -191,7 +203,10 @@ function atualizarResumoMatch() {
 }
 
 document.querySelectorAll("#previewSkills input, #previewDays input").forEach(function (cb) {
-  cb.addEventListener("change", atualizarResumoMatch);
+  cb.addEventListener("change", function () {
+    atualizarResumoMatch();
+    mostrarOportunidades();
+  });
 });
 
 // 8. Simulador de renda (6h, 12h, 18h — fiel ao Figma)

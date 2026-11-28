@@ -349,6 +349,11 @@ input:focus-visible {
   border-color: #93c5fd;
 }
 
+.job.destaque-match {
+  border-color: #10b981;
+  box-shadow: 0 8px 22px rgba(16, 185, 129, 0.15);
+}
+
 .job-art {
   height: 128px;
   border-radius: 12px;
