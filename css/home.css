@@ -863,6 +863,26 @@ input:focus-visible {
   object-fit: contain;
 }
 
+.btn-topo {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 800;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+  z-index: 90;
+}
+
+.btn-topo:hover {
+  background: #1d4ed8;
+}
+
 /* RODAPÉ */
 footer {
   text-align: center;

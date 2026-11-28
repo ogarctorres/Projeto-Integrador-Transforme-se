@@ -290,6 +290,17 @@ document.querySelectorAll(".nav a").forEach(function (link) {
   });
 });
 
+// 11. Botão Voltar ao Topo ao rolar a página
+const btnTopo = document.getElementById("btnVoltarTopo");
+if (btnTopo) {
+  window.addEventListener("scroll", function () {
+    btnTopo.hidden = window.scrollY < 450;
+  });
+  btnTopo.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
 atualizarBotoesCabecalho();
 mostrarOportunidades();
 atualizarResumoMatch();
