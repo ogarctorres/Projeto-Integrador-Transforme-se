@@ -149,11 +149,11 @@ document.querySelectorAll("#listaSimuladorPainel input").forEach(function (cb) {
   cb.addEventListener("change", calcularSimuladorPainel);
 });
 
-document.getElementById("btnAplicarMetaSimulada").addEventListener("click", function () {
+document.getElementById("btnAplicarMetaSimulada").addEventListener("click", async function () {
   const total = calcularSimuladorPainel();
   if (total > 0) {
     usuarioAtual.metaMensal = total;
-    atualizarUsuarioLogado(usuarioAtual);
+    await servicoAtualizarPerfil(usuarioAtual);
     carregarDadosUsuario();
     document.getElementById("msgSimulador").textContent = "Meta atualizada para R$ " + total.toLocaleString("pt-BR") + "/mês! ✓";
   }
@@ -193,8 +193,8 @@ function criarCardVaga(vaga) {
       '<button class="btn-azul btn-candidatar" type="button">Ver Detalhes →</button>' +
     '</div>';
 
-  card.querySelector(".btn-fav").addEventListener("click", function () {
-    alternarFavorito(usuarioAtual.id, vaga.id);
+  card.querySelector(".btn-fav").addEventListener("click", async function () {
+    await servicoAlternarFavorito(usuarioAtual.id, vaga.id);
     renderizarTudo();
   });
 
@@ -435,9 +435,9 @@ document.getElementById("btnVoltarDasDetalhes").addEventListener("click", functi
   abrirAbaPainel(telaOrigemDetalhes);
 });
 
-function alternarFavNaTelaDetalhe() {
+async function alternarFavNaTelaDetalhe() {
   if (!vagaSelecionadaParaCandidatura) return;
-  alternarFavorito(usuarioAtual.id, vagaSelecionadaParaCandidatura.id);
+  await servicoAlternarFavorito(usuarioAtual.id, vagaSelecionadaParaCandidatura.id);
   renderizarTudo();
   atualizarBotoesFavoritoDetalhe();
 }
@@ -473,10 +473,11 @@ document.getElementById("btnIrParaFormularioCand").addEventListener("click", fun
 });
 
 // Envia a candidatura e abre a página de Sucesso (Tela 03.5 do Figma)
-document.getElementById("btnConfirmarCand").addEventListener("click", function () {
+document.getElementById("btnConfirmarCand").addEventListener("click", async function () {
   if (!vagaSelecionadaParaCandidatura) return;
   const mensagem = document.getElementById("textoMensagemCand").value.trim();
-  const resultado = salvarCandidatura(usuarioAtual.id, vagaSelecionadaParaCandidatura.id, mensagem);
+  const portfolio = document.getElementById("linkPortfolioCand").value.trim();
+  const resultado = await servicoEnviarCandidatura(usuarioAtual.id, vagaSelecionadaParaCandidatura.id, mensagem, portfolio);
 
   const msgEl = document.getElementById("msgCandidatura");
   if (!resultado.sucesso) {
@@ -551,18 +552,18 @@ botoesMenu.forEach(function (btn) {
 // 7. Busca, salvar meta e sair (volta para ../index.html)
 document.getElementById("buscaPainel").addEventListener("input", renderizarVagas);
 
-document.getElementById("btnSalvarMeta").addEventListener("click", function () {
+document.getElementById("btnSalvarMeta").addEventListener("click", async function () {
   const novaMeta = Number(document.getElementById("novaMetaInput").value);
   if (novaMeta >= 100) {
     usuarioAtual.metaMensal = novaMeta;
-    atualizarUsuarioLogado(usuarioAtual);
+    await servicoAtualizarPerfil(usuarioAtual);
     carregarDadosUsuario();
     document.getElementById("msgPerfil").textContent = "Perfil, habilidades, dias e meta salvos com sucesso! ✓";
   }
 });
 
-document.getElementById("btnSair").addEventListener("click", function () {
-  sairDaConta();
+document.getElementById("btnSair").addEventListener("click", async function () {
+  await servicoSairDaConta();
   window.location.href = "../index.html";
 });
 
