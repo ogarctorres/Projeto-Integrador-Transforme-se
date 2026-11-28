@@ -778,6 +778,39 @@ input:focus-visible {
   border: 1px solid #b4efda;
 }
 
+/* PERGUNTAS FREQUENTES (FAQ) */
+.faq-section {
+  padding-top: 8px;
+  padding-bottom: 44px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+
+.faq-item summary {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.faq-item p {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
 /* PARCEIROS */
 .partners {
   text-align: center;
