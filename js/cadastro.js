@@ -123,6 +123,8 @@ formCadastro.addEventListener("submit", async function (event) {
     senha: campoSenha.value,
     escolaridade: campoEscolaridade.value.trim(),
     dispositivo: campoDispositivo.value.trim(),
+    idiomas: document.getElementById("idiomas").value.trim(),
+    informatica: document.getElementById("informatica").value,
     habilidades: habilidadesSelecionadas,
     diasLivres: diasSelecionados,
     metaMensal: Number(campoMeta.value) || 1250
