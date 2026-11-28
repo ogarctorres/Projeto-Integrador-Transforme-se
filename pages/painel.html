@@ -228,21 +228,37 @@
       </div>
       <div class="lista-simples" id="listaCandidaturasPainel"></div>
 
-      <div class="perfil-box" style="margin-top: 24px;">
-        <h3>💬 Mensagens — Ana Clara (Cafeteria &amp; Bistrô Vila Nova)</h3>
-        <div id="mensagensChat" class="chat-box">
-          <div class="msg-recebida">
-            <strong>Ana Clara:</strong> Olá! Vimos seu perfil no Conecta+ e gostamos muito das suas habilidades. Você tem disponibilidade para 3 posts por semana?
+      <div class="chat-2col" style="margin-top: 24px;">
+        <!-- LISTA DE CONVERSAS (TELA 03.6 DO FIGMA) -->
+        <aside class="perfil-box chat-sidebar">
+          <h3 style="margin-top:0;">Conversas</h3>
+          <button type="button" class="contato-btn ativo" data-contato="ana">
+            <strong>Ana Clara</strong>
+            <small>Cafeteria &amp; Bistrô Vila Nova • Social Media</small>
+          </button>
+          <button type="button" class="contato-btn" data-contato="lucas">
+            <strong>Lucas Ferreira</strong>
+            <small>Estúdio PodCortes • Cortes TikTok/Reels</small>
+          </button>
+          <button type="button" class="contato-btn" data-contato="mariana">
+            <strong>Mariana Rocha</strong>
+            <small>Loja UrbanStyle • Suporte WhatsApp</small>
+          </button>
+        </aside>
+
+        <!-- JANELA DE CHAT ATIVA -->
+        <div class="perfil-box">
+          <h3 id="chatTituloContato" style="margin-top:0;">💬 Ana Clara — Cafeteria &amp; Bistrô Vila Nova</h3>
+          <div id="mensagensChat" class="chat-box"></div>
+          <div class="chat-quick-replies">
+            <button type="button" class="quick-reply-btn">Sim! Tenho disponibilidade à noite e sábados.</button>
+            <button type="button" class="quick-reply-btn">Posso enviar 2 amostras no Drive hoje!</button>
+            <button type="button" class="quick-reply-btn">Podemos combinar pagamento via PIX?</button>
           </div>
-        </div>
-        <div class="chat-quick-replies">
-          <button type="button" class="quick-reply-btn">Sim! Tenho disponibilidade à noite e sábados.</button>
-          <button type="button" class="quick-reply-btn">Posso enviar 2 amostras de posts no Drive hoje!</button>
-          <button type="button" class="quick-reply-btn">Podemos combinar o pagamento via PIX quinzenal?</button>
-        </div>
-        <div class="linha-meta" style="margin-top: 12px;">
-          <input type="text" id="inputChat" placeholder="Digite sua resposta para o contratante..." style="flex: 1; width: auto;">
-          <button type="button" class="btn-verde" id="btnEnviarChat">Enviar →</button>
+          <div class="linha-meta" style="margin-top: 12px;">
+            <input type="text" id="inputChat" placeholder="Digite sua resposta para o contratante..." style="flex: 1; width: auto;">
+            <button type="button" class="btn-verde" id="btnEnviarChat">Enviar →</button>
+          </div>
         </div>
       </div>
     </section>

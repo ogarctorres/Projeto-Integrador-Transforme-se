@@ -547,31 +547,91 @@ document.getElementById("btnConfirmarCand").addEventListener("click", async func
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// 5. Chat Direto simples com contratante (Tela 03.6 do Figma)
-document.getElementById("btnEnviarChat").addEventListener("click", function () {
+// 5. Chat Direto com múltiplos contratantes (Tela 03.6 do Figma)
+const CONTATOS_CHAT = {
+  ana: {
+    titulo: "💬 Ana Clara — Cafeteria & Bistrô Vila Nova",
+    nome: "Ana Clara",
+    respostaAuto: "Perfeito! Combinado, vamos te enviar o briefing dos posts por aqui ainda hoje.",
+    iniciais: [
+      { tipo: "recebida", autor: "Ana Clara", hora: "10:15", texto: "Olá! Vimos seu perfil no Conecta+ e gostamos muito das suas habilidades. Você tem disponibilidade para 3 posts por semana?" }
+    ]
+  },
+  lucas: {
+    titulo: "💬 Lucas Ferreira — Estúdio PodCortes Digital",
+    nome: "Lucas Ferreira",
+    respostaAuto: "Show! Vou liberar a pasta com o episódio desta semana para você testar os 5 cortes no CapCut.",
+    iniciais: [
+      { tipo: "recebida", autor: "Lucas Ferreira", hora: "Ontem", texto: "E aí! Vi que você manda bem em Edição de Vídeo. Curte editar cortes curtos de podcast no CapCut?" }
+    ]
+  },
+  mariana: {
+    titulo: "💬 Mariana Rocha — Loja UrbanStyle E-commerce",
+    nome: "Mariana Rocha",
+    respostaAuto: "Ótimo! Nosso atendimento noturno começa às 18h30 e temos scripts prontos para facilitar.",
+    iniciais: [
+      { tipo: "recebida", autor: "Mariana Rocha", hora: "Ontem", texto: "Olá! Estamos selecionando jovens para atendimento via WhatsApp à noite e sábados. Tem interesse?" }
+    ]
+  }
+};
+
+let contatoChatAtual = "ana";
+let historicoChatMemoria = {
+  ana: CONTATOS_CHAT.ana.iniciais.slice(),
+  lucas: CONTATOS_CHAT.lucas.iniciais.slice(),
+  mariana: CONTATOS_CHAT.mariana.iniciais.slice()
+};
+
+function renderizarMensagensChat() {
+  const box = document.getElementById("mensagensChat");
+  const info = CONTATOS_CHAT[contatoChatAtual];
+  document.getElementById("chatTituloContato").textContent = info.titulo;
+
+  box.innerHTML = "";
+  (historicoChatMemoria[contatoChatAtual] || []).forEach(function (m) {
+    const div = document.createElement("div");
+    div.className = m.tipo === "enviada" ? "msg-enviada" : "msg-recebida";
+    div.innerHTML = "<strong>" + m.autor + " (" + m.hora + "):</strong> " + m.texto;
+    box.appendChild(div);
+  });
+  box.scrollTop = box.scrollHeight;
+}
+
+document.querySelectorAll(".contato-btn").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    document.querySelectorAll(".contato-btn").forEach(function (b) { b.classList.remove("ativo"); });
+    btn.classList.add("ativo");
+    contatoChatAtual = btn.dataset.contato;
+    renderizarMensagensChat();
+  });
+});
+
+document.getElementById("btnEnviarChat").addEventListener("click", async function () {
   const input = document.getElementById("inputChat");
   const texto = input.value.trim();
   if (texto === "") return;
 
   const hora = new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
-  const box = document.getElementById("mensagensChat");
-  const minhaMsg = document.createElement("div");
-  minhaMsg.className = "msg-enviada";
-  minhaMsg.innerHTML = "<strong>Você (" + hora + "):</strong> " + texto;
-  box.appendChild(minhaMsg);
+  const contato = CONTATOS_CHAT[contatoChatAtual];
 
+  historicoChatMemoria[contatoChatAtual].push({ tipo: "enviada", autor: "Você", hora: hora, texto: texto });
+  renderizarMensagensChat();
   input.value = "";
-  box.scrollTop = box.scrollHeight;
 
-  // Resposta simples automática para demonstração
+  await servicoSalvarMensagemChat(usuarioAtual.id, contatoChatAtual, "Você", texto, hora);
+
   setTimeout(function () {
-    const resp = document.createElement("div");
-    resp.className = "msg-recebida";
-    resp.innerHTML = "<strong>Ana Clara (" + hora + "):</strong> Perfeito! Combinado, vamos te enviar o briefing dos posts por aqui ainda hoje.";
-    box.appendChild(resp);
-    box.scrollTop = box.scrollHeight;
-  }, 700);
+    historicoChatMemoria[contatoChatAtual].push({
+      tipo: "recebida",
+      autor: contato.nome,
+      hora: hora,
+      texto: contato.respostaAuto
+    });
+    renderizarMensagensChat();
+  }, 650);
 });
+
+renderizarMensagensChat();
 
 document.getElementById("inputChat").addEventListener("keydown", function (evento) {
   if (evento.key === "Enter") {
