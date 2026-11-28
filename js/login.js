@@ -1,5 +1,5 @@
 // =========================================================================
-// SCRIPT DA TELA DE LOGIN — CONECTA MAIS (CONECTA+)
+// SCRIPT DA TELA DE LOGIN — CONECTA MAIS (FIREBASE AUTH + FALLBACK LOCAL)
 // =========================================================================
 
 const form = document.getElementById("login-form");
@@ -7,6 +7,7 @@ const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const feedback = document.getElementById("feedback");
 const togglePassword = document.getElementById("toggle-password");
+const btnEntrar = form.querySelector(".btn-primary");
 
 // 1. Mostrar e ocultar senha
 togglePassword.addEventListener("click", function () {
@@ -15,8 +16,8 @@ togglePassword.addEventListener("click", function () {
   togglePassword.textContent = senhaOculta ? "Ocultar" : "Mostrar";
 });
 
-// 2. Validar formulário e abrir o Painel Logado
-form.addEventListener("submit", function (event) {
+// 2. Validar formulário e autenticar via Firebase Auth (ou modo local)
+form.addEventListener("submit", async function (event) {
   event.preventDefault();
 
   feedback.style.color = "#b42318";
@@ -33,34 +34,51 @@ form.addEventListener("submit", function (event) {
     return;
   }
 
-  const resultado = validarLoginUsuario(emailInput.value.trim(), passwordInput.value);
+  btnEntrar.disabled = true;
+  btnEntrar.textContent = "Entrando...";
+
+  const resultado = await servicoLoginEmailSenha(emailInput.value.trim(), passwordInput.value);
 
   if (!resultado.sucesso) {
+    btnEntrar.disabled = false;
+    btnEntrar.textContent = "Entrar na Plataforma →";
     feedback.textContent = resultado.mensagem + " (Conta teste: richard.mendes@estudante.br / 123456)";
     return;
   }
 
-  feedback.style.color = "#079b6b";
+  feedback.style.color = "#059669";
   feedback.textContent = "Login realizado! Abrindo seu painel...";
 
   setTimeout(function () {
     window.location.href = "painel.html";
-  }, 600);
+  }, 550);
 });
 
-// 3. Links informativos (planejados para Firebase Authentication)
-document.getElementById("forgot-link").addEventListener("click", function (event) {
+// 3. Recuperar senha via Firebase Auth
+document.getElementById("forgot-link").addEventListener("click", async function (event) {
   event.preventDefault();
-  feedback.style.color = "#2864e8";
-  feedback.textContent = "Recuperação de senha será integrada via Firebase Authentication.";
+  const resp = await servicoRecuperarSenha(emailInput.value.trim());
+  feedback.style.color = resp.sucesso ? "#059669" : "#2563eb";
+  feedback.textContent = resp.mensagem;
 });
 
-document.getElementById("google-button").addEventListener("click", function () {
-  feedback.style.color = "#2864e8";
-  feedback.textContent = "Login com Google será conectado via Firebase Authentication.";
+// 4. Login com Google via Firebase Auth
+document.getElementById("google-button").addEventListener("click", async function () {
+  feedback.style.color = "#2563eb";
+  feedback.textContent = "Conectando com sua conta Google...";
+  const resp = await servicoLoginGoogle();
+
+  if (resp.sucesso) {
+    feedback.style.color = "#059669";
+    feedback.textContent = "Autenticado com Google! Abrindo seu painel...";
+    setTimeout(function () { window.location.href = "painel.html"; }, 550);
+  } else {
+    feedback.textContent = resp.mensagem;
+  }
 });
 
+// 5. Botão LinkedIn (informativo)
 document.getElementById("linkedin-button").addEventListener("click", function () {
-  feedback.style.color = "#2864e8";
-  feedback.textContent = "Login com LinkedIn será conectado na próxima fase do projeto.";
+  feedback.style.color = "#2563eb";
+  feedback.textContent = "Login com LinkedIn disponível na próxima fase (OAuth).";
 });
