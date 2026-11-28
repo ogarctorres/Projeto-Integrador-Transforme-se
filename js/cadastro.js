@@ -117,6 +117,11 @@ formCadastro.addEventListener("submit", async function (event) {
     diasSelecionados.push(item.value);
   });
 
+  const turnosSelecionados = [];
+  document.querySelectorAll("#grupo-turnos input:checked").forEach(function (item) {
+    turnosSelecionados.push(item.value);
+  });
+
   const novoUsuario = {
     nome: campoNome.value.trim(),
     email: campoEmail.value.trim(),
@@ -125,6 +130,8 @@ formCadastro.addEventListener("submit", async function (event) {
     dispositivo: campoDispositivo.value.trim(),
     idiomas: document.getElementById("idiomas").value.trim(),
     informatica: document.getElementById("informatica").value,
+    turnos: turnosSelecionados.length > 0 ? turnosSelecionados : ["Noite"],
+    formaPagamento: document.getElementById("formaPagamento").value,
     habilidades: habilidadesSelecionadas,
     diasLivres: diasSelecionados,
     metaMensal: Number(campoMeta.value) || 1250
