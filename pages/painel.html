@@ -180,7 +180,14 @@
           <h2>Explorar Oportunidades</h2>
           <p class="sec-sub">Filtre por compatibilidade, formato remoto ou tempo livre no contraturno</p>
         </div>
-        <input type="search" id="buscaPainel" placeholder="Buscar por habilidade, empresa ou vaga...">
+        <div class="busca-ordenacao-row">
+          <input type="search" id="buscaPainel" placeholder="Buscar por habilidade, empresa ou vaga...">
+          <select id="ordenarPainel" class="select-ordenar" aria-label="Ordenar oportunidades">
+            <option value="match">Ordenar: Maior Match %</option>
+            <option value="curto">Ordenar: Tarefas mais rápidas</option>
+            <option value="padrao">Ordenar: Padrão</option>
+          </select>
+        </div>
       </div>
 
       <div class="filter-chips" id="filtrosPainel">

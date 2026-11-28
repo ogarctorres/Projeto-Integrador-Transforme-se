@@ -458,6 +458,23 @@ textarea:focus-visible {
   background: #dbeafe;
 }
 
+.busca-ordenacao-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.select-ordenar {
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  background: #ffffff;
+  color: var(--text);
+}
+
 #buscaPainel {
   padding: 10px 14px;
   border: 1px solid #cbd5e1;
@@ -1316,7 +1333,9 @@ textarea {
   .container { margin: 20px auto; padding: 0 16px 88px; }
   .welcome-card, .meta-card, .perfil-box { padding: 20px; }
   .welcome-top h1 { font-size: 20px; }
-  #buscaPainel { width: 100%; }
+  .busca-ordenacao-row,
+  #buscaPainel,
+  .select-ordenar { width: 100%; }
   .linha-meta { flex-direction: column; }
   .linha-meta input { width: 100%; }
   .quick-actions,

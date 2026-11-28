@@ -225,7 +225,16 @@ function criarCardVaga(vaga) {
 function renderizarVagas() {
   const container = document.getElementById("listaVagasPainel");
   const busca = document.getElementById("buscaPainel").value.trim().toLowerCase();
-  const vagas = listarOportunidades();
+  const ordemEl = document.getElementById("ordenarPainel");
+  const ordem = ordemEl ? ordemEl.value : "match";
+  const vagas = listarOportunidades().slice();
+
+  if (ordem === "match") {
+    vagas.sort(function (a, b) { return calcularMatchReal(b) - calcularMatchReal(a); });
+  } else if (ordem === "curto") {
+    const peso = { curtos: 1, medios: 2, longos: 3 };
+    vagas.sort(function (a, b) { return (peso[a.tipo] || 9) - (peso[b.tipo] || 9); });
+  }
 
   container.innerHTML = "";
   let totalMostrado = 0;
@@ -565,8 +574,12 @@ botoesMenu.forEach(function (btn) {
   });
 });
 
-// 7. Busca, salvar meta e sair (volta para ../index.html)
+// 7. Busca, ordenação, salvar meta e sair (volta para ../index.html)
 document.getElementById("buscaPainel").addEventListener("input", renderizarVagas);
+const selectOrdem = document.getElementById("ordenarPainel");
+if (selectOrdem) {
+  selectOrdem.addEventListener("change", renderizarVagas);
+}
 
 document.getElementById("btnSalvarMeta").addEventListener("click", async function () {
   const novaMeta = Number(document.getElementById("novaMetaInput").value);
