@@ -23,14 +23,18 @@ projeto-integrador/
 │   ├── auth.css        # Estilos das páginas de Login e Cadastro
 │   └── painel.css      # Estilos da área logada
 ├── js/
-│   ├── dados.js        # Dados demonstrativos em localStorage (pronto para migrar ao Firebase)
-│   ├── home.js         # Interações da Home (3 abas, busca, simulador e modal de prévia)
-│   ├── login.js        # Validação do Login e mostrar/ocultar senha
-│   ├── cadastro.js     # Fluxo de cadastro por etapas e salvamento
-│   ├── painel.js       # Filtros, Simulador Financeiro, detalhes de vaga, favoritos, chat e perfil
-│   └── acessibilidade.js # VLibras, Modo Alto Contraste e ajuste de fonte (A- / A+)
-├── .gitignore          # Arquivos ignorados pelo Git
-└── README.md           # Documentação do repositório
+│   ├── firebase-config.js   # Configuração do Firebase + detecção automática de ambiente
+│   ├── firebase-service.js  # Serviço completo de Firebase Authentication + Cloud Firestore
+│   ├── dados.js             # Dados iniciais e fallback automático em localStorage
+│   ├── home.js              # Home: 3 abas, busca, prévia do Match, simulador e FAQ
+│   ├── login.js             # Login via Firebase Auth (Email/Senha, Google e Recuperar Senha)
+│   ├── cadastro.js          # Cadastro por etapas (dados, idiomas, turnos, PIX, portfólio e LGPD)
+│   ├── painel.js            # Match real %, filtros, ordenação, Simulador, Detalhes, Chat multi-contato e Perfil
+│   └── acessibilidade.js    # VLibras, Modo Alto Contraste e ajuste de fonte (A- / A+)
+├── firestore.rules          # Regras de segurança e privacidade LGPD do Cloud Firestore
+├── FIREBASE_GUIA.md         # Passo a passo rápido para colar as chaves do Firebase Console
+├── .gitignore               # Arquivos ignorados pelo Git
+└── README.md                # Documentação oficial do repositório
 ```
 
 ---
@@ -52,7 +56,7 @@ projeto-integrador/
 - **Design UX/UI:** Figma (Design System com fonte **Inter**, paleta Azul Royal/Marinho, Verde Esmeralda e Âmbar).
 - **Metodologia:** Framework Ágil **Scrum** (*Sprints, Product Backlog, Planning, Daily, Review e Retrospective*).
 - **Acessibilidade (WCAG 2.1):** Widget oficial **VLibras**, controle de tamanho de fonte (`A-` / `A+`), foco visível por teclado e **Modo Alto Contraste** em todas as telas.
-- **Próxima Etapa (Banco de Dados):** Migração dos dados demonstrativos (`js/dados.js`) para o **Firebase** (*Firebase Authentication* + *Cloud Firestore*).
+- **Banco de Dados & Autenticação (Firebase):** Integrado com **Firebase SDK v10** (*Firebase Authentication* com E-mail/Senha, Google OAuth e Recuperação de Senha + *Cloud Firestore* com regras `firestore.rules` para LGPD), contando com fallback automático em `localStorage` para demonstrações offline. Veja [FIREBASE_GUIA.md](FIREBASE_GUIA.md) para ativar suas chaves em 5 minutos.
 
 ---
 
