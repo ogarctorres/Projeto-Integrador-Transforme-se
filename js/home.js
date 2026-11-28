@@ -104,6 +104,10 @@ function mostrarOportunidades() {
   });
 
   mensagemSemResultados.hidden = quantidadeMostrada > 0;
+  const badgeCont = document.getElementById("jobsCountBadge");
+  if (badgeCont) {
+    badgeCont.textContent = quantidadeMostrada + (quantidadeMostrada === 1 ? " vaga" : " vagas");
+  }
 }
 
 // 3. Modal de Prévia da Vaga (Tela 001 do Figma)

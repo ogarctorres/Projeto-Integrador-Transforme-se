@@ -292,6 +292,23 @@ input:focus-visible {
   margin: 0 0 6px;
 }
 
+.section-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.count-pill {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  border-radius: 99px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 .section-head p {
   font-size: 14px;
   color: var(--muted);
