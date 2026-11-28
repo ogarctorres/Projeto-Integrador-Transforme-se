@@ -301,6 +301,19 @@ if (btnTopo) {
   });
 }
 
+// 12. Destaca o link ativo da navbar conforme a seção visível no scroll
+const linksNavHome = document.querySelectorAll(".nav a");
+window.addEventListener("scroll", function () {
+  const posicaoAtual = window.scrollY + 140;
+  linksNavHome.forEach(function (link) {
+    const idSecao = link.getAttribute("href").replace("#", "");
+    const secao = document.getElementById(idSecao);
+    if (!secao) return;
+    const dentro = posicaoAtual >= secao.offsetTop && posicaoAtual < secao.offsetTop + secao.offsetHeight;
+    link.classList.toggle("ativo", dentro);
+  });
+});
+
 atualizarBotoesCabecalho();
 mostrarOportunidades();
 atualizarResumoMatch();

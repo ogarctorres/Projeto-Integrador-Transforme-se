@@ -126,7 +126,8 @@ input:focus-visible {
   white-space: nowrap;
 }
 
-.nav a:hover {
+.nav a:hover,
+.nav a.ativo {
   color: var(--blue);
 }
 
