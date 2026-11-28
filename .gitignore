@@ -3,6 +3,9 @@
 .env.local
 js/firebase-env.js
 
+# Dependências locais do Node (não necessárias porque usamos SDK via CDN)
+node_modules/
+
 # Arquivos de sistema operacional
 .DS_Store
 Thumbs.db
