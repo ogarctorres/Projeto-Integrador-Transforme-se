@@ -200,6 +200,20 @@ function atualizarResumoMatch() {
 
   document.getElementById("matchResumoTexto").textContent =
     "✓ " + qtdHabilidades + " " + textoHab + " e " + qtdDias + " " + textoDia + " — perfeito para vagas no contraturno!";
+
+  // Salva a prévia do visitante para já pré-preencher a tela de Cadastro
+  const habsSalvas = [];
+  document.querySelectorAll("#previewSkills input:checked").forEach(function (c) {
+    habsSalvas.push(c.parentElement.textContent.trim());
+  });
+  const diasSalvos = [];
+  document.querySelectorAll("#previewDays input:checked").forEach(function (c) {
+    diasSalvos.push(c.parentElement.textContent.trim());
+  });
+  sessionStorage.setItem("conecta_previa_match", JSON.stringify({
+    habilidades: habsSalvas,
+    dias: diasSalvos
+  }));
 }
 
 document.querySelectorAll("#previewSkills input, #previewDays input").forEach(function (cb) {
