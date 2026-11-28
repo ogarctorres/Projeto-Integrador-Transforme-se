@@ -191,4 +191,24 @@ formCadastro.addEventListener("submit", async function (event) {
   }, 650);
 });
 
+// 6. Pré-preenche habilidades e dias caso o visitante tenha testado a Prévia do Match na Home
+function aplicarPreviaMatchDaHome() {
+  const texto = sessionStorage.getItem("conecta_previa_match");
+  if (!texto) return;
+  try {
+    const previa = JSON.parse(texto);
+    if (Array.isArray(previa.habilidades) && previa.habilidades.length > 0) {
+      document.querySelectorAll("#grupo-habilidades input").forEach(function (cb) {
+        cb.checked = previa.habilidades.includes(cb.value);
+      });
+    }
+    if (Array.isArray(previa.dias) && previa.dias.length > 0) {
+      document.querySelectorAll("#grupo-dias input").forEach(function (cb) {
+        cb.checked = previa.dias.includes(cb.value);
+      });
+    }
+  } catch (e) {}
+}
+
+aplicarPreviaMatchDaHome();
 mostrarEtapa(1);
