@@ -12,6 +12,17 @@ if (!usuarioAtual) {
 let vagaSelecionadaParaCandidatura = null;
 let filtroAtivoPainel = "todas";
 
+function mostrarToast(texto) {
+  const toast = document.getElementById("toastPainel");
+  if (!toast) return;
+  toast.textContent = texto;
+  toast.style.display = "block";
+  clearTimeout(window._toastTimerPainel);
+  window._toastTimerPainel = setTimeout(function () {
+    toast.style.display = "none";
+  }, 2800);
+}
+
 // 1. Preenche cabeçalho, iniciais, saudação, barra da meta e dados do perfil
 function carregarDadosUsuario() {
   const partes = usuarioAtual.nome.trim().split(" ");
@@ -210,8 +221,9 @@ function criarCardVaga(vaga) {
     '</div>';
 
   card.querySelector(".btn-fav").addEventListener("click", async function () {
-    await servicoAlternarFavorito(usuarioAtual.id, vaga.id);
+    const salvo = await servicoAlternarFavorito(usuarioAtual.id, vaga.id);
     renderizarTudo();
+    mostrarToast(salvo ? "♥ Vaga salva nos seus Favoritos!" : "Vaga removida dos Favoritos.");
   });
 
   card.querySelector(".btn-candidatar").addEventListener("click", function () {
