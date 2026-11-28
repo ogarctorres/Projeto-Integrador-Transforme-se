@@ -383,6 +383,22 @@ button:disabled {
   border: 1px solid #cbd5e1;
 }
 
+.btn-demo-link {
+  width: 100%;
+  margin-top: 10px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px;
+}
+
+.btn-demo-link:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
 .feedback {
   min-height: 18px;
   margin: 12px 0 0;

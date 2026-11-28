@@ -77,8 +77,18 @@ document.getElementById("google-button").addEventListener("click", async functio
   }
 });
 
-// 5. Botão LinkedIn (informativo)
+// 5. Botão LinkedIn (informativo) e atalho da conta demonstrativa
 document.getElementById("linkedin-button").addEventListener("click", function () {
   feedback.style.color = "#2563eb";
   feedback.textContent = "Login com LinkedIn disponível na próxima fase (OAuth).";
 });
+
+const btnDemo = document.getElementById("btnPreencherDemo");
+if (btnDemo) {
+  btnDemo.addEventListener("click", function () {
+    emailInput.value = "richard.mendes@estudante.br";
+    passwordInput.value = "123456";
+    feedback.style.color = "#059669";
+    feedback.textContent = "Conta de demonstração preenchida! Clique em Entrar na Plataforma.";
+  });
+}
